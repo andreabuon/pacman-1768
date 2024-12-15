@@ -23,8 +23,12 @@ extern unsigned char led_value;
 #define N 6
 
 typedef enum {
-	STATE_IDLE,
-	STATE_RESET
+	STATE_RESET,
+	STATE_READY,
+	STATE_PLAYING,
+	STATE_PAUSED,
+	STATE_WON,
+	STATE_LOST
 } state_t;
 
 extern volatile state_t state;

@@ -1,6 +1,8 @@
 #include "include.h"
 #include "common.h"
 
+#include "pacman.h"
+
 //#define N 8 see common.h
 #define RIT_PERIOD_MS 50U
 
@@ -33,7 +35,7 @@ int main (void) {
 	InitSysTick();
 	
 	// Initialize Variables
-	state = STATE_IDLE;
+	state = STATE_RESET;
 	memset(VETT, 0, sizeof(VETT));
 	i = 0;
 	VAR = 0;
@@ -41,7 +43,7 @@ int main (void) {
 	// Other peripherals Init
 	LED_init();
 	joystick_init();
-	//LCD_Initialization();
+	LCD_Initialization();
 	//ADC_init();
 	
 	// BUTTON_init:
@@ -93,14 +95,35 @@ int main (void) {
 	// call asm function
 	// ASM_func(VETT, N);
 	
+	LCD_Clear(Black);
+	GUI_Text(0, 280, (uint8_t *) " touch here : 1 sec to clear  ", Red, White);
+
+	Game game;
+
 	while (1) {
-		
 		/*Finite State Machine*/
 		switch(state){
-			case STATE_IDLE:
-			break;
 			case STATE_RESET:
-			break;
+				new_game(&game);
+				break;
+			
+			case STATE_READY:
+				break;
+
+			case STATE_PLAYING:
+				//TODO start_game(game);
+				//TODO show_map(game->map)
+				//Move PACMAN with the Joystick
+				break;
+
+			case STATE_PAUSED:
+				break;
+
+			case STATE_WON:
+				break;
+
+			case STATE_LOST:
+				break;
 		}
 
 		__ASM("wfi");
