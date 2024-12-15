@@ -20,17 +20,6 @@ extern unsigned char led_value;
 #define PRIO_4 4U
 #define PRIO_5 5U
 
-typedef enum {
-	STATE_RESET,
-	STATE_READY,
-	STATE_PLAYING,
-	STATE_PAUSED,
-	STATE_WON,
-	STATE_LOST
-} state_t;
-
-extern volatile state_t state;
-
 // Get Current Ticks
 uint32_t Sys_GetTick(void);
 /******************************************************************************

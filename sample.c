@@ -14,9 +14,6 @@ static void InitSysTick(void);
 void SysTick_Handler(void);
 void Delay_SysTick(uint32_t SysTicks);
 
-// Exported variables
-volatile state_t state;
-
 // Imported Variables
 extern uint8_t joystick_flag;
 extern uint8_t btn_flag;
@@ -25,30 +22,22 @@ extern uint8_t btn_flag;
 extern void ASM_func(uint32_t VETT[], uint32_t n);
 
 int main (void) {
-	// Imperative Inits
 	SystemInit();
 	InitSysTick();
 	
-	// Initialize Variables
-	state = STATE_RESET;
-	
-	// Other peripherals Init
 	LED_init();
 	joystick_init();
 	LCD_Initialization();
-	//ADC_init();
 	
 	// BUTTON_init:
 	//		1: which button
 	//		2: priority of the associated interrupt
-	
 	BUTTON_init(BUTTON_0, PRIO_3);
 	BUTTON_init(BUTTON_1, PRIO_3);
 	BUTTON_init(BUTTON_2, PRIO_3);
 	
 	// RIT WORKS WITH CLOCK = 100MHZ
 	// ONE INTERRUPT EVERY 50ms
-	
 	init_RIT(RIT_MS_TO_TICKS(RIT_PERIOD_MS)); enable_RIT();
 	
 	/* TIMER INSTRUCTIONS
@@ -88,34 +77,30 @@ int main (void) {
 	GUI_Text(0, 280, (uint8_t *) " touch here : 1 sec to clear  ", Red, White);
 
 	Game game;
+	new_game(&game);
 
 	while (1) {
-		/*Finite State Machine*/
-		switch(state){
-			case STATE_RESET:
-				new_game(&game);
-				break;
-			
-			case STATE_READY:
+		switch(game.state){		
+			case READY:
 				break;
 
-			case STATE_PLAYING:
+			case PLAYING:
 				//TODO start_game(game);
 				//TODO show_map(game->map)
 				//Move PACMAN with the Joystick
 				break;
 
-			case STATE_PAUSED:
+			case PAUSED:
 				break;
 
-			case STATE_WON:
+			case WON:
 				break;
 
-			case STATE_LOST:
+			case GAME_OVER:
 				break;
 		}
 
-		__ASM("wfi");
+		//__ASM("wfi");
 	}
 }
 /*
