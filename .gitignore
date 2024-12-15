@@ -11,3 +11,4 @@ Objects/
 *.scvd
 
 **/output/**
+.vscode/settings.json
