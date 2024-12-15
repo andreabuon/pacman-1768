@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "GLCD/GLCD.h"
 
+#define MARGIN_LEFT 8
+#define MARGIN_TOP 8
+
 enum TileType board[MAP_HEIGHT][MAP_LENGTH] = {
     {WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}, 
     {WALL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, WALL, WALL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, STANDARD_PILL, WALL},
@@ -77,6 +80,53 @@ void update_game_state(Game* game) {
     } else if (game->standard_pills_count == 0 && game->power_pills_count == 0) {
         game->state = WON;
     }
+}
+
+
+
+void display_tile(uint16_t row, uint16_t col, Tile* tile){
+	int color = 0;
+	switch(tile->type){
+		case EMPTY_TILE:
+			color = Black;
+			break;
+		case WALL:
+			color = Blue;
+			break;
+		case STANDARD_PILL:
+			color = White;
+			break;
+		case POWER_PILL:
+			color = Red;
+			break;
+		case TELEPORT:
+			color = Blue;
+			break;
+		case PACMAN:
+			color = Yellow;
+			break;
+		
+		default:
+			break;
+	}
+	
+	int i = 0;
+	for(; i < 8; i++){
+		int j = 0;
+		for(; j < 8; j++){
+			LCD_SetPoint(MARGIN_LEFT +8*col + j, MARGIN_TOP + 8*row + i , color);
+		}
+	}
+}
+
+void display_map(Tile map[MAP_HEIGHT][MAP_LENGTH]){
+	uint16_t row = 0;
+	for(; row < MAP_HEIGHT; row++){
+		uint16_t col = 0;
+		for(; col < MAP_LENGTH; col++){
+			display_tile(row, col, &map[row][col]);
+		}
+	}
 }
 
 

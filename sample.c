@@ -80,6 +80,7 @@ int main (void) {
 	new_game(&game);
 	
 	display_game_info(&game);
+	display_map(game.map);
 
 	while (1) {
 		switch(game.state){		
