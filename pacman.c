@@ -84,10 +84,22 @@ void parse_map(Tile map[MAP_HEIGHT][MAP_LENGTH]){
   }
 }
 
+void place_power_pills(Tile map[MAP_HEIGHT][MAP_LENGTH]){
+	int placed = 0;
+	while (placed < POWER_PILLS_COUNT)	{
+		int x = rand() % MAP_HEIGHT;
+		int y = rand() % MAP_LENGTH;
+		if (map[x][y].type == STANDARD_PILL)	{
+				map[x][y].type = POWER_PILL;
+				placed++;
+		}
+	}
+}
+
 void generate_map(Tile map[MAP_HEIGHT][MAP_LENGTH]){
 	parse_map(map);
 	//TODO place pills
-	//TODO place power pills randomly
+	place_power_pills(map);
 }
 
 void add_life(Game* game){
