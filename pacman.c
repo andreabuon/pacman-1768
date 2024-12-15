@@ -1,5 +1,6 @@
 #include "pacman.h"
 #include <stdlib.h>
+#include "GLCD/GLCD.h"
 
 enum TileType board[MAP_HEIGHT][MAP_LENGTH] = {
     {WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}, 
@@ -77,6 +78,16 @@ void update_game_state(Game* game) {
         game->state = WON;
     }
 }
+
+
+void display_game_info(Game* game){
+	GUI_Text(0, 304, (uint8_t *) "Time: -- ", White, Black);
+	
+	GUI_Text(90, 304, (uint8_t *) "Lifes: - ", White, Black);
+	
+	GUI_Text(150, 304, (uint8_t *) "Score: ----", White, Black);
+}
+
 
 void start_game(Game* game){
   game->state = PLAYING;

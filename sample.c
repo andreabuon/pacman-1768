@@ -74,10 +74,12 @@ int main (void) {
 	//execution of wfi or wfe assembly enters Power-Down mode when SLEEPDEEP is on
 	
 	LCD_Clear(Black);
-	GUI_Text(0, 280, (uint8_t *) " touch here : 1 sec to clear  ", Red, White);
+	//GUI_Text(0, 280, (uint8_t *) " touch here : 1 sec to clear  ", Red, White);
 
 	Game game;
 	new_game(&game);
+	
+	display_game_info(&game);
 
 	while (1) {
 		switch(game.state){		
@@ -90,7 +92,7 @@ int main (void) {
 				//Move PACMAN with the Joystick
 				break;
 
-			case PAUSED:
+			case PAUSED:					
 				break;
 
 			case WON:
