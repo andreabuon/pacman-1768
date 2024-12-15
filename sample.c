@@ -84,9 +84,6 @@ int main (void) {
 	LPC_SC->PCON &= 0xFFFFFFFFD;	// PM1=0
 	//execution of wfi or wfe assembly enters Power-Down mode when SLEEPDEEP is on
 	
-	// call asm function
-	// ASM_func(VETT, N);
-	
 	LCD_Clear(Black);
 	GUI_Text(0, 280, (uint8_t *) " touch here : 1 sec to clear  ", Red, White);
 
