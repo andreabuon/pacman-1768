@@ -67,6 +67,7 @@ void new_game(Game* game){
 	
 	game->pacman_x = PACMAN_INITIAL_POSITION_X;
 	game->pacman_y = PACMAN_INITIAL_POSITION_Y;
+	game->map[game->pacman_y][game->pacman_x].type = PACMAN;
 }
 
 void start_game(Game* game){
