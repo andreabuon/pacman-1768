@@ -60,6 +60,7 @@ typedef struct Game {
 
 void new_game(Game* game);
 void start_game(Game* game);
+void update_game_state(Game* game);
 
 void generate_map(Tile map[MAP_HEIGHT][MAP_LENGTH]);
 
