@@ -24,11 +24,6 @@ extern uint8_t btn_flag;
 // Imported Functions
 extern void ASM_func(uint32_t VETT[], uint32_t n);
 
-// Local Global Variables
-uint32_t VETT[N];
-uint32_t i;
-uint32_t VAR;
-
 int main (void) {
 	// Imperative Inits
 	SystemInit();
@@ -36,9 +31,6 @@ int main (void) {
 	
 	// Initialize Variables
 	state = STATE_RESET;
-	memset(VETT, 0, sizeof(VETT));
-	i = 0;
-	VAR = 0;
 	
 	// Other peripherals Init
 	LED_init();
