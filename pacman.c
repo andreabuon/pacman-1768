@@ -69,6 +69,10 @@ void new_game(Game* game){
 	game->pacman_y = PACMAN_INITIAL_POSITION_Y;
 }
 
+void start_game(Game* game){
+  game->state = PLAYING;
+}
+
 void parse_map(Tile map[MAP_HEIGHT][MAP_LENGTH]){
 	int row = 0;
 	int col = 0;
