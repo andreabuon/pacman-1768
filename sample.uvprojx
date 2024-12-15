@@ -415,6 +415,16 @@
               <FileType>5</FileType>
               <FilePath>.\common.h</FilePath>
             </File>
+            <File>
+              <FileName>pacman.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\pacman.c</FilePath>
+            </File>
+            <File>
+              <FileName>pacman.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pacman.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -985,6 +995,16 @@
               <FileName>common.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\common.h</FilePath>
+            </File>
+            <File>
+              <FileName>pacman.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\pacman.c</FilePath>
+            </File>
+            <File>
+              <FileName>pacman.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pacman.h</FilePath>
             </File>
           </Files>
         </Group>
