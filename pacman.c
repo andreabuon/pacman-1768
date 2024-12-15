@@ -92,3 +92,22 @@ void generate_map(Tile map[MAP_HEIGHT][MAP_LENGTH]){
 void add_life(Game* game){
 	game->lives++;
 }
+
+void move_pacman(Game* game, int dx, int dy) {
+    int new_x = game->pacman_x + dx;
+    int new_y = game->pacman_y + dy;
+    
+    if (game->map[new_y][new_x].type != WALL) {
+				// Replace the old tile with a new one
+				game->map[game->pacman_y][game->pacman_x].type = EMPTY_TILE;
+        game->pacman_x = new_x;
+        game->pacman_y = new_y;
+				// If the old tile was a pill update the game score
+        if (is_a_pill(&game->map[new_y][new_x])) {
+            game->score += get_tile_score(&game->map[new_y][new_x]);
+            if (game->map[new_y][new_x].type == STANDARD_PILL) game->standard_pills_count--;
+            else game->power_pills_count--;
+        }
+        game->map[new_y][new_x].type = PACMAN; // Update new position
+		}
+}
