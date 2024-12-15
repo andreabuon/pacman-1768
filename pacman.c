@@ -75,8 +75,8 @@ void start_game(Game* game){
 
 void parse_map(Tile map[MAP_HEIGHT][MAP_LENGTH]){
 	int row = 0;
-	int col = 0;
 	for (; row < MAP_HEIGHT; row++) {
+		int col = 0;
 		for (; col < MAP_LENGTH; col++) {
 			map[row][col].type = board[row][col];
     }
