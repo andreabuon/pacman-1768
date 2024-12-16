@@ -1,6 +1,6 @@
 #include "pacman.h"
 #include <stdlib.h>
-#include "GLCD/GLCD.h"
+#include "../GLCD/GLCD.h"
 
 #define MARGIN_LEFT 8
 #define MARGIN_TOP 8

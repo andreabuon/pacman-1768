@@ -1,7 +1,7 @@
 #include "include.h"
 #include "common.h"
 
-#include "pacman.h"
+#include "pacman/pacman.h"
 
 //#define N 8 see common.h
 #define RIT_PERIOD_MS 50U
@@ -38,7 +38,8 @@ int main (void) {
 	
 	// RIT WORKS WITH CLOCK = 100MHZ
 	// ONE INTERRUPT EVERY 50ms
-	init_RIT(RIT_MS_TO_TICKS(RIT_PERIOD_MS)); enable_RIT();
+	init_RIT(RIT_MS_TO_TICKS(RIT_PERIOD_MS));
+	enable_RIT();
 	
 	/* TIMER INSTRUCTIONS
 	//	init_timer_simplified:
