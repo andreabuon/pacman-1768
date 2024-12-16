@@ -18,9 +18,6 @@ void Delay_SysTick(uint32_t SysTicks);
 extern uint8_t joystick_flag;
 extern uint8_t btn_flag;
 
-// Imported Functions
-extern void ASM_func(uint32_t VETT[], uint32_t n);
-
 int main (void) {
 	SystemInit();
 	InitSysTick();
