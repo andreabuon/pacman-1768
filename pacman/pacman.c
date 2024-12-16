@@ -87,7 +87,7 @@ void draw_pacman(uint16_t row, uint16_t col){
 	for(; i < 8; i++){
 		int j = 0;
 		for(; j < 8; j++){
-			LCD_SetPoint(MARGIN_LEFT +8*col + j, MARGIN_TOP + 8*row + i , Yellow);
+			LCD_SetPoint(MARGIN_LEFT +8*row + j, MARGIN_TOP + 8*col + i , Yellow);
 		}
 	}
 }
