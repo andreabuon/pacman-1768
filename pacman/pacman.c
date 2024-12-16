@@ -82,7 +82,15 @@ void update_game_state(Game* game) {
     }
 }
 
-
+void draw_pacman(uint16_t row, uint16_t col){
+	int i = 0;
+	for(; i < 8; i++){
+		int j = 0;
+		for(; j < 8; j++){
+			LCD_SetPoint(MARGIN_LEFT +8*col + j, MARGIN_TOP + 8*row + i , Yellow);
+		}
+	}
+}
 
 void display_tile(uint16_t row, uint16_t col, Tile* tile){
 	int color = 0;

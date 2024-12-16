@@ -64,6 +64,7 @@ void update_game_state(Game* game);
 
 void display_game_info(Game* game);
 void display_map(Tile map[MAP_HEIGHT][MAP_LENGTH]);
+void draw_pacman(uint16_t row, uint16_t col);
 
 void generate_map(Tile map[MAP_HEIGHT][MAP_LENGTH]);
 
