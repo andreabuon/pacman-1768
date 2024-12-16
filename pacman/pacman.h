@@ -70,3 +70,8 @@ void generate_map(Tile map[MAP_HEIGHT][MAP_LENGTH]);
 void add_life(Game* game);
 
 void move_pacman(Game* game, int dx, int dy);
+
+void move_pacman_up(Game* game);
+void move_pacman_down(Game* game);
+void move_pacman_left(Game* game);
+void move_pacman_right(Game* game);

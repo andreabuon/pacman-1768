@@ -193,3 +193,19 @@ void move_pacman(Game* game, int dx, int dy) {
         game->map[new_y][new_x].type = PACMAN; // Update new position
 		}
 }
+
+void move_pacman_up(Game* game){
+	move_pacman(game, 0, -1);
+}
+
+void move_pacman_down(Game* game){
+	move_pacman(game, 1, 0);
+}
+
+void move_pacman_left(Game* game){
+	move_pacman(game, -1, 0);
+}
+
+void move_pacman_right(Game* game){
+	move_pacman(game, 1, 0);
+}
