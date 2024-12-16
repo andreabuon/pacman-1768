@@ -68,3 +68,5 @@ void display_map(Tile map[MAP_HEIGHT][MAP_LENGTH]);
 void generate_map(Tile map[MAP_HEIGHT][MAP_LENGTH]);
 
 void add_life(Game* game);
+
+void move_pacman(Game* game, int dx, int dy);
