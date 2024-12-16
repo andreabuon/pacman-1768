@@ -207,7 +207,7 @@ void move_pacman_up(Game* game){
 }
 
 void move_pacman_down(Game* game){
-	move_pacman(game, 1, 0);
+	move_pacman(game, 0, 1);
 }
 
 void move_pacman_left(Game* game){
