@@ -46,6 +46,12 @@ void add_life(Game* game){
 void move_pacman(Game* game, int dx, int dy) {
 	int new_x = game->pacman_x + dx;
 	int new_y = game->pacman_y + dy;
+	
+	// Prevent out-of-bounds access
+	if (new_x < 0 || new_x >= MAP_LENGTH || new_y < 0 || new_y >= MAP_HEIGHT) {
+		return;
+	}
+	
 	if (game->map[new_y][new_x].type == WALL) {
 		return;
 	}
