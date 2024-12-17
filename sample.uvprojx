@@ -580,6 +580,26 @@
               <FileType>5</FileType>
               <FilePath>.\pacman\pacman.h</FilePath>
             </File>
+            <File>
+              <FileName>graphics.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\pacman\graphics.c</FilePath>
+            </File>
+            <File>
+              <FileName>graphics.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pacman\graphics.h</FilePath>
+            </File>
+            <File>
+              <FileName>map.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\pacman\map.c</FilePath>
+            </File>
+            <File>
+              <FileName>map.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pacman\map.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1160,6 +1180,26 @@
               <FileName>pacman.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\pacman\pacman.h</FilePath>
+            </File>
+            <File>
+              <FileName>graphics.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\pacman\graphics.c</FilePath>
+            </File>
+            <File>
+              <FileName>graphics.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pacman\graphics.h</FilePath>
+            </File>
+            <File>
+              <FileName>map.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\pacman\map.c</FilePath>
+            </File>
+            <File>
+              <FileName>map.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pacman\map.h</FilePath>
             </File>
           </Files>
         </Group>
