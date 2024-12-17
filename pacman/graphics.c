@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-void draw_tile(uint16_t row, uint16_t col, Tile* tile){
+void draw_tile(uint8_t row, uint8_t col, Tile* tile){
 	int color = 0;
 	switch(tile->type){
 		case EMPTY_TILE:
@@ -64,7 +64,7 @@ void draw_game_info_values(Game* game){
 	GUI_Text(200, 304, (uint8_t *) buf, White, Black);
 }
 
-void draw_pacman(uint16_t row, uint16_t col){
+void draw_pacman(uint8_t row, uint8_t col){
 	int i = 0;
 	for(; i < 8; i++){
 		int j = 0;
