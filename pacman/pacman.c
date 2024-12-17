@@ -17,12 +17,8 @@ void new_game(Game* game){
 	//game->map[game->pacman_y][game->pacman_x].type = PACMAN;
 }
 
-void update_game_state(Game* game) {
-    if (game->lives == 0) {
-        game->state = GAME_OVER;
-    } else if (game->standard_pills_count == 0 && game->power_pills_count == 0) {
-        game->state = WON;
-    }
+void set_game_state(Game* game, enum GameState state) {
+    game->state = state;
 }
 
 void start_game(Game* game){
