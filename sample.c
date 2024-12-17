@@ -2,6 +2,7 @@
 #include "common.h"
 
 #include "pacman/pacman.h"
+#include "pacman/graphics.h"
 
 //#define N 8 see common.h
 #define RIT_PERIOD_MS 50U
