@@ -47,17 +47,19 @@ void draw_map(Tile map[MAP_HEIGHT][MAP_LENGTH]){
 	}
 }
 
-
-void draw_game_info(Game* game){
+void draw_game_info_labels(){
 	GUI_Text(0, 304, (uint8_t *) "Time: ", White, Black);
-	//GUI_Text(50, 304, (uint8_t *) &(game->time), White, Black);
-	
 	GUI_Text(80, 304, (uint8_t *) "Lifes: ", White, Black);
-	//GUI_Text(135, 304, (uint8_t *) &(game->lives), White, Black);
-	
 	GUI_Text(150, 304, (uint8_t *) "Score: ", White, Black);
+}
+
+/*
+void draw_game_info_values(Game* game){
+	//GUI_Text(50, 304, (uint8_t *) &(game->time), White, Black);
+	//GUI_Text(135, 304, (uint8_t *) &(game->lives), White, Black);
 	//GUI_Text(190, 304, (uint8_t *) &(game->score), White, Black);
 }
+*/
 
 void draw_pacman(uint16_t row, uint16_t col){
 	int i = 0;
