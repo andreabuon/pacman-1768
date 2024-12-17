@@ -20,8 +20,7 @@ extern uint8_t joystick_flag;
 extern uint8_t btn_flag;
 
 Game game; //FIXME
-enum Direction movement_direction;
-
+enum Direction movement_direction = RIGHT;
 
 int main (void) {
 	SystemInit();

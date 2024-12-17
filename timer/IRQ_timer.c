@@ -9,6 +9,7 @@
 */
 
 extern Game game; //FIXME
+extern enum Direction movement_direction; //FIXME
 
 void TIMER0_IRQHandler (void){
 	uint8_t irq_source = LPC_TIM0->IR;
@@ -35,6 +36,7 @@ void TIMER1_IRQHandler (void){
 	uint8_t irq_source = LPC_TIM1->IR;
 	
 	if(irq_source & IR_MR0) { // mr0
+		move_pacman_direction(&game, movement_direction);
 		draw_pacman(game.pacman_x, game.pacman_y); //FIXME 				
 	} else if(irq_source & IR_MR1) { // mr1
 		
