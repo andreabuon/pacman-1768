@@ -2,7 +2,7 @@
 #include "../GLCD/GLCD.h"
 #include <stdint.h>
 
-void display_tile(uint16_t row, uint16_t col, Tile* tile){
+void draw_tile(uint16_t row, uint16_t col, Tile* tile){
 	int color = 0;
 	switch(tile->type){
 		case EMPTY_TILE:
@@ -37,23 +37,26 @@ void display_tile(uint16_t row, uint16_t col, Tile* tile){
 	}
 }
 
-void display_map(Tile map[MAP_HEIGHT][MAP_LENGTH]){
+void draw_map(Tile map[MAP_HEIGHT][MAP_LENGTH]){
 	uint16_t row = 0;
 	for(; row < MAP_HEIGHT; row++){
 		uint16_t col = 0;
 		for(; col < MAP_LENGTH; col++){
-			display_tile(row, col, &map[row][col]);
+			draw_tile(row, col, &map[row][col]);
 		}
 	}
 }
 
 
-void display_game_info(Game* game){
-	GUI_Text(0, 304, (uint8_t *) "Time: -- ", White, Black);
+void draw_game_info(Game* game){
+	GUI_Text(0, 304, (uint8_t *) "Time: ", White, Black);
+	//GUI_Text(50, 304, (uint8_t *) &(game->time), White, Black);
 	
-	GUI_Text(90, 304, (uint8_t *) "Lifes: - ", White, Black);
+	GUI_Text(80, 304, (uint8_t *) "Lifes: ", White, Black);
+	//GUI_Text(135, 304, (uint8_t *) &(game->lives), White, Black);
 	
-	GUI_Text(150, 304, (uint8_t *) "Score: ----", White, Black);
+	GUI_Text(150, 304, (uint8_t *) "Score: ", White, Black);
+	//GUI_Text(190, 304, (uint8_t *) &(game->score), White, Black);
 }
 
 void draw_pacman(uint16_t row, uint16_t col){
