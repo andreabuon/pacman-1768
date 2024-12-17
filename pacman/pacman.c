@@ -58,7 +58,6 @@ void move_pacman(Game* game, int dx, int dy) {
             if (game->map[new_y][new_x].type == STANDARD_PILL) game->standard_pills_count--;
             else game->power_pills_count--;
         }
-        game->map[new_y][new_x].type = PACMAN; // Update new position
 		}
 }
 

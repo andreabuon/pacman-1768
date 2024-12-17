@@ -21,9 +21,6 @@ void draw_tile(uint16_t row, uint16_t col, Tile* tile){
 		case TELEPORT:
 			color = Green;
 			break;
-		case PACMAN:
-			color = Yellow;
-			break;
 		
 		default:
 			break;
