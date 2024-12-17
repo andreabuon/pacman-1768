@@ -20,6 +20,7 @@ extern uint8_t joystick_flag;
 extern uint8_t btn_flag;
 
 Game game; //FIXME
+enum Direction movement_direction;
 
 void handle_input(Game* game){
 	if(joystick_flag & FLAG_JOYSTICK_UP) {

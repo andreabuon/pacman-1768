@@ -24,6 +24,14 @@ enum GameState {
 	GAME_OVER
 };
 
+enum Direction{
+	NONE,
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+};
+
 typedef struct Game {
 	enum GameState state;
 	
