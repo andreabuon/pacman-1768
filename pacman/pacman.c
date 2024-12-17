@@ -35,6 +35,8 @@ void win_game(Game* game){
 
 void lose_game(Game* game){
 	set_game_state(game, GAME_OVER);
+	//disable timers (time, movement, score, etc)
+	//draw game over message
 }
 
 void add_life(Game* game){
