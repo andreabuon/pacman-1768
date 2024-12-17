@@ -97,7 +97,9 @@ int main (void) {
 	Game game;
 	new_game(&game);
 	
-	void draw_game_info_labels();
+	draw_game_info_labels();
+	draw_game_info_values(&game);
+	
 	draw_map(game.map);
 
 	while (1) {

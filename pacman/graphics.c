@@ -1,6 +1,7 @@
 #include "graphics.h"
 #include "../GLCD/GLCD.h"
 #include <stdint.h>
+#include <stdio.h>
 
 void draw_tile(uint16_t row, uint16_t col, Tile* tile){
 	int color = 0;
@@ -53,13 +54,18 @@ void draw_game_info_labels(){
 	GUI_Text(150, 304, (uint8_t *) "Score: ", White, Black);
 }
 
-/*
+
 void draw_game_info_values(Game* game){
-	//GUI_Text(50, 304, (uint8_t *) &(game->time), White, Black);
-	//GUI_Text(135, 304, (uint8_t *) &(game->lives), White, Black);
-	//GUI_Text(190, 304, (uint8_t *) &(game->score), White, Black);
+	char buf[5];
+	sprintf(buf, "%u", game->time);
+	GUI_Text(50, 304, (uint8_t *) buf , White, Black);
+	
+	sprintf(buf, "%u", game->lives);
+	GUI_Text(135, 304, (uint8_t *) buf , White, Black);
+	
+	sprintf(buf, "%u", game->score);
+	GUI_Text(200, 304, (uint8_t *) buf, White, Black);
 }
-*/
 
 void draw_pacman(uint16_t row, uint16_t col){
 	int i = 0;
