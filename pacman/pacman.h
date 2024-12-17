@@ -1,7 +1,8 @@
-#include <stdint.h>
+#ifndef PACMAN_H
+#define PACMAN_H
 
-#define MAP_HEIGHT 31
-#define MAP_LENGTH 28
+#include <stdint.h>
+#include "map.h"
 
 #define STANDARD_PILLS_COUNT 240
 #define POWER_PILLS_COUNT 6
@@ -11,24 +12,6 @@
 
 #define PACMAN_INITIAL_POSITION_X 3
 #define PACMAN_INITIAL_POSITION_Y 14
-
-enum TileType {
-  EMPTY_TILE,
-	WALL,
-  STANDARD_PILL,
-  POWER_PILL,
-	TELEPORT,
-	PACMAN
-	/*
-	ENEMY,
-	ENEMY_PILL,
-	ENEMY_SPECIAL_PILL
-	*/
-};
-
-typedef struct {
-	enum TileType type;
-} Tile;
 
 uint8_t is_a_pill(Tile* tile);
 uint8_t get_tile_score(Tile* tile);
@@ -62,13 +45,12 @@ void new_game(Game* game);
 void start_game(Game* game);
 void update_game_state(Game* game);
 
-void generate_map(Tile map[MAP_HEIGHT][MAP_LENGTH]);
-
 void add_life(Game* game);
 
 void move_pacman(Game* game, int dx, int dy);
-
 void move_pacman_up(Game* game);
 void move_pacman_down(Game* game);
 void move_pacman_left(Game* game);
 void move_pacman_right(Game* game);
+
+#endif // PACMAN_H *
