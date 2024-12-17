@@ -38,7 +38,7 @@ typedef struct Game {
 	Tile map[MAP_HEIGHT][MAP_LENGTH];
 	
 	uint8_t lives;
-	uint8_t score;
+	uint16_t score;
 	uint8_t time;
 	
 	uint8_t standard_pills_count;
