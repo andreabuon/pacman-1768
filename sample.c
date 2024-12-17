@@ -22,24 +22,6 @@ extern uint8_t btn_flag;
 Game game; //FIXME
 enum Direction movement_direction;
 
-void handle_input(Game* game){
-	if(joystick_flag & FLAG_JOYSTICK_UP) {
-		move_pacman_up(game);
-		joystick_flag &= ~FLAG_JOYSTICK_UP;
-	}
-	if(joystick_flag & FLAG_JOYSTICK_DOWN) {
-		move_pacman_down(game);
-		joystick_flag &= ~FLAG_JOYSTICK_DOWN;
-	}
-	if(joystick_flag & FLAG_JOYSTICK_LEFT) {
-		move_pacman_left(game);
-		joystick_flag &= ~FLAG_JOYSTICK_LEFT;
-	}
-	if(joystick_flag & FLAG_JOYSTICK_RIGHT) {
-		move_pacman_right(game);
-		joystick_flag &= ~FLAG_JOYSTICK_RIGHT;
-	}
-}
 
 int main (void) {
 	SystemInit();
