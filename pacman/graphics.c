@@ -19,7 +19,7 @@ void draw_tile(uint16_t row, uint16_t col, Tile* tile){
 			color = Red;
 			break;
 		case TELEPORT:
-			color = Blue;
+			color = Green;
 			break;
 		case PACMAN:
 			color = Yellow;
