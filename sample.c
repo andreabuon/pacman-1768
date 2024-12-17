@@ -19,6 +19,8 @@ void Delay_SysTick(uint32_t SysTicks);
 extern uint8_t joystick_flag;
 extern uint8_t btn_flag;
 
+Game game; //FIXME
+
 void handle_input(Game* game){
 	if(joystick_flag & FLAG_JOYSTICK_UP) {
 		move_pacman_up(game);
@@ -84,7 +86,6 @@ int main (void) {
 	// init_timer_pwm(TIMER_0, 0.5, 170000U); enable_timer(TIMER_0, PRIO_3);
 	
 	init_timer_simplified(TIMER_0, 0, TIM_MS_TO_TICKS_SIMPLE(1000), 0, TIMER_INTERRUPT_MR | TIMER_RESET_MR, 0);
-	enable_timer(TIMER_0, PRIO_3);
 	
 	// power control register
 	LPC_SC->PCON |= 0x1;			// PM0=1
@@ -94,13 +95,14 @@ int main (void) {
 	LCD_Clear(Black);
 	//GUI_Text(0, 280, (uint8_t *) " touch here : 1 sec to clear  ", Red, White);
 
-	Game game;
 	new_game(&game);
 	
 	draw_game_info_labels();
 	draw_game_info_values(&game);
 	
 	draw_map(game.map);
+	
+	enable_timer(TIMER_0, PRIO_3);
 
 	while (1) {
 		switch(game.state){		

@@ -1,15 +1,21 @@
 #include "timer.h"
 #include "../common.h"
 
+#include "../pacman/pacman.h"
+#include "../pacman/graphics.h"
+
 /*
 	in IR si deve settare il bit associato al MR di cui si vuole cancellare l'interruzione.
 */
+
+extern Game game; //FIXME
 
 void TIMER0_IRQHandler (void){
 	uint8_t irq_source = LPC_TIM0->IR;
 	
 	if(irq_source & IR_MR0) { // mr0
-		
+		game.time--;
+		draw_game_info_values(&game);
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2
