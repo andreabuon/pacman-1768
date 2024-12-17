@@ -85,7 +85,11 @@ int main (void) {
 	
 	// init_timer_pwm(TIMER_0, 0.5, 170000U); enable_timer(TIMER_0, PRIO_3);
 	
+	// Game Time countdown update
 	init_timer_simplified(TIMER_0, 0, TIM_MS_TO_TICKS_SIMPLE(1000), 0, TIMER_INTERRUPT_MR | TIMER_RESET_MR, 0);
+	
+	// Pacman movement
+	init_timer_simplified(TIMER_1, 1, TIM_MS_TO_TICKS_SIMPLE(160), 0, TIMER_INTERRUPT_MR | TIMER_RESET_MR, 0);
 	
 	// power control register
 	LPC_SC->PCON |= 0x1;			// PM0=1
@@ -103,32 +107,9 @@ int main (void) {
 	
 	start_game(&game);
 	enable_timer(TIMER_0, PRIO_3);
+	enable_timer(TIMER_1, PRIO_3);
 
-	while (1) {
-		switch(game.state){		
-			case READY:
-				break;
-
-			case PLAYING:
-				//TODO start_game(game);
-				//TODO show_map(game->map)
-				//Move PACMAN with the Joystick
-				break;
-
-			case PAUSED:
-				handle_input(&game);
-				draw_pacman(game.pacman_x, game.pacman_y); //FIXME 				
-				break;
-
-			case WON:
-				break;
-
-			case GAME_OVER:
-				break;
-		}
-
-		//__ASM("wfi");
-	}
+	__ASM("wfi");
 }
 /*
 		// Joystick cmd, flags set at first edge
