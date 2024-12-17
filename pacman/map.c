@@ -18,10 +18,10 @@ void parse_map(Tile map[MAP_HEIGHT][MAP_LENGTH]){
 void place_power_pills(Tile map[MAP_HEIGHT][MAP_LENGTH]){
 	int placed = 0;
 	while (placed < POWER_PILLS_COUNT)	{
-		int x = rand() % MAP_HEIGHT;
-		int y = rand() % MAP_LENGTH;
-		if (map[x][y].type == STANDARD_PILL)	{
-				map[x][y].type = POWER_PILL;
+		int row = rand() % MAP_HEIGHT;
+		int col = rand() % MAP_LENGTH;
+		if (map[row][col].type == STANDARD_PILL)	{
+				map[row][col].type = POWER_PILL;
 				placed++;
 		}
 	}
