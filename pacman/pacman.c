@@ -77,3 +77,22 @@ void move_pacman_left(Game* game){
 void move_pacman_right(Game* game){
 	move_pacman(game, 1, 0);
 }
+
+void move_pacman_direction(Game* game, enum Direction direction){
+	switch(direction){
+		case UP:
+			move_pacman_up(game);
+			break;
+		case DOWN:
+			move_pacman_down(game);
+			break;
+		case LEFT:
+			move_pacman_left(game);
+			break;
+		case RIGHT:
+			move_pacman_right(game);
+			break;
+		default:
+			break;
+	}
+}

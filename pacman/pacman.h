@@ -65,5 +65,6 @@ void move_pacman_up(Game* game);
 void move_pacman_down(Game* game);
 void move_pacman_left(Game* game);
 void move_pacman_right(Game* game);
+void move_pacman_direction(Game* game, enum Direction direction);
 
 #endif // PACMAN_H *
