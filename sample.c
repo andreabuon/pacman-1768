@@ -109,6 +109,10 @@ int main (void) {
 	enable_timer(TIMER_0, PRIO_3);
 	enable_timer(TIMER_1, PRIO_3);
 
+	while(1){
+		;
+	}
+
 	__ASM("wfi");
 }
 /*
