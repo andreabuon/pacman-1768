@@ -99,9 +99,9 @@ int main (void) {
 	
 	draw_game_info_labels();
 	draw_game_info_values(&game);
-	
 	draw_map(game.map);
 	
+	start_game(&game);
 	enable_timer(TIMER_0, PRIO_3);
 
 	while (1) {

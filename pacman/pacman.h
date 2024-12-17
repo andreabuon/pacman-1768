@@ -43,6 +43,10 @@ typedef struct Game {
 
 void new_game(Game* game);
 void start_game(Game* game);
+void pause_game(Game* game);
+void win_game(Game* game)
+void lose_game(Game* game);
+
 void set_game_state(Game* game, enum GameState state);
 
 void add_life(Game* game);

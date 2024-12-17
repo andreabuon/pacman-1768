@@ -2,7 +2,7 @@
 #include "pacman.h"
 
 void new_game(Game* game){
-	game->state = PAUSED;
+	game->state = READY;
 	generate_map(game->map);	
 	game->score = 0;
 	game->lives = 1;
@@ -23,6 +23,18 @@ void set_game_state(Game* game, enum GameState state) {
 
 void start_game(Game* game){
   game->state = PLAYING;
+}
+
+void pause_game(Game* game){
+	set_game_state(game, PAUSED);
+}
+
+void win_game(Game* game){
+	set_game_state(game, WON);
+}
+
+void lose_game(Game* game){
+	set_game_state(game, GAME_OVER);
 }
 
 void add_life(Game* game){
