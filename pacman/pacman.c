@@ -52,16 +52,21 @@ void move_pacman(Game* game, int dx, int dy) {
 		return;
 	}
 	
+	//Pacman does not move if it encounters a wall
 	if (game->map[new_y][new_x].type == WALL) {
 		return;
 	}
 	
+	// Wrap around or teleport to a predefined position
 	if (game->map[new_y][new_x].type == TELEPORT) {
-		//return;
+		new_x = (new_x + MAP_LENGTH) % MAP_LENGTH;  // Wrap around horizontally
+		new_y = (new_y + MAP_HEIGHT) % MAP_HEIGHT;  // Wrap around vertically
 	}
  
 	// Replace the old tile with a new one
-	game->map[game->pacman_y][game->pacman_x].type = EMPTY_TILE;
+	else {
+		game->map[game->pacman_y][game->pacman_x].type = EMPTY_TILE;
+	}
 		
   game->pacman_x = new_x;
   game->pacman_y = new_y;
