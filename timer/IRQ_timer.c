@@ -40,6 +40,8 @@ void TIMER1_IRQHandler (void){
 		draw_pacman(game.pacman_x, game.pacman_y); //FIXME 
 		draw_game_score(&game);
 		draw_game_lifes(&game);
+		
+		draw_game_state(&game); //FIXME move somewhere else? draw only on change?
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2
