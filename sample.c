@@ -83,8 +83,11 @@ int main (void) {
 
 	new_game(&game);
 	
-	draw_game_info_labels();
-	draw_game_info_values(&game);
+	draw_labels();
+	draw_game_time(&game);
+	draw_game_lifes(&game);
+	draw_game_score(&game);
+	
 	draw_map(game.map);
 	
 	start_game(&game);
