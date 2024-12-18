@@ -31,11 +31,9 @@ void new_game(Game* game){
 	
 	game->standard_pills_count = STANDARD_PILLS_COUNT;
 	game->power_pills_count = POWER_PILLS_COUNT;
-	//TODO place pacman on the map
 	
 	game->pacman_x = PACMAN_INITIAL_POSITION_X;
 	game->pacman_y = PACMAN_INITIAL_POSITION_Y;
-	//game->map[game->pacman_y][game->pacman_x].type = PACMAN;
 }
 
 void set_game_state(Game* game, enum GameState state) {
