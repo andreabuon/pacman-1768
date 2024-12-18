@@ -23,7 +23,7 @@ void disable_pacman_movement(){
 }
 
 void new_game(Game* game){
-	game->state = READY;
+	game->state = PAUSED;
 	generate_map(game->map);	
 	game->score = 0;
 	game->lives = 1;
