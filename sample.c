@@ -40,7 +40,6 @@ int main (void) {
 	// RIT WORKS WITH CLOCK = 100MHZ
 	// ONE INTERRUPT EVERY 50ms
 	init_RIT(RIT_MS_TO_TICKS(RIT_PERIOD_MS));
-	enable_RIT();
 	
 	/* TIMER INSTRUCTIONS
 	//	init_timer_simplified:
