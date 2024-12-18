@@ -69,6 +69,31 @@ void draw_game_score(Game* game){
 	GUI_Text(200, 304, (uint8_t *) buf, White, Black);
 }
 
+void draw_game_state(Game* game){
+	char buf[11];
+	switch(game->state){
+		case READY:
+			sprintf(buf, "%s", "READY");
+			break;
+		case PLAYING:
+			sprintf(buf, "%s", "PLAYING");
+			break;
+		case PAUSED:
+			sprintf(buf, "%s", "PAUSED");
+			break;
+		case WON:
+			sprintf(buf, "%s", "WON");
+			break;
+		case GAME_OVER:
+			sprintf(buf, "%s", "GAME_OVER");
+			break;
+		default:
+			sprintf(buf, "%s", "ERROR");
+			break;
+	}
+	GUI_Text(8, 280, (uint8_t *) buf, White, Black);
+}
+
 void draw_pacman(uint8_t row, uint8_t col){
 	int i = 0;
 	for(; i < 8; i++){

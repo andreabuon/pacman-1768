@@ -87,6 +87,7 @@ int main (void) {
 	draw_game_time(&game);
 	draw_game_lifes(&game);
 	draw_game_score(&game);
+	draw_game_state(&game);
 	
 	draw_map(game.map);
 	

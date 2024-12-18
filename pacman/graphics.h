@@ -10,6 +10,7 @@ void draw_labels();
 void draw_game_time(Game* game);
 void draw_game_lifes(Game* game);
 void draw_game_score(Game* game);
+void draw_game_state(Game* game);
 
 void draw_tile(uint8_t row, uint8_t col, Tile* tile);
 void draw_map(Tile map[MAP_HEIGHT][MAP_LENGTH]);
