@@ -3,9 +3,11 @@
 #include <stdint.h>
 #include <stdio.h>
 
-void draw_tile(uint8_t row, uint8_t col, Tile* tile){
+void draw_tile(Tile map[MAP_HEIGHT][MAP_LENGTH], uint8_t row, uint8_t col){
+	Tile tile = map[row][col];
+	
 	int color = 0;
-	switch(tile->type){
+	switch(tile.type){
 		case EMPTY_TILE:
 			color = Black;
 			break;
@@ -40,7 +42,7 @@ void draw_map(Tile map[MAP_HEIGHT][MAP_LENGTH]){
 	for(; row < MAP_HEIGHT; row++){
 		uint16_t col = 0;
 		for(; col < MAP_LENGTH; col++){
-			draw_tile(row, col, &map[row][col]);
+			draw_tile(map, row, col);
 		}
 	}
 }
