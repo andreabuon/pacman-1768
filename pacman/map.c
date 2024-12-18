@@ -30,7 +30,7 @@ void place_power_pills(Tile map[MAP_HEIGHT][MAP_LENGTH]){
 void generate_map(Tile map[MAP_HEIGHT][MAP_LENGTH]){
 	parse_map(map);
 	//TODO place pills
-	place_power_pills(map);
+	place_power_pills(map); //FIXME
 }
 
 uint8_t is_a_pill(Tile* tile){
