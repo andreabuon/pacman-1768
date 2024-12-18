@@ -71,7 +71,7 @@ int main (void) {
 	init_timer_simplified(TIMER_0, 0, TIM_MS_TO_TICKS_SIMPLE(1000), 0, TIMER_INTERRUPT_MR | TIMER_RESET_MR, 0);
 	
 	// Pacman movement
-	init_timer_simplified(TIMER_1, 1, TIM_MS_TO_TICKS_SIMPLE(160), 0, TIMER_INTERRUPT_MR | TIMER_RESET_MR, 0);
+	init_timer_simplified(TIMER_1, 1, TIM_MS_TO_TICKS_SIMPLE(120), 0, TIMER_INTERRUPT_MR | TIMER_RESET_MR, 0);
 	
 	// power control register
 	LPC_SC->PCON |= 0x1;			// PM0=1
