@@ -92,8 +92,6 @@ int main (void) {
 	draw_map(game.map);
 	
 	start_game(&game);
-	enable_timer(TIMER_0, PRIO_3);
-	enable_timer(TIMER_1, PRIO_3);
 
 	while(1){
 		;

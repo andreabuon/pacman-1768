@@ -1,11 +1,26 @@
 #include <stdint.h>
 #include "pacman.h"
-
+#include "../pacman/graphics.h"
 //
 #include "../timer/timer.h"
+#include "../common.h"
 #include "../RIT/RIT.h"
-#include "../pacman/graphics.h"
 
+void enable_game_countdown(){
+	enable_timer(TIMER_0, PRIO_3);
+}
+
+void disable_game_countdown(){
+	disable_timer(TIMER_0);
+}
+
+void enable_pacman_movement(){
+	enable_timer(TIMER_1, PRIO_3);
+}
+
+void disable_pacman_movement(){
+	disable_timer(TIMER_1);
+}
 
 void new_game(Game* game){
 	game->state = READY;
@@ -28,23 +43,40 @@ void set_game_state(Game* game, enum GameState state) {
 }
 
 void start_game(Game* game){
-  game->state = PLAYING;
+  set_game_state(game, PLAYING);
+	
+	enable_game_countdown();
+	enable_pacman_movement();
+	
+	enable_RIT(); //Joystick polling
+	
+	draw_game_state(game);
 }
 
 void pause_game(Game* game){
 	set_game_state(game, PAUSED);
+	
+	disable_game_countdown();
+	disable_pacman_movement();
+	
+	draw_game_state(game);
 }
 
 void win_game(Game* game){
 	set_game_state(game, WON);
+	
+	disable_game_countdown();
+	disable_pacman_movement();
+	
+	draw_game_state(game);
 }
 
 void lose_game(Game* game){
 	set_game_state(game, GAME_OVER);
 	
-	disable_timer(TIMER_0);
-	disable_timer(TIMER_1);
-	disable_RIT();
+	disable_game_countdown();
+	disable_pacman_movement();
+	
 	draw_game_state(game);
 }
 
