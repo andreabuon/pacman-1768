@@ -123,7 +123,13 @@ void move_pacman(Game* game, int dx, int dy) {
 		}
 		
 		if (game->map[new_y][new_x].type == STANDARD_PILL) game->standard_pills_count--;
-			else game->power_pills_count--;
+		else if (game->map[new_y][new_x].type == POWER_PILL) game->power_pills_count--;
+		}else{
+		return;
+		}
+	
+		if(game->standard_pills_count == 0 && game->power_pills_count == 0){
+			win_game(game);
 		}
 }
 
