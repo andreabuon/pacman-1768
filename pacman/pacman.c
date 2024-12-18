@@ -34,6 +34,8 @@ void new_game(Game* game){
 	
 	game->pacman_x = PACMAN_INITIAL_POSITION_X;
 	game->pacman_y = PACMAN_INITIAL_POSITION_Y;
+	
+	game->threshold_new_life = THRESHOLD_NEW_LIFE;
 }
 
 void set_game_state(Game* game, enum GameState state) {
@@ -109,9 +111,17 @@ void move_pacman(Game* game, int dx, int dy) {
 		
   game->pacman_x = new_x;
   game->pacman_y = new_y;
+	
 	// If the old tile was a pill update the game score
   if (is_a_pill(&game->map[new_y][new_x])) {
 		game->score += get_tile_score(&game->map[new_y][new_x]);
+		
+		//Add life every 1000 points
+		if (game->score > game->threshold_new_life){
+			add_life(game);
+			game->threshold_new_life += THRESHOLD_NEW_LIFE;
+		}
+		
 		if (game->map[new_y][new_x].type == STANDARD_PILL) game->standard_pills_count--;
 			else game->power_pills_count--;
 		}

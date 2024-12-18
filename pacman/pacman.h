@@ -13,6 +13,8 @@
 #define PACMAN_INITIAL_POSITION_X 3
 #define PACMAN_INITIAL_POSITION_Y 14
 
+#define THRESHOLD_NEW_LIFE 1000
+
 uint8_t is_a_pill(Tile* tile);
 uint8_t get_tile_score(Tile* tile);
 
@@ -46,6 +48,8 @@ typedef struct Game {
 	
 	uint8_t pacman_x;
 	uint8_t pacman_y;
+	
+	uint16_t threshold_new_life;
 	
 } Game;
 
