@@ -1,6 +1,12 @@
 #include <stdint.h>
 #include "pacman.h"
 
+//
+#include "../timer/timer.h"
+#include "../RIT/RIT.h"
+#include "../pacman/graphics.h"
+
+
 void new_game(Game* game){
 	game->state = READY;
 	generate_map(game->map);	
@@ -35,8 +41,11 @@ void win_game(Game* game){
 
 void lose_game(Game* game){
 	set_game_state(game, GAME_OVER);
-	//disable timers (time, movement, score, etc)
-	//draw game over message
+	
+	disable_timer(TIMER_0);
+	disable_timer(TIMER_1);
+	disable_RIT();
+	draw_game_state(game);
 }
 
 void add_life(Game* game){
