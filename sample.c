@@ -93,10 +93,8 @@ int main (void) {
 	start_game(&game);
 
 	while(1){
-		;
+			__ASM("wfi");
 	}
-
-	__ASM("wfi");
 }
 /*
 		// Joystick cmd, flags set at first edge
