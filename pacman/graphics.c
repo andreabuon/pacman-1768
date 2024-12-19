@@ -75,22 +75,22 @@ void draw_game_state(Game* game){
 	char buf[11];
 	switch(game->state){
 		case READY:
-			sprintf(buf, "%s", "READY");
+			sprintf(buf, "%s", "READY     ");
 			break;
 		case PLAYING:
-			sprintf(buf, "%s", "PLAYING");
+			sprintf(buf, "%s", "PLAYING   ");
 			break;
 		case PAUSED:
-			sprintf(buf, "%s", "PAUSED");
+			sprintf(buf, "%s", "PAUSED    ");
 			break;
 		case WON:
-			sprintf(buf, "%s", "WON");
+			sprintf(buf, "%s", "WON       ");
 			break;
 		case GAME_OVER:
-			sprintf(buf, "%s", "GAME_OVER");
+			sprintf(buf, "%s", "GAME OVER ");
 			break;
 		default:
-			sprintf(buf, "%s", "ERROR");
+			sprintf(buf, "%s", "ERR_STATE ");
 			break;
 	}
 	GUI_Text(8, 280, (uint8_t *) buf, White, Black);
