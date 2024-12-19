@@ -49,25 +49,25 @@ void draw_map(Tile map[MAP_HEIGHT][MAP_LENGTH]){
 
 void draw_labels(){
 	GUI_Text(0, 304, (uint8_t *) "Time: ", White, Black);
-	GUI_Text(80, 304, (uint8_t *) "Lifes: ", White, Black);
+	GUI_Text(75, 304, (uint8_t *) "Lifes: ", White, Black);
 	GUI_Text(150, 304, (uint8_t *) "Score: ", White, Black);
 }
 
 void draw_game_time(Game* game){
 	char buf[5];
-	sprintf(buf, "%u", game->time);
-	GUI_Text(50, 304, (uint8_t *) buf , White, Black);
+	sprintf(buf, "%02u", game->time);
+	GUI_Text(45, 304, (uint8_t *) buf , White, Black);
 }
 	
 void draw_game_lifes(Game* game){
 	char buf[5];
-	sprintf(buf, "%u", game->lives);
-	GUI_Text(135, 304, (uint8_t *) buf , White, Black);
+	sprintf(buf, "%02u", game->lives);
+	GUI_Text(125, 304, (uint8_t *) buf , White, Black);
 }
 
 void draw_game_score(Game* game){
 	char buf[5];
-	sprintf(buf, "%u", game->score);
+	sprintf(buf, "%04u", game->score);
 	GUI_Text(200, 304, (uint8_t *) buf, White, Black);
 }
 
