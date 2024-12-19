@@ -16,7 +16,9 @@ void TIMER0_IRQHandler (void){
 		if(game.time == 0){
 			lose_game(&game);
 		}else{
+			/* Values should be printed from within the CAN IRQ instead
 			draw_game_time(game.time);
+			*/
 		}
 	} else if(irq_source & IR_MR1) { // mr1
 		
@@ -42,9 +44,10 @@ void TIMER1_IRQHandler (void){
 		draw_tile(game.map, old_tile_y, old_tile_x);
 		draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
 		
+		/* Values should be printed from within the CAN IRQ instead
 		draw_game_score(game.score);
 		draw_game_lifes(game.lives);
-		
+		*/
 		if(game.standard_pills_count == 0 && game.power_pills_count == 0){
 			win_game(&game);
 		}
