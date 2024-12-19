@@ -4,6 +4,7 @@
 
 #include "pacman/pacman.h"
 #include "pacman/graphics.h"
+#include "CAN/CAN.h" //FIXME move
 
 #ifdef SIMULATOR
 #define RIT_PERIOD_MS 150U
@@ -21,6 +22,7 @@ int main (void) {
 	LED_init();
 	joystick_init();
 	LCD_Initialization();
+	CAN_Init();
 	
 	// RIT WORKS WITH CLOCK = 100MHZ
 	init_RIT(RIT_MS_TO_TICKS(RIT_PERIOD_MS));
