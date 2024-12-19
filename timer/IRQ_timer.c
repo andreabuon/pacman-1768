@@ -3,6 +3,7 @@
 
 #include "../pacman/pacman.h"
 #include "../pacman/graphics.h"
+#include "../CAN/CAN.h"
 
 /*
 	in IR si deve settare il bit associato al MR di cui si vuole cancellare l'interruzione.
@@ -20,6 +21,7 @@ void TIMER0_IRQHandler (void){
 			draw_game_time(game.time);
 			*/
 		}
+		send_values_CAN();
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2

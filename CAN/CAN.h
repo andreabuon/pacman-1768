@@ -46,6 +46,8 @@ void CAN_Init 				 (void);
 extern CAN_msg       CAN_TxMsg;      /* CAN messge for sending */
 extern CAN_msg       CAN_RxMsg;      /* CAN message for receiving */                                
 
+void send_values_CAN();
+
 #endif // _CAN_H_
 
 
