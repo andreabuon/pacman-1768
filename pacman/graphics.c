@@ -69,27 +69,27 @@ void draw_labels(){
 	GUI_Text(150, 304, (uint8_t *) "Score: ", White, Black);
 }
 
-void draw_game_time(Game* game){
+void draw_game_time(uint8_t time){
 	char buf[5];
-	sprintf(buf, "%02u", game->time);
+	sprintf(buf, "%02u", time);
 	GUI_Text(45, 304, (uint8_t *) buf , White, Black);
 }
 	
-void draw_game_lives(Game* game){
+void draw_game_lifes(uint8_t lifes){
 	char buf[5];
-	sprintf(buf, "%02u", game->lives);
+	sprintf(buf, "%02u", lifes);
 	GUI_Text(125, 304, (uint8_t *) buf , White, Black);
 }
 
-void draw_game_score(Game* game){
+void draw_game_score(uint16_t score){
 	char buf[5];
-	sprintf(buf, "%04u", game->score);
+	sprintf(buf, "%04u", score);
 	GUI_Text(200, 304, (uint8_t *) buf, White, Black);
 }
 
-void draw_game_state(Game* game){
+void draw_game_state(enum GameState state){
 	char buf[11];
-	switch(game->state){
+	switch(state){
 		case READY:
 			sprintf(buf, "%s", "READY     ");
 			break;

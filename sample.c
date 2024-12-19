@@ -62,10 +62,10 @@ int main (void) {
 	draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
 	
 	draw_labels();
-	draw_game_time(&game);
-	draw_game_lives(&game);
-	draw_game_score(&game);
-	draw_game_state(&game);
+	draw_game_time(game.time);
+	draw_game_lifes(game.lives);
+	draw_game_score(game.score);
+	draw_game_state(game.state);
 	
 	NVIC_SetPriority(RIT_IRQn, RIT_PRIORITY );
 	NVIC_SetPriority(TIMER0_IRQn, TIMER0_PRIORITY );

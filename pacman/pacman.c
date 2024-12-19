@@ -97,7 +97,7 @@ void start_game(Game* game){
 	
 	enable_RIT(); //Joystick polling
 	
-	draw_game_state(game);
+	draw_game_state(game->state);
 }
 
 void pause_game(Game* game){
@@ -107,7 +107,7 @@ void pause_game(Game* game){
 	disable_pacman_movement();
 	disable_power_pills_generation();
 	
-	draw_game_state(game);
+	draw_game_state(game->state);
 }
 
 void win_game(Game* game){

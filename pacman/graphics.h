@@ -7,10 +7,10 @@
 #define MARGIN_TOP 8
 
 void draw_labels();
-void draw_game_time(Game* game);
-void draw_game_lives(Game* game);
-void draw_game_score(Game* game);
-void draw_game_state(Game* game);
+void draw_game_time(uint8_t time);
+void draw_game_lifes(uint8_t lifes);
+void draw_game_score(uint16_t score);
+void draw_game_state(enum GameState state);
 
 void draw_win_screen();
 void draw_game_over_screen();
