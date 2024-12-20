@@ -53,6 +53,7 @@ void TIMER1_IRQHandler (void){
 		if(game.standard_pills_count == 0 && game.power_pills_count == 0){
 			win_game(&game);
 		}
+		send_values_CAN();
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2
