@@ -52,9 +52,21 @@ void send_values_CAN(){
   CAN interrupt handler
  *----------------------------------------------------------------------------*/
 void CAN_IRQHandler (void)  {
-  icr = (LPC_CAN1->ICR | icr) & 0xFF;   
-	icr = (LPC_CAN2->ICR | icr) & 0xFF;             /* clear interrupts */
+   /* check CAN controller 1 */
+	icr = 0;
+  icr = (LPC_CAN1->ICR | icr) & 0xFF;               /* clear interrupts */
 	
+  if (icr & (1 << 0)) {                          		/* CAN Controller #1 meassage is received */
+		CAN_rdMsg (1, &CAN_RxMsg);	                		/* Read the message */
+    LPC_CAN1->CMR = (1 << 2);                    		/* Release receive buffer */
+  }
+	if (icr & (1 << 1)) {                         /* CAN Controller #1 meassage is transmitted */
+		// do nothing in this example
+	}
+		
+	/* check CAN controller 2 */
+	icr = 0;
+	icr = (LPC_CAN2->ICR | icr) & 0xFF;             /* clear interrupts */
 	if (icr & (1 << 0)) {						/* CAN Controller #2 meassage is received */
 		CAN_rdMsg (2, &CAN_RxMsg);		/* Read the message */
 		LPC_CAN2->CMR = (1 << 2);			/* Release receive buffer */
@@ -66,7 +78,8 @@ void CAN_IRQHandler (void)  {
 		draw_game_time(time);
 		draw_game_lifes(lifes);
 		draw_game_score(score);
-		
-		icr = (LPC_CAN2->ICR | icr) & 0xFF;             /* clear interrupts */
+	}
+	if (icr & (1 << 1)) {                         /* CAN Controller #2 meassage is transmitted */
+		// do nothing in this example
 	}
 }
