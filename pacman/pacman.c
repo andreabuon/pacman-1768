@@ -24,7 +24,7 @@ void disable_pacman_movement(){
 
 void new_game(Game* game){
 	game->state = PAUSED;
-	generate_map(game->map);	
+	generate_map(game);	
 	game->score = 0;
 	game->lives = 1;
 	game->time = 60;
