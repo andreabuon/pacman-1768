@@ -111,7 +111,15 @@ void move_pacman(Game* game, int dx, int dy) {
 	int new_y = game->pacman_y + dy;
 	
 	// Prevent out-of-bounds access
-	if (new_x < 0 || new_x >= MAP_LENGTH || new_y < 0 || new_y >= MAP_HEIGHT) {
+	if ( new_x < 0 || new_x >= MAP_LENGTH ) {
+		// Teleport mechanism
+		if (game->map[game->pacman_y][game->pacman_x].type == TELEPORT) {
+			new_x = (new_x + MAP_LENGTH) % MAP_LENGTH;  // Wrap around horizontally
+			//new_y = (new_y + MAP_HEIGHT) % MAP_HEIGHT;  // Wrap around vertically
+		}
+	}
+	
+	if ( new_y < 0 || new_y >= MAP_HEIGHT ) {
 		return;
 	}
 	
@@ -120,17 +128,10 @@ void move_pacman(Game* game, int dx, int dy) {
 		return;
 	}
 	
-	// Wrap around or teleport to a predefined position
-	if (game->map[new_y][new_x].type == TELEPORT) {
-		new_x = (new_x + MAP_LENGTH) % MAP_LENGTH;  // Wrap around horizontally
-		new_y = (new_y + MAP_HEIGHT) % MAP_HEIGHT;  // Wrap around vertically
-	}
- 
-	// Replace the old tile with a new one
-	else {
+	if (game->map[game->pacman_y][game->pacman_x].type != TELEPORT) {
 		game->map[game->pacman_y][game->pacman_x].type = EMPTY_TILE;
 	}
-		
+	
   game->pacman_x = new_x;
   game->pacman_y = new_y;
 	
