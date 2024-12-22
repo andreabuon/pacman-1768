@@ -4,8 +4,8 @@
 #include <stdint.h>
 #include "map.h"
 
-#define STANDARD_PILLS_COUNT 240
-#define POWER_PILLS_COUNT 6
+#define INITIAL_STANDARD_PILLS_COUNT 240
+#define INITIAL_POWER_PILLS_COUNT 0
 
 #define STANDARD_PILL_SCORE 10
 #define POWER_PILL_SCORE 50

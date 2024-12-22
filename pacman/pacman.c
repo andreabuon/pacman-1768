@@ -24,13 +24,13 @@ void disable_pacman_movement(){
 
 void new_game(Game* game){
 	game->state = PAUSED;
-	generate_map(game);	
+	parse_map(game->map);	
 	game->score = 0;
 	game->lives = 1;
 	game->time = 60;
 	
-	game->standard_pills_count = STANDARD_PILLS_COUNT;
-	game->power_pills_count = POWER_PILLS_COUNT;
+	game->standard_pills_count = INITIAL_STANDARD_PILLS_COUNT;
+	game->power_pills_count = INITIAL_POWER_PILLS_COUNT;
 	
 	game->pacman_x = PACMAN_INITIAL_POSITION_X;
 	game->pacman_y = PACMAN_INITIAL_POSITION_Y;

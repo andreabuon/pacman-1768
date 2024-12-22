@@ -21,6 +21,6 @@ typedef struct {
 	enum TileType type;
 } Tile;
 
-void generate_map(Game* game);
+void parse_map(Tile map[MAP_HEIGHT][MAP_LENGTH]);
 
 #endif // MAP_H *

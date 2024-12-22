@@ -15,29 +15,6 @@ void parse_map(Tile map[MAP_HEIGHT][MAP_LENGTH]){
   }
 }
 
-void place_power_pill(Game* game){
-		int row = rand() % MAP_HEIGHT;
-		int col = rand() % MAP_LENGTH;
-		if (game->map[row][col].type == STANDARD_PILL)	{
-				game->map[row][col].type = POWER_PILL;
-				game->power_pills_count++;
-		}
-}
-
-void place_power_pills(Game* game){
-	int placed = 0;
-	while (placed < POWER_PILLS_COUNT)	{
-		place_power_pill(game);
-		placed++;
-	}
-}
-
-void generate_map(Game* game){
-	parse_map( game->map );
-	//TODO place pills
-	place_power_pills(game); //FIXME
-}
-
 uint8_t is_a_pill(Tile* tile){
 	if(tile->type == STANDARD_PILL || tile->type == POWER_PILL){
 		return 1;
