@@ -63,6 +63,8 @@ void lose_game(Game* game);
 void set_game_state(Game* game, enum GameState state);
 
 void add_life(Game* game);
+void update_score(Game* game, Tile* new_tile);
+
 
 void move_pacman(Game* game, int dx, int dy);
 void move_pacman_up(Game* game);
