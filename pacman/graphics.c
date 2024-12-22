@@ -21,7 +21,7 @@ void draw_tile(Tile map[MAP_HEIGHT][MAP_LENGTH], uint8_t row, uint8_t col){
 			color = Red;
 			break;
 		case TELEPORT:
-			color = Green;
+			color = Black;
 			break;
 		
 		default:
