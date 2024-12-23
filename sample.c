@@ -55,7 +55,7 @@ int main (void) {
 	
 	// Random power pills generation
 	uint32_t time1 = TIM_MS_TO_TICKS_SIMPLE(3000);
-	init_timer_simplified(TIMER_2, 1, time1, 0, TIMER_INTERRUPT_MR , 0);
+	init_timer_simplified(TIMER_2, 1, time1, 0, TIMER_INTERRUPT_MR | TIMER_RESET_MR , 0);
 	
 	// power control register
 	LPC_SC->PCON |= 0x1;			// PM0=1
