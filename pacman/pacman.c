@@ -33,12 +33,19 @@ void disable_power_pills_generation(){
 }
 //
 
+int compare_uint32_ascending(const void* a, const void* b) {
+	uint32_t x = *(uint32_t*) a;
+	uint32_t y = *(uint32_t*) b;
+	if (x < y) return -1;
+	if (x > y) return 1;
+	return 0;
+}
+
 void generate_random_power_pills_spawn_times(uint32_t power_pills_spawn_times[POWER_PILLS_TO_PLACE]){
-	uint32_t time = 3000;
-	for(int i = 0; i< POWER_PILLS_TO_PLACE; i++){
-		power_pills_spawn_times[i] = TIM_MS_TO_TICKS_SIMPLE(time);
-		time += 3000;
+	for(int i = 0; i < POWER_PILLS_TO_PLACE; i++){
+		power_pills_spawn_times[i] = TIM_MS_TO_TICKS_SIMPLE(rand() % INITIAL_GAME_TIME);
 	}
+	qsort(power_pills_spawn_times, POWER_PILLS_TO_PLACE, sizeof(power_pills_spawn_times[0]), compare_uint32_ascending );
 }
 
 void new_game(Game* game){
