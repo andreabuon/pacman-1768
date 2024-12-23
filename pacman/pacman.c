@@ -43,6 +43,14 @@ void new_game(Game* game){
 	game->standard_pills_count = INITIAL_STANDARD_PILLS_COUNT;
 	game->power_pills_count = INITIAL_POWER_PILLS_COUNT;
 	
+	//FIXME
+	game->power_pills_spawn_times[0] = TIM_MS_TO_TICKS_SIMPLE(3000);
+	game->power_pills_spawn_times[1] = TIM_MS_TO_TICKS_SIMPLE(6000);
+	game->power_pills_spawn_times[2] = TIM_MS_TO_TICKS_SIMPLE(9000);
+	game->power_pills_spawn_times[3] = TIM_MS_TO_TICKS_SIMPLE(12000);
+	game->power_pills_spawn_times[4] = TIM_MS_TO_TICKS_SIMPLE(15000);
+	game->power_pills_spawn_times[5] = TIM_MS_TO_TICKS_SIMPLE(18000);
+	
 	game->pacman_x = PACMAN_INITIAL_POSITION_X;
 	game->pacman_y = PACMAN_INITIAL_POSITION_Y;
 	

@@ -22,7 +22,6 @@ extern uint8_t btn_flag;
 
 Game game; //FIXME
 enum Direction movement_direction = RIGHT;
-uint32_t times[6];
 
 int main (void) {
 	SystemInit();
@@ -53,16 +52,7 @@ int main (void) {
 	
 	// Pacman movement
 	init_timer_simplified(TIMER_1, 1, TIM_MS_TO_TICKS_SIMPLE(70), 0, TIMER_INTERRUPT_MR | TIMER_RESET_MR, 0);
-	
-	// Random power pills generation
-	times[0] = TIM_MS_TO_TICKS_SIMPLE(3000);
-	times[1] = TIM_MS_TO_TICKS_SIMPLE(6000);
-	times[2] = TIM_MS_TO_TICKS_SIMPLE(9000);
-	times[3] = TIM_MS_TO_TICKS_SIMPLE(12000);
-	times[4] = TIM_MS_TO_TICKS_SIMPLE(15000);
-	times[5] = TIM_MS_TO_TICKS_SIMPLE(18000);
-	init_timer_simplified(TIMER_2, 1, times[0], 0, TIMER_INTERRUPT_MR, 0);
-	
+		
 	// power control register
 	LPC_SC->PCON |= 0x1;			// PM0=1
 	LPC_SC->PCON &= 0xFFFFFFFFD;	// PM1=0
@@ -70,6 +60,9 @@ int main (void) {
 	LCD_Clear(Black);
 
 	new_game(&game);
+	
+	// Random power pills generation
+	init_timer_simplified(TIMER_2, 1, game.power_pills_spawn_times[0], 0, TIMER_INTERRUPT_MR, 0);
 	
 	// Seed the random number generator
 	srand(game.standard_pills_count);
