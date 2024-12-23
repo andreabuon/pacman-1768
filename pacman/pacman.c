@@ -6,6 +6,7 @@
 #include "../common.h"
 #include "../RIT/RIT.h"
 
+// Game Time Countdown
 void enable_game_countdown(){
 	enable_timer(TIMER_0, PRIO_3);
 }
@@ -13,7 +14,7 @@ void enable_game_countdown(){
 void disable_game_countdown(){
 	disable_timer(TIMER_0);
 }
-
+// Pacman Movement
 void enable_pacman_movement(){
 	enable_timer(TIMER_1, PRIO_3);
 }
@@ -21,6 +22,15 @@ void enable_pacman_movement(){
 void disable_pacman_movement(){
 	disable_timer(TIMER_1);
 }
+// Power Pills Generation
+void enable_power_pills_generation(){
+	enable_timer(TIMER_2, PRIO_3);
+}
+
+void disable_power_pills_generation(){
+	disable_timer(TIMER_2);
+}
+//
 
 void new_game(Game* game){
 	game->state = PAUSED;
@@ -47,6 +57,7 @@ void start_game(Game* game){
 	
 	enable_game_countdown();
 	enable_pacman_movement();
+	enable_power_pills_generation();
 	
 	enable_RIT(); //Joystick polling
 	
@@ -58,6 +69,7 @@ void pause_game(Game* game){
 	
 	disable_game_countdown();
 	disable_pacman_movement();
+	disable_power_pills_generation();
 	
 	draw_game_state(game);
 }
@@ -67,6 +79,7 @@ void win_game(Game* game){
 	
 	disable_game_countdown();
 	disable_pacman_movement();
+	disable_power_pills_generation();
 	
 	draw_game_state(game);
 }
@@ -76,6 +89,7 @@ void lose_game(Game* game){
 	
 	disable_game_countdown();
 	disable_pacman_movement();
+	disable_power_pills_generation();
 	
 	draw_game_state(game);
 }
