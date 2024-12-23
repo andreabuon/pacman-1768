@@ -67,8 +67,6 @@ int main (void) {
 	draw_game_state(&game);
 	
 	draw_map(game.map);
-	
-	start_game(&game);
 
 	while(1){
 			__ASM("wfi");
