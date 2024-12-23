@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stdlib.h>
+
 #include "pacman.h"
 #include "../pacman/graphics.h"
 //
@@ -79,7 +80,9 @@ void start_game(Game* game){
 	
 	enable_game_countdown();
 	enable_pacman_movement();
-	enable_power_pills_generation();
+	if(game->power_pills_placed_count < POWER_PILLS_TO_PLACE){
+		enable_power_pills_generation();
+	}
 	
 	enable_RIT(); //Joystick polling
 	
