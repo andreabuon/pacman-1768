@@ -33,6 +33,14 @@ void disable_power_pills_generation(){
 }
 //
 
+void generate_random_power_pills_spawn_times(uint32_t power_pills_spawn_times[POWER_PILLS_TO_PLACE]){
+	uint32_t time = 3000;
+	for(int i = 0; i< POWER_PILLS_TO_PLACE; i++){
+		power_pills_spawn_times[i] = TIM_MS_TO_TICKS_SIMPLE(time);
+		time += 3000;
+	}
+}
+
 void new_game(Game* game){
 	game->state = PAUSED;
 	parse_map(game->map);	
@@ -43,13 +51,7 @@ void new_game(Game* game){
 	game->standard_pills_count = INITIAL_STANDARD_PILLS_COUNT;
 	game->power_pills_count = INITIAL_POWER_PILLS_COUNT;
 	
-	//FIXME
-	game->power_pills_spawn_times[0] = TIM_MS_TO_TICKS_SIMPLE(3000);
-	game->power_pills_spawn_times[1] = TIM_MS_TO_TICKS_SIMPLE(6000);
-	game->power_pills_spawn_times[2] = TIM_MS_TO_TICKS_SIMPLE(9000);
-	game->power_pills_spawn_times[3] = TIM_MS_TO_TICKS_SIMPLE(12000);
-	game->power_pills_spawn_times[4] = TIM_MS_TO_TICKS_SIMPLE(15000);
-	game->power_pills_spawn_times[5] = TIM_MS_TO_TICKS_SIMPLE(18000);
+	generate_random_power_pills_spawn_times(game->power_pills_spawn_times);
 	
 	game->pacman_x = PACMAN_INITIAL_POSITION_X;
 	game->pacman_y = PACMAN_INITIAL_POSITION_Y;
