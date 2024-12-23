@@ -64,7 +64,8 @@ void TIMER2_IRQHandler(void){
 	uint8_t irq_source = LPC_TIM2->IR;
 	
 	if(irq_source & IR_MR0) { // mr0
-		place_random_power_pill(&game);
+		struct Coordinates power_pill_position = place_random_power_pill(&game);
+		draw_tile(game.map, power_pill_position.row, power_pill_position.col);
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2

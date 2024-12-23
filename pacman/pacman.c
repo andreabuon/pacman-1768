@@ -121,18 +121,22 @@ void update_score(Game* game, Tile* new_tile){
 		}
 }
 
-void place_random_power_pill(Game* game){
-	uint16_t x;
-	uint16_t y;
-	do{
-		x = rand() % MAP_LENGTH ;
-		y = rand() % MAP_HEIGHT ;
-	}
-	while( game->map[y][x].type != STANDARD_PILL );
+struct Coordinates place_random_power_pill(Game* game){
+	srand(game->standard_pills_count);
 	
-	game->map[y][x].type = POWER_PILL;
+	struct Coordinates power_pill_position;
+	
+	do{
+		power_pill_position.row = rand() % MAP_LENGTH ;
+		power_pill_position.col = rand() % MAP_HEIGHT ;
+	}
+	while( game->map[power_pill_position.row][power_pill_position.col].type != STANDARD_PILL );
+	
+	game->map[power_pill_position.row][power_pill_position.col].type = POWER_PILL;
 	game->standard_pills_count--;
 	game->power_pills_count++;
+	
+	return power_pill_position;
 }
 
 void move_pacman(Game* game, int dx, int dy) {
