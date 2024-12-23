@@ -46,7 +46,7 @@ void new_game(Game* game){
 	parse_map(game->map);	
 	game->score = 0;
 	game->lives = 1;
-	game->time = 60;
+	game->time = INITIAL_GAME_TIME;
 	
 	game->standard_pills_count = INITIAL_STANDARD_PILLS_COUNT;
 	game->power_pills_count = INITIAL_POWER_PILLS_COUNT;

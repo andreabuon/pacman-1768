@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include "map.h"
 
+#define INITIAL_GAME_TIME 60
+
 #define INITIAL_STANDARD_PILLS_COUNT 240
 #define INITIAL_POWER_PILLS_COUNT 0
 
