@@ -41,9 +41,13 @@ int compare_uint32_ascending(const void* a, const void* b) {
 	return 0;
 }
 
+//Fills the array with the values to set the timer MR0 to generate the random power pills
 void generate_random_power_pills_spawn_times(uint32_t power_pills_spawn_times[POWER_PILLS_TO_PLACE]){
 	for(int i = 0; i < POWER_PILLS_TO_PLACE; i++){
-		power_pills_spawn_times[i] = TIM_MS_TO_TICKS_SIMPLE(rand() % INITIAL_GAME_TIME);
+		int time_seconds = rand() % INITIAL_GAME_TIME;
+		int time_ms = time_seconds * 1000;
+		//power_pills_spawn_times[i] = TIM_MS_TO_TICKS_SIMPLE(ms);
+		power_pills_spawn_times[i] = time_ms;
 	}
 	qsort(power_pills_spawn_times, POWER_PILLS_TO_PLACE, sizeof(power_pills_spawn_times[0]), compare_uint32_ascending );
 }
