@@ -65,6 +65,7 @@ void set_game_state(Game* game, enum GameState state);
 void add_life(Game* game);
 void update_score(Game* game, Tile* new_tile);
 
+void place_random_power_pill(Game* game);
 
 void move_pacman(Game* game, int dx, int dy);
 void move_pacman_up(Game* game);

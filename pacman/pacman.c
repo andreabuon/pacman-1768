@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdlib.h>
 #include "pacman.h"
 #include "../pacman/graphics.h"
 //
@@ -118,6 +119,20 @@ void update_score(Game* game, Tile* new_tile){
 		if(game->standard_pills_count == 0 && game->power_pills_count == 0){
 			win_game(game);
 		}
+}
+
+void place_random_power_pill(Game* game){
+	uint16_t x;
+	uint16_t y;
+	do{
+		x = rand() % MAP_LENGTH ;
+		y = rand() % MAP_HEIGHT ;
+	}
+	while( game->map[y][x].type != STANDARD_PILL );
+	
+	game->map[y][x].type = POWER_PILL;
+	game->standard_pills_count--;
+	game->power_pills_count++;
 }
 
 void move_pacman(Game* game, int dx, int dy) {
