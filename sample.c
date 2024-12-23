@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "include.h"
 #include "common.h"
 
@@ -63,6 +64,9 @@ int main (void) {
 	LCD_Clear(Black);
 
 	new_game(&game);
+	
+	// Seed the random number generator
+	srand(game.standard_pills_count);
 	
 	draw_labels();
 	draw_game_time(&game);
