@@ -21,8 +21,6 @@ uint32_t pressed_joystick_select = 0;
 volatile uint8_t joystick_flag = 0;
 volatile uint8_t btn_flag = 0;
 
-extern Game game; //FIXME
-
 void RIT_IRQHandler(void){	
 	
 	// -------------------------------

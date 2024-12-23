@@ -20,7 +20,7 @@ void Delay_SysTick(uint32_t SysTicks);
 extern uint8_t joystick_flag;
 extern uint8_t btn_flag;
 
-Game game; //FIXME
+Game game; //FIXME Global
 
 int main (void) {
 	SystemInit();

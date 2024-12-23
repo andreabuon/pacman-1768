@@ -8,8 +8,6 @@
 	in IR si deve settare il bit associato al MR di cui si vuole cancellare l'interruzione.
 */
 
-extern Game game; //FIXME
-
 void TIMER0_IRQHandler (void){
 	uint8_t irq_source = LPC_TIM0->IR;
 	

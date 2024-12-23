@@ -7,8 +7,6 @@ extern int pressed_button_0;
 extern int pressed_button_1;
 extern int pressed_button_2;
 
-extern Game game;
-
 void EINT0_IRQHandler(void){
 	if(game.state == PLAYING){
 		pause_game(&game);
