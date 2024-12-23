@@ -44,7 +44,9 @@ typedef struct Game {
 	uint8_t time;
 	
 	uint8_t standard_pills_count;
-	uint8_t power_pills_count;
+	
+	uint8_t power_pills_count; // Counts the number of power pills currently present in the map.
+	uint8_t power_pills_placed_count; // Counts the number of power pills placed sine the beginning of the game
 	
 	uint8_t pacman_x;
 	uint8_t pacman_y;

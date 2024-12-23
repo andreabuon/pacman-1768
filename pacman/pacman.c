@@ -135,6 +135,7 @@ struct Coordinates place_random_power_pill(Game* game){
 	game->map[power_pill_position.row][power_pill_position.col].type = POWER_PILL;
 	game->standard_pills_count--;
 	game->power_pills_count++;
+	game->power_pills_placed_count++;
 	
 	return power_pill_position;
 }
