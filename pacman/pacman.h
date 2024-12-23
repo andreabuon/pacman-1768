@@ -55,6 +55,7 @@ typedef struct Game {
 	
 	uint8_t pacman_x;
 	uint8_t pacman_y;
+	enum Direction pacman_direction;
 	
 	uint16_t threshold_new_life;
 	
@@ -84,6 +85,6 @@ void move_pacman_up(Game* game);
 void move_pacman_down(Game* game);
 void move_pacman_left(Game* game);
 void move_pacman_right(Game* game);
-void move_pacman_direction(Game* game, enum Direction direction);
+void move_pacman_direction(Game* game);
 
 #endif // PACMAN_H *

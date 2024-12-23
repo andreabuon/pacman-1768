@@ -21,7 +21,7 @@ uint32_t pressed_joystick_select = 0;
 volatile uint8_t joystick_flag = 0;
 volatile uint8_t btn_flag = 0;
 
-extern enum Direction movement_direction; //FIXME
+extern Game game; //FIXME
 
 void RIT_IRQHandler(void){	
 	
@@ -32,7 +32,7 @@ void RIT_IRQHandler(void){
 	if(joystick_check_dir(JOYSTICK_UP)){
 		pressed_joystick_up++;
 		if(pressed_joystick_up == 1) {
-			movement_direction = UP;
+			game.pacman_direction = UP;
 			joystick_flag |= FLAG_JOYSTICK_UP;
 		}
 	}
@@ -45,7 +45,7 @@ void RIT_IRQHandler(void){
 	if(joystick_check_dir(JOYSTICK_DOWN)){
 		pressed_joystick_down++;
 		if(pressed_joystick_down == 1) {
-			movement_direction = DOWN;
+			game.pacman_direction = DOWN;
 			joystick_flag |= FLAG_JOYSTICK_DOWN;
 		}
 	}
@@ -58,7 +58,7 @@ void RIT_IRQHandler(void){
 	if(joystick_check_dir(JOYSTICK_LEFT)){
 		pressed_joystick_left++;
 		if(pressed_joystick_left == 1) {
-			movement_direction = LEFT;
+			game.pacman_direction = LEFT;
 			joystick_flag |= FLAG_JOYSTICK_LEFT;
 		}
 	}
@@ -71,7 +71,7 @@ void RIT_IRQHandler(void){
 	if(joystick_check_dir(JOYSTICK_RIGHT)){
 		pressed_joystick_right++;
 		if(pressed_joystick_right == 1) {
-			movement_direction = RIGHT;
+			game.pacman_direction = RIGHT;
 			joystick_flag |= FLAG_JOYSTICK_RIGHT;
 		}
 	}

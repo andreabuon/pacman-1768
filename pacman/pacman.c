@@ -67,6 +67,7 @@ void new_game(Game* game){
 	
 	game->pacman_x = PACMAN_INITIAL_POSITION_X;
 	game->pacman_y = PACMAN_INITIAL_POSITION_Y;
+	game->pacman_direction = RIGHT;
 	
 	game->threshold_new_life = THRESHOLD_NEW_LIFE;
 }
@@ -212,8 +213,8 @@ void move_pacman_right(Game* game){
 	move_pacman(game, 1, 0);
 }
 
-void move_pacman_direction(Game* game, enum Direction direction){
-	switch(direction){
+void move_pacman_direction(Game* game){
+	switch(game->pacman_direction){
 		case UP:
 			move_pacman_up(game);
 			break;
