@@ -70,6 +70,8 @@ extern Game game; //FIXME Global variable defined in the main
 
 void new_game(Game* game);
 
+void toggle_game_state(Game* game);
+
 void start_game(Game* game);
 void pause_game(Game* game);
 void win_game(Game* game);

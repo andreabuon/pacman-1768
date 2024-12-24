@@ -8,13 +8,7 @@ extern int pressed_button_1;
 extern int pressed_button_2;
 
 void EINT0_IRQHandler(void){
-	if(game.state == PLAYING){
-		pause_game(&game);
-	}	else if (game.state == PAUSED || game.state == READY){
-		start_game(&game);
-	} else if (game.state == WON || game.state == GAME_OVER){
-		// Do nothing
-	}
+		toggle_game_state(&game);
 	// Remove interrput bit
     LPC_SC->EXTINT |= (1 << 0);
 	

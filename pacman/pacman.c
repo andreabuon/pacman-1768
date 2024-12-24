@@ -72,6 +72,16 @@ void new_game(Game* game){
 	game->threshold_new_life = THRESHOLD_NEW_LIFE;
 }
 
+void toggle_game_state(Game* game){
+	if(game->state == PLAYING){
+		pause_game(game);
+	}	else if (game->state == PAUSED || game->state == READY){
+		start_game(game);
+	} else {
+		// Do nothing
+	}
+}
+
 void set_game_state(Game* game, enum GameState state) {
     game->state = state;
 }
