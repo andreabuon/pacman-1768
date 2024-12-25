@@ -9,7 +9,6 @@
 #define RIT_PERIOD_MS 50U
 
 // Imported Variables
-extern uint8_t joystick_flag;
 extern uint8_t btn_flag;
 
 Game game; //FIXME Global

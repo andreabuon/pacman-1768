@@ -20,7 +20,6 @@ extern uint32_t pressed_joystick_right;
 extern uint32_t pressed_joystick_down;
 extern uint32_t pressed_joystick_select;
 
-extern uint8_t joystick_flag;
 extern uint8_t btn_flag;
 
 /******************************************************************************
@@ -91,7 +90,6 @@ uint32_t init_RIT ( uint32_t RITInterval ){
 	pressed_joystick_down   = 0;
 	pressed_joystick_select = 0;
 	
-	joystick_flag = 0;
 	btn_flag = 0;
 	
 	return (0);
