@@ -20,8 +20,6 @@ extern unsigned char led_value;
 #define PRIO_4 4U
 #define PRIO_5 5U
 
-// Get Current Ticks
-uint32_t Sys_GetTick(void);
 /******************************************************************************
 **                            End Of File
 ******************************************************************************/

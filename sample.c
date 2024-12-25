@@ -8,14 +8,6 @@
 //#define N 8 see common.h
 #define RIT_PERIOD_MS 50U
 
-// Private Variables
-static volatile uint32_t Sys_Tick = 0;
-
-// Local Functions Prototypes
-static void InitSysTick(void);
-void SysTick_Handler(void);
-void Delay_SysTick(uint32_t SysTicks);
-
 // Imported Variables
 extern uint8_t joystick_flag;
 extern uint8_t btn_flag;
@@ -24,7 +16,6 @@ Game game; //FIXME Global
 
 int main (void) {
 	SystemInit();
-	InitSysTick();
 	
 	LED_init();
 	joystick_init();
@@ -78,22 +69,4 @@ int main (void) {
 	while(1){
 			__ASM("wfi");
 	}
-}
-
-/* Initialize SysTick using CMSIS Core_CM4 function */
-static void InitSysTick(void){
-	SysTick_Config(SystemFrequency/1000U); /* Configure the SysTick timer */
-}
-/* SysTick Interrupt Handler */
-void SysTick_Handler(void){
-	Sys_Tick++; /* increment timer */
-}
-/* Delay Function based on SysTick Counter */
-void Delay_SysTick(uint32_t SysTicks){
-	uint32_t DelayTimer_SysTick = Sys_GetTick() + SysTicks; /* Get End Tick */
-	while(Sys_GetTick() < DelayTimer_SysTick); 				/* wait for timer */
-}
-/*Get Current Elapsed Ticks*/
-uint32_t Sys_GetTick(void){
-	return Sys_Tick;
 }
