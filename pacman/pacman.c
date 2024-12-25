@@ -152,10 +152,6 @@ void update_score(Game* game, Tile* new_tile){
 		}else{
 		return;
 		}
-	
-		if(game->standard_pills_count == 0 && game->power_pills_count == 0){
-			win_game(game);
-		}
 }
 
 struct Coordinates place_random_power_pill(Game* game){
