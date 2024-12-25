@@ -12,6 +12,9 @@ void draw_game_lifes(Game* game);
 void draw_game_score(Game* game);
 void draw_game_state(Game* game);
 
+void draw_win_screen();
+void draw_game_over_screen();
+
 void draw_tile(Tile map[MAP_HEIGHT][MAP_LENGTH], uint8_t row, uint8_t col);
 void draw_map(Tile map[MAP_HEIGHT][MAP_LENGTH]);
 

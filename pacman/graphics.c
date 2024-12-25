@@ -96,6 +96,16 @@ void draw_game_state(Game* game){
 	GUI_Text(8, 280, (uint8_t *) buf, White, Black);
 }
 
+void draw_win_screen(){
+	LCD_Clear(Blue);
+	GUI_Text(85, 146, (uint8_t *) "YOU WON", White, Blue);
+}
+
+void draw_game_over_screen(){
+	LCD_Clear(Red);
+	GUI_Text(85, 146, (uint8_t *) "GAME OVER", Black, Red);
+}
+
 void draw_pacman(uint8_t row, uint8_t col){
 	int i = 0;
 	for(; i < 8; i++){

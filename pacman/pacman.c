@@ -117,7 +117,8 @@ void win_game(Game* game){
 	disable_pacman_movement();
 	disable_power_pills_generation();
 	
-	draw_game_state(game);
+	//draw_game_state(game);
+	draw_win_screen();
 }
 
 void lose_game(Game* game){
@@ -127,7 +128,8 @@ void lose_game(Game* game){
 	disable_pacman_movement();
 	disable_power_pills_generation();
 	
-	draw_game_state(game);
+	//draw_game_state(game);
+	draw_game_over_screen();
 }
 
 void add_life(Game* game){
