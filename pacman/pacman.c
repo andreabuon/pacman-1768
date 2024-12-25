@@ -183,6 +183,8 @@ void move_pacman(Game* game, int dx, int dy) {
 		if (game->map[game->pacman_y][game->pacman_x].type == TELEPORT) {
 			new_x = (new_x + MAP_LENGTH) % MAP_LENGTH;  // Wrap around horizontally
 			//new_y = (new_y + MAP_HEIGHT) % MAP_HEIGHT;  // Wrap around vertically
+		}else{
+			return;
 		}
 	}
 	
