@@ -44,7 +44,6 @@ void TIMER1_IRQHandler (void){
 		
 		draw_game_score(&game);
 		draw_game_lifes(&game);
-		draw_game_state(&game); //FIXME move somewhere else? draw only on change?
 		
 		if(game.standard_pills_count == 0 && game.power_pills_count == 0){
 			win_game(&game);
