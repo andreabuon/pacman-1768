@@ -6,7 +6,7 @@
 #include "../button_EXINT/button.h"
 #include "../adc/adc.h"
 
-#include "../pacman/pacman.h" //FIXME
+#include "../pacman/pacman.h"
 
 volatile uint32_t pressed_button_0 = 0;
 volatile uint32_t pressed_button_1 = 0;
