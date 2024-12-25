@@ -15,8 +15,9 @@ void TIMER0_IRQHandler (void){
 		game.time--;
 		if(game.time == 0){
 			lose_game(&game);
+		}else{
+			draw_game_time(&game);
 		}
-		draw_game_time(&game);
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2
