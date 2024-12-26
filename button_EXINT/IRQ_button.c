@@ -4,8 +4,6 @@
 #include "../pacman/pacman.h"
 
 extern int pressed_button_0;
-extern int pressed_button_1;
-extern int pressed_button_2;
 
 void EINT0_IRQHandler(void){
 	
@@ -21,17 +19,11 @@ void EINT0_IRQHandler(void){
 }
 
 void EINT1_IRQHandler(void){
-    pressed_button_1 = 1;
-    NVIC_DisableIRQ(EINT1_IRQn);
-    LPC_SC->EXTINT |= (1 << 1);
-    LPC_PINCON->PINSEL4 &= ~(1 << 22);
+
 }
 
 void EINT2_IRQHandler(void){
-    pressed_button_2 = 1;
-    NVIC_DisableIRQ(EINT2_IRQn);
-    LPC_SC->EXTINT |= (1 << 2);
-    LPC_PINCON->PINSEL4 &= ~(1 << 24);
+
 }
 
 /******************************************************************************

@@ -11,8 +11,6 @@
 #include "RIT.h"
 
 extern uint32_t pressed_button_0;
-extern uint32_t pressed_button_1;
-extern uint32_t pressed_button_2;
 
 extern uint32_t pressed_joystick_up;
 extern uint32_t pressed_joystick_left;
@@ -79,8 +77,6 @@ uint32_t init_RIT ( uint32_t RITInterval ){
 	NVIC_EnableIRQ(RIT_IRQn);
 	
 	pressed_button_0 = 0;
-	pressed_button_1 = 0;
-	pressed_button_2 = 0;
 
 	pressed_joystick_up     = 0;
 	pressed_joystick_left   = 0;
