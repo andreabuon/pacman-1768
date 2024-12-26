@@ -3,47 +3,14 @@
 #include <stdint.h>
 #include <stdio.h>
 
-//#include "sprites.c"
-
-uint16_t pacman_sprite[8][8] = {
-    { Black, Black, Yellow, Yellow, Yellow, Yellow, Black, Black },
-    { Black, Yellow, Yellow, Yellow, Yellow, Yellow, Yellow, Black },
-    { Yellow, Yellow, Yellow, Yellow, Yellow, Yellow, Black, Black },
-    { Yellow, Yellow, Yellow, Yellow, Black, Black, Black, Black },
-    { Yellow, Yellow, Yellow, Yellow, Black, Black, Black, Black },
-    { Yellow, Yellow, Yellow, Yellow, Yellow, Yellow, Black, Black },
-    { Black, Yellow, Yellow, Yellow, Yellow, Yellow, Yellow, Black },
-    { Black, Black, Yellow, Yellow, Yellow, Yellow, Black, Black }
-};
-
-uint16_t power_pill[8][8] = {
-		{ Black, Black, Black, Black, Black, Black, Black, Black },
-    { Black, Black, Black, Red, Red, Black, Black, Black },
-    { Black, Black, Red, Red, Red, Red, Black, Black },
-    { Black, Red, Red, Red, Red, Red, Red, Black },
-    { Black, Red, Red, Red, Red, Red, Red, Black },
-    { Black, Black, Red, Red, Red, Red, Black, Black },
-    { Black, Black, Black, Red, Red, Black, Black, Black },
-    { Black, Black, Black, Black, Black, Black, Black, Black }
-};
-
-uint16_t standard_pill[8][8] = {
-		{ Black, Black, Black, Black, Black, Black, Black, Black },
-    { Black, Black, Black, Black, Black, Black, Black, Black },
-    { Black, Black, Black, White, White, Black, Black, Black },
-    { Black, Black, White, White, White, White, Black, Black },
-    { Black, Black, White, White, White, White, Black, Black },
-    { Black, Black, Black, White, White, Black, Black, Black },
-    { Black, Black, Black, Black, Black, Black, Black, Black },
-    { Black, Black, Black, Black, Black, Black, Black, Black }
-};
+#include "sprites.h"
 
 void draw_power_pill(uint16_t col, uint16_t row){
 	int i = 0;
 	for(; i < 8; i++){
 		int j = 0;
 		for(; j < 8; j++){
-			LCD_SetPoint(col + j, row + i, power_pill[i][j]);
+			LCD_SetPoint(col + j, row + i, power_pill_sprite[i][j]);
 		}
 	}
 }
@@ -53,7 +20,7 @@ void draw_standard_pill(uint16_t col, uint16_t row){
 	for(; i < 8; i++){
 		int j = 0;
 		for(; j < 8; j++){
-			LCD_SetPoint(col + j, row + i, standard_pill[i][j]);
+			LCD_SetPoint(col + j, row + i, standard_pill_sprite[i][j]);
 		}
 	}
 }
