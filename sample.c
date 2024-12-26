@@ -5,7 +5,6 @@
 #include "pacman/pacman.h"
 #include "pacman/graphics.h"
 
-
 #ifdef SIMULATOR
 #define RIT_PERIOD_MS 150U
 #define PACMAN_MOVEMENT_MS 200U
@@ -13,8 +12,6 @@
 #define RIT_PERIOD_MS 50U
 #define PACMAN_MOVEMENT_MS 75U
 #endif
-
-
 
 Game game; //FIXME Global
 
