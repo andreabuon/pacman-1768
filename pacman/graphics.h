@@ -6,8 +6,6 @@
 #define MARGIN_LEFT 8
 #define MARGIN_TOP 8
 
-#define TILE_SIZE_PIXELS 8
-
 void draw_labels();
 void draw_game_time(Game* game);
 void draw_game_lifes(Game* game);
