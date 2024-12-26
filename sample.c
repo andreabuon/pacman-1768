@@ -64,6 +64,8 @@ int main (void) {
 	draw_game_score(&game);
 	draw_game_state(&game);
 
+	enable_RIT(); //FIXME test for button debouncing
+	
 	//Enable button after game has loaded
 	BUTTON_init(BUTTON_0, PRIO_3);
 

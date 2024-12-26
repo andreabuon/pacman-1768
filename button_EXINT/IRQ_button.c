@@ -19,6 +19,8 @@ void EINT0_IRQHandler(void){
 	// Change pin selection so that the button 
 	// does not work any longer. 
     LPC_PINCON->PINSEL4 &= ~(1 << 20);
+	
+	//enable_RIT();
 }
 
 void EINT1_IRQHandler(void){
