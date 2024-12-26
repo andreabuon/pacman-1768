@@ -4,7 +4,6 @@
 #include "../timer/timer.h"
 #include "../joystick/joystick.h"
 #include "../button_EXINT/button.h"
-#include "../adc/adc.h"
 
 #include "../pacman/pacman.h"
 
