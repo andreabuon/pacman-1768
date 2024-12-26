@@ -117,6 +117,8 @@ void win_game(Game* game){
 	disable_pacman_movement();
 	disable_power_pills_generation();
 	
+	disable_RIT(); // Disable RIT polling of the joystick and the buttons
+	
 	//draw_game_state(game);
 	draw_win_screen();
 }
@@ -127,6 +129,8 @@ void lose_game(Game* game){
 	disable_game_countdown();
 	disable_pacman_movement();
 	disable_power_pills_generation();
+	
+	disable_RIT(); // Disable RIT polling of the joystick and the buttons
 	
 	//draw_game_state(game);
 	draw_game_over_screen();
