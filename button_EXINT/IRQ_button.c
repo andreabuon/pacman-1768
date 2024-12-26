@@ -8,11 +8,7 @@ extern int pressed_button_1;
 extern int pressed_button_2;
 
 void EINT0_IRQHandler(void){
-		toggle_game_state(&game);
-	// Remove interrput bit
-    LPC_SC->EXTINT |= (1 << 0);
-	
-	/* Template
+	//toggle_game_state(&game);
 	
 	// Variable set to 1	
     pressed_button_0 = 1;
@@ -23,8 +19,6 @@ void EINT0_IRQHandler(void){
 	// Change pin selection so that the button 
 	// does not work any longer. 
     LPC_PINCON->PINSEL4 &= ~(1 << 20);
-	
-	*/
 }
 
 void EINT1_IRQHandler(void){
