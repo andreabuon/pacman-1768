@@ -63,7 +63,7 @@ int main (void) {
 	draw_game_state(&game);
 	
 	draw_map(game.map);
-	draw_pacman(game.pacman_x, game.pacman_y);
+	draw_pacman(game.pacman_y, game.pacman_x);
 
 	while(1){
 			__ASM("wfi");

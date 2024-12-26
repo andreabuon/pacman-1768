@@ -40,7 +40,7 @@ void TIMER1_IRQHandler (void){
 		move_pacman_direction(&game);
 		
 		draw_tile(game.map, old_tile_y, old_tile_x);
-		draw_pacman(game.pacman_x, game.pacman_y); //FIXME 
+		draw_pacman(game.pacman_y, game.pacman_x);
 		
 		draw_game_score(&game);
 		draw_game_lifes(&game);

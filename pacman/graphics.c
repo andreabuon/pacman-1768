@@ -123,14 +123,8 @@ void draw_game_over_screen(){
 }
 
 void draw_pacman(uint8_t row, uint8_t col){
-	uint16_t initial_x = MARGIN_LEFT + ( TILE_SIZE_PIXELS * col );
 	uint16_t initial_y = MARGIN_TOP + ( TILE_SIZE_PIXELS * row ) ;
+	uint16_t initial_x = MARGIN_LEFT + ( TILE_SIZE_PIXELS * col );
 	
-	int i = 0;
-	for(; i < 8; i++){
-		int j = 0;
-		for(; j < 8; j++){
-			LCD_SetPoint(initial_y + j, initial_x + i, pacman_sprite[i][j]);
-		}
-	}
+	draw_sprite(initial_x, initial_y, pacman_sprite);
 }
