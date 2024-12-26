@@ -8,7 +8,6 @@ extern int pressed_button_1;
 extern int pressed_button_2;
 
 void EINT0_IRQHandler(void){
-	//toggle_game_state(&game);
 	
 	// Variable set to 1	
     pressed_button_0 = 1;

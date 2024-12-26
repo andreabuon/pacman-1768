@@ -87,12 +87,16 @@ void RIT_IRQHandler(void){
 	// -------------------------------
 	
 	if(pressed_button_0 != 0){
-		pressed_button_0++;
 		if(LPC_GPIO2->FIOPIN & (1 << 10)){
-			btn_flag |= FLAG_BUTTON_0;
+			pressed_button_0++;
+			//btn_flag |= FLAG_BUTTON_0;
+			if(pressed_button_0 == 2){
+				toggle_game_state(&game);
+			}
 			
 			// check here for a longer press
 			
+		}else{
 			pressed_button_0 = 0;
 			NVIC_EnableIRQ(EINT0_IRQn);
 			LPC_PINCON->PINSEL4 |= (1 << 20);
