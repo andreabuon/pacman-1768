@@ -6,6 +6,9 @@
 void draw_tile(Tile map[MAP_HEIGHT][MAP_LENGTH], uint8_t row, uint8_t col){
 	Tile tile = map[row][col];
 	
+	uint16_t initial_x = MARGIN_LEFT + ( TILE_SIZE_PIXELS * col );
+	uint16_t initial_y = MARGIN_TOP + ( TILE_SIZE_PIXELS * row ) ;
+	
 	int color = 0;
 	switch(tile.type){
 		case EMPTY_TILE:
@@ -32,7 +35,7 @@ void draw_tile(Tile map[MAP_HEIGHT][MAP_LENGTH], uint8_t row, uint8_t col){
 	for(; i < 8; i++){
 		int j = 0;
 		for(; j < 8; j++){
-			LCD_SetPoint(MARGIN_LEFT +8*col + j, MARGIN_TOP + 8*row + i , color);
+			LCD_SetPoint(initial_x + j, initial_y + i , color);
 		}
 	}
 }
