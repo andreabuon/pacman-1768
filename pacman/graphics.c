@@ -122,9 +122,28 @@ void draw_game_over_screen(){
 	GUI_Text(85, 146, (uint8_t *) "GAME OVER", Black, Red);
 }
 
-void draw_pacman(uint8_t row, uint8_t col){
+void draw_pacman(uint8_t row, uint8_t col, enum Direction direction){
 	uint16_t initial_y = MARGIN_TOP + ( TILE_SIZE_PIXELS * row ) ;
 	uint16_t initial_x = MARGIN_LEFT + ( TILE_SIZE_PIXELS * col );
 	
-	draw_sprite(initial_x, initial_y, pacman_sprite);
+	switch(direction){
+		case UP:
+			draw_sprite(initial_x, initial_y, pacman_sprite_up);
+			return;
+		
+		case DOWN:
+			draw_sprite(initial_x, initial_y, pacman_sprite_down);
+			return;
+		
+		case LEFT:
+			draw_sprite(initial_x, initial_y, pacman_sprite_left);
+			return;
+		
+		case RIGHT:
+			draw_sprite(initial_x, initial_y, pacman_sprite_right);
+			return;
+		
+		default:
+			return;
+	}
 }

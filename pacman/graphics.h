@@ -18,6 +18,6 @@ void draw_game_over_screen();
 void draw_tile(Tile map[MAP_HEIGHT][MAP_LENGTH], uint8_t row, uint8_t col);
 void draw_map(Tile map[MAP_HEIGHT][MAP_LENGTH]);
 
-void draw_pacman(uint8_t row, uint8_t col);
+void draw_pacman(uint8_t row, uint8_t col, enum Direction direction);
 
 #endif // GRAPHICS_H *
