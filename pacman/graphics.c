@@ -5,6 +5,17 @@
 
 //#include "sprites.c"
 
+uint16_t pacman_sprite[8][8] = {
+    { Black, Black, Yellow, Yellow, Yellow, Yellow, Black, Black },
+    { Black, Yellow, Yellow, Yellow, Yellow, Yellow, Yellow, Black },
+    { Yellow, Yellow, Yellow, Yellow, Yellow, Yellow, Black, Black },
+    { Yellow, Yellow, Yellow, Yellow, Black, Black, Black, Black },
+    { Yellow, Yellow, Yellow, Yellow, Black, Black, Black, Black },
+    { Yellow, Yellow, Yellow, Yellow, Yellow, Yellow, Black, Black },
+    { Black, Yellow, Yellow, Yellow, Yellow, Yellow, Yellow, Black },
+    { Black, Black, Yellow, Yellow, Yellow, Yellow, Black, Black }
+};
+
 uint16_t power_pill[8][8] = {
 		{ Black, Black, Black, Black, Black, Black, Black, Black },
     { Black, Black, Black, Red, Red, Black, Black, Black },
@@ -154,11 +165,14 @@ void draw_game_over_screen(){
 }
 
 void draw_pacman(uint8_t row, uint8_t col){
+	uint16_t initial_x = MARGIN_LEFT + ( TILE_SIZE_PIXELS * col );
+	uint16_t initial_y = MARGIN_TOP + ( TILE_SIZE_PIXELS * row ) ;
+	
 	int i = 0;
 	for(; i < 8; i++){
 		int j = 0;
 		for(; j < 8; j++){
-			LCD_SetPoint(MARGIN_LEFT +8*row + j, MARGIN_TOP + 8*col + i , Yellow);
+			LCD_SetPoint(initial_y + j, initial_x + i, pacman_sprite[i][j]);
 		}
 	}
 }
