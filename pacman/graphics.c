@@ -5,22 +5,22 @@
 
 #include "sprites.h"
 
-void draw_power_pill(uint16_t col, uint16_t row){
+void draw_block(uint16_t col, uint16_t row, uint16_t color){
 	int i = 0;
-	for(; i < 8; i++){
+	for(; i < TILE_SIZE_PIXELS; i++){
 		int j = 0;
-		for(; j < 8; j++){
-			LCD_SetPoint(col + j, row + i, power_pill_sprite[i][j]);
+		for(; j < TILE_SIZE_PIXELS; j++){
+			LCD_SetPoint(col + j, row + i, color);
 		}
 	}
-}
+};
 
-void draw_standard_pill(uint16_t col, uint16_t row){
+void draw_sprite(uint16_t col, uint16_t row, uint16_t sprite[TILE_SIZE_PIXELS][TILE_SIZE_PIXELS]){
 	int i = 0;
-	for(; i < 8; i++){
+	for(; i < TILE_SIZE_PIXELS; i++){
 		int j = 0;
-		for(; j < 8; j++){
-			LCD_SetPoint(col + j, row + i, standard_pill_sprite[i][j]);
+		for(; j < TILE_SIZE_PIXELS; j++){
+			LCD_SetPoint(col + j, row + i, sprite[i][j]);
 		}
 	}
 }
@@ -31,34 +31,25 @@ void draw_tile(Tile map[MAP_HEIGHT][MAP_LENGTH], uint8_t row, uint8_t col){
 	uint16_t initial_x = MARGIN_LEFT + ( TILE_SIZE_PIXELS * col );
 	uint16_t initial_y = MARGIN_TOP + ( TILE_SIZE_PIXELS * row ) ;
 	
-	int color = 0;
 	switch(tile.type){
 		case EMPTY_TILE:
-			color = Black;
-			break;
+			draw_block(initial_x, initial_y, Black);
+			return;
 		case WALL:
-			color = Blue;
-			break;
+			draw_block(initial_x, initial_y, Blue);
+			return;
 		case STANDARD_PILL:
-			draw_standard_pill(initial_x, initial_y);
+			draw_sprite(initial_x, initial_y, standard_pill_sprite);
 			return;
 		case POWER_PILL:
-			draw_power_pill(initial_x, initial_y);
+			draw_sprite(initial_x, initial_y, power_pill_sprite);
 			return;
 		case TELEPORT:
-			color = Black;
-			break;
+			draw_block(initial_x, initial_y, Black);
+			return;
 		
 		default:
-			break;
-	}
-	
-	int i = 0;
-	for(; i < 8; i++){
-		int j = 0;
-		for(; j < 8; j++){
-			LCD_SetPoint(initial_x + j, initial_y + i , color);
-		}
+			return;
 	}
 }
 
