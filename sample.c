@@ -20,8 +20,6 @@ int main (void) {
 	joystick_init();
 	LCD_Initialization();
 	
-	BUTTON_init(BUTTON_0, PRIO_3);
-	
 	// RIT WORKS WITH CLOCK = 100MHZ
 	// ONE INTERRUPT EVERY 50ms
 	init_RIT(RIT_MS_TO_TICKS(RIT_PERIOD_MS));
@@ -64,6 +62,9 @@ int main (void) {
 	
 	draw_map(game.map);
 	draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
+
+	//Enable button after game has loaded
+	BUTTON_init(BUTTON_0, PRIO_3);
 
 	while(1){
 			__ASM("wfi");
