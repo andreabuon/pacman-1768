@@ -91,7 +91,7 @@ void RIT_IRQHandler(void){
 				pressed_button_0 = 0;
 				NVIC_EnableIRQ(EINT0_IRQn);
 				LPC_PINCON->PINSEL4 |= (1 << 20);
-		}else{
+		} else {
 			pressed_button_0++;
 			if(pressed_button_0 == 2){
 				toggle_game_state(&game);
