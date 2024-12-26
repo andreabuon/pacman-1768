@@ -5,7 +5,6 @@
 #include "pacman/pacman.h"
 #include "pacman/graphics.h"
 
-//#define N 8 see common.h
 #define RIT_PERIOD_MS 150U
 
 Game game; //FIXME Global
@@ -18,7 +17,6 @@ int main (void) {
 	LCD_Initialization();
 	
 	// RIT WORKS WITH CLOCK = 100MHZ
-	// ONE INTERRUPT EVERY 50ms
 	init_RIT(RIT_MS_TO_TICKS(RIT_PERIOD_MS));
 	
 	/* TIMER INSTRUCTIONS
@@ -61,9 +59,9 @@ int main (void) {
 	draw_game_score(&game);
 	draw_game_state(&game);
 
-	enable_RIT(); //FIXME test for button debouncing
+	enable_RIT(); // RIT used for joystick polling and button debouncing
 	
-	//Enable button after game has loaded
+	//Enable button only after game has loaded
 	BUTTON_init(BUTTON_0, PRIO_3);
 
 	while(1){
