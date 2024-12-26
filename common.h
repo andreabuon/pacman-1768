@@ -7,9 +7,6 @@
 */
 #include "inttypes.h"
 
-/*SystemFrequency defined in file system_LPC17xx.c initialized during SystemInit()*/
-extern uint32_t SystemFrequency;
-
 extern unsigned char led_value;
 
 //IRQ priorities
