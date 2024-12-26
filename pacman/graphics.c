@@ -5,6 +5,17 @@
 
 //#include "sprites.c"
 
+uint16_t power_pill[8][8] = {
+		{ Black, Black, Black, Black, Black, Black, Black, Black },
+    { Black, Black, Black, Red, Red, Black, Black, Black },
+    { Black, Black, Red, Red, Red, Red, Black, Black },
+    { Black, Red, Red, Red, Red, Red, Red, Black },
+    { Black, Red, Red, Red, Red, Red, Red, Black },
+    { Black, Black, Red, Red, Red, Red, Black, Black },
+    { Black, Black, Black, Red, Red, Black, Black, Black },
+    { Black, Black, Black, Black, Black, Black, Black, Black }
+};
+
 uint16_t standard_pill[8][8] = {
 		{ Black, Black, Black, Black, Black, Black, Black, Black },
     { Black, Black, Black, Black, Black, Black, Black, Black },
@@ -15,6 +26,16 @@ uint16_t standard_pill[8][8] = {
     { Black, Black, Black, Black, Black, Black, Black, Black },
     { Black, Black, Black, Black, Black, Black, Black, Black }
 };
+
+void draw_power_pill(uint16_t col, uint16_t row){
+	int i = 0;
+	for(; i < 8; i++){
+		int j = 0;
+		for(; j < 8; j++){
+			LCD_SetPoint(col + j, row + i, power_pill[i][j]);
+		}
+	}
+}
 
 void draw_standard_pill(uint16_t col, uint16_t row){
 	int i = 0;
@@ -44,8 +65,8 @@ void draw_tile(Tile map[MAP_HEIGHT][MAP_LENGTH], uint8_t row, uint8_t col){
 			draw_standard_pill(initial_x, initial_y);
 			return;
 		case POWER_PILL:
-			color = Red;
-			break;
+			draw_power_pill(initial_x, initial_y);
+			return;
 		case TELEPORT:
 			color = Black;
 			break;
