@@ -45,6 +45,7 @@ int main (void) {
 	LPC_SC->PCON &= 0xFFFFFFFFD;	// PM1=0
 	
 	LCD_Clear(Black);
+	GUI_Text(8, 280, (uint8_t *) "LOADING", White, Black);
 
 	new_game(&game);
 	
@@ -54,14 +55,14 @@ int main (void) {
 	// Seed the random number generator
 	srand(game.standard_pills_count);
 	
+	draw_map(game.map);
+	draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
+	
 	draw_labels();
 	draw_game_time(&game);
 	draw_game_lives(&game);
 	draw_game_score(&game);
 	draw_game_state(&game);
-	
-	draw_map(game.map);
-	draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
 
 	//Enable button after game has loaded
 	BUTTON_init(BUTTON_0, PRIO_3);
