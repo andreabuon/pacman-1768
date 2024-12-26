@@ -58,7 +58,7 @@ int main (void) {
 	
 	draw_labels();
 	draw_game_time(&game);
-	draw_game_lifes(&game);
+	draw_game_lives(&game);
 	draw_game_score(&game);
 	draw_game_state(&game);
 	

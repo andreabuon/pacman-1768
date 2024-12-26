@@ -8,7 +8,7 @@
 
 void draw_labels();
 void draw_game_time(Game* game);
-void draw_game_lifes(Game* game);
+void draw_game_lives(Game* game);
 void draw_game_score(Game* game);
 void draw_game_state(Game* game);
 

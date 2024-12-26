@@ -43,7 +43,7 @@ void TIMER1_IRQHandler (void){
 		draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
 		
 		draw_game_score(&game);
-		draw_game_lifes(&game);
+		draw_game_lives(&game);
 		
 		if(game.standard_pills_count == 0 && game.power_pills_count == 0){
 			win_game(&game);
