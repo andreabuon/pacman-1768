@@ -47,7 +47,7 @@ int main (void) {
 	LCD_Clear(Black);
 	GUI_Text(8, 280, (uint8_t *) "LOADING", White, Black);
 
-	new_game(&game);
+	init_game(&game);
 	
 	// Random power pills generation
 	init_timer_simplified(TIMER_2, 1, TIM_MS_TO_TICKS_SIMPLE(game.power_pills_spawn_times[0]), 0, TIMER_INTERRUPT_MR, 0);

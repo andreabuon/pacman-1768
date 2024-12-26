@@ -53,7 +53,7 @@ void generate_random_power_pills_spawn_times(uint32_t power_pills_spawn_times[PO
 	qsort(power_pills_spawn_times, POWER_PILLS_TO_PLACE, sizeof(power_pills_spawn_times[0]), compare_uint32_ascending );
 }
 
-void new_game(Game* game){
+void init_game(Game* game){
 	game->state = PAUSED;
 	parse_map(game->map);	
 	game->score = 0;
