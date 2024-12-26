@@ -18,8 +18,6 @@ uint32_t pressed_joystick_right  = 0;
 uint32_t pressed_joystick_down   = 0;
 uint32_t pressed_joystick_select = 0;
 
-volatile uint8_t btn_flag = 0;
-
 void RIT_IRQHandler(void){	
 	
 	// -------------------------------
@@ -98,42 +96,6 @@ void RIT_IRQHandler(void){
 			}
 		}
 	}
-	
-	// -------------------------------
-	// BUTTON 1
-	// -------------------------------
-	
-	if(pressed_button_1 != 0){
-			pressed_button_1++;
-			if(LPC_GPIO2->FIOPIN & (1 << 11)){
-				btn_flag |= FLAG_BUTTON_1;
-				
-				pressed_button_1 = 0;
-				NVIC_EnableIRQ(EINT1_IRQn);
-				LPC_PINCON->PINSEL4 |= (1 << 22);
-			}
-	}
-
-	// -------------------------------
-	// BUTTON 2
-	// -------------------------------
-	
-	if(pressed_button_2 != 0){
-			pressed_button_2++;
-			if(LPC_GPIO2->FIOPIN & (1 << 12)){
-				btn_flag |= FLAG_BUTTON_2;
-				
-				pressed_button_2 = 0;
-				NVIC_EnableIRQ(EINT2_IRQn);
-				LPC_PINCON->PINSEL4 |= (1 << 24);
-			}
-	}
-	
-	// -------------------------------
-	// ADC Conversion
-	// -------------------------------
-	
-	// ADC_start_conversion();
 	
 	LPC_RIT->RICTRL |= 0x1;
 }

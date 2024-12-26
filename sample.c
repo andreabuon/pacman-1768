@@ -8,9 +8,6 @@
 //#define N 8 see common.h
 #define RIT_PERIOD_MS 150U
 
-// Imported Variables
-extern uint8_t btn_flag;
-
 Game game; //FIXME Global
 
 int main (void) {
