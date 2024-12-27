@@ -10,7 +10,7 @@
 
 // Game Time Countdown
 void enable_game_countdown(){
-	enable_timer(TIMER_0, PRIO_3);
+	enable_timer(TIMER_0, TIMER0_PRIORITY);
 }
 
 void disable_game_countdown(){
@@ -18,7 +18,7 @@ void disable_game_countdown(){
 }
 // Pacman Movement
 void enable_pacman_movement(){
-	enable_timer(TIMER_1, PRIO_3);
+	enable_timer(TIMER_1, TIMER1_PRIORITY);
 }
 
 void disable_pacman_movement(){
@@ -26,7 +26,7 @@ void disable_pacman_movement(){
 }
 // Power Pills Generation
 void enable_power_pills_generation(){
-	enable_timer(TIMER_2, PRIO_3);
+	enable_timer(TIMER_2, TIMER2_PRIORITY);
 }
 
 void disable_power_pills_generation(){

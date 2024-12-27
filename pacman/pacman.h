@@ -19,6 +19,13 @@
 
 #define THRESHOLD_NEW_LIFE 1000
 
+//Game timers priorities
+#define RIT_PRIORITY PRIO_1
+#define TIMER0_PRIORITY	PRIO_2
+#define TIMER1_PRIORITY PRIO_3
+#define TIMER2_PRIORITY PRIO_2
+#define BUTTON0_PRIORITY PRIO_0
+
 uint8_t is_a_pill(Tile* tile);
 uint8_t get_tile_score(Tile* tile);
 

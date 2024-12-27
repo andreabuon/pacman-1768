@@ -64,11 +64,16 @@ int main (void) {
 	draw_game_lives(&game);
 	draw_game_score(&game);
 	draw_game_state(&game);
+	
+	NVIC_SetPriority(RIT_IRQn, RIT_PRIORITY );
+	NVIC_SetPriority(TIMER0_IRQn, TIMER0_PRIORITY );
+	NVIC_SetPriority(TIMER1_IRQn, TIMER1_PRIORITY );
+	NVIC_SetPriority(TIMER2_IRQn, TIMER2_PRIORITY );
 
 	enable_RIT(); // RIT used for joystick polling and button debouncing
 	
 	//Enable button only after game has loaded
-	BUTTON_init(BUTTON_0, PRIO_3);
+	BUTTON_init(BUTTON_0, BUTTON0_PRIORITY);
 
 	while(1){
 			__ASM("wfi");
