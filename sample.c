@@ -51,7 +51,7 @@ int main (void) {
 	init_game(&game);
 	
 	// Random power pills generation
-	init_timer_simplified(TIMER_2, 1, TIM_MS_TO_TICKS_SIMPLE(game.power_pills_spawn_times[0]), 0, TIMER_INTERRUPT_MR, 0);
+	init_timer_simplified(TIMER_2, 0, TIM_MS_TO_TICKS_SIMPLE(game.power_pills_spawn_times[0]), 0, TIMER_INTERRUPT_MR, 0);
 	
 	// Seed the random number generator
 	srand(game.standard_pills_count);
