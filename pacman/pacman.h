@@ -64,6 +64,9 @@ typedef struct Game {
 	uint8_t pacman_y;
 	enum Direction pacman_direction;
 	
+	uint8_t blinky_x;
+	uint8_t blinky_y;
+	
 	uint16_t threshold_new_life;
 	
 } Game;

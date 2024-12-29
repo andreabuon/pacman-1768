@@ -3,6 +3,7 @@
 
 #include "pacman.h"
 #include "../pacman/graphics.h"
+#include "blinky.h"
 //
 #include "../timer/timer.h"
 #include "../common.h"
@@ -63,11 +64,15 @@ void init_game(Game* game){
 	game->standard_pills_count = INITIAL_STANDARD_PILLS_COUNT;
 	game->power_pills_count = INITIAL_POWER_PILLS_COUNT;
 	
+	spawn_blinky(game);
+	
 	generate_random_power_pills_spawn_times(game->power_pills_spawn_times);
 	
 	game->pacman_x = PACMAN_INITIAL_POSITION_X;
 	game->pacman_y = PACMAN_INITIAL_POSITION_Y;
 	game->pacman_direction = RIGHT;
+	
+	
 	
 	game->threshold_new_life = THRESHOLD_NEW_LIFE;
 }
