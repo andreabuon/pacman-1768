@@ -1,7 +1,7 @@
 #include "blinky.h"
 
-#define BLINKY_INITIAL_X 16
-#define BLINKY_INITIAL_Y 14
+#define BLINKY_INITIAL_X 13
+#define BLINKY_INITIAL_Y 15
 
 void spawn_blinky(Game* game){
 	game->blinky_y = BLINKY_INITIAL_Y;
