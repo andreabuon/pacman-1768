@@ -9,13 +9,13 @@ void spawn_blinky(Game* game){
 }
 
 void move_blinky(Game* game, int dx, int dy) {
-	int new_x = game->pacman_x + dx;
-	int new_y = game->pacman_y + dy;
+	int new_x = game->blinky_x + dx;
+	int new_y = game->blinky_y + dy;
 	
 	// Prevent out-of-bounds access
 	if ( new_x < 0 || new_x >= MAP_LENGTH ) {
 		// Teleport mechanism
-		if (game->map[game->pacman_y][game->pacman_x].type == TELEPORT) {
+		if (game->map[game->blinky_y][game->blinky_x].type == TELEPORT) {
 			new_x = (new_x + MAP_LENGTH) % MAP_LENGTH;  // Wrap around horizontally
 			//new_y = (new_y + MAP_HEIGHT) % MAP_HEIGHT;  // Wrap around vertically
 		}else{
