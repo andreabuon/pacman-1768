@@ -42,6 +42,8 @@ void TIMER1_IRQHandler (void){
 		draw_tile(game.map, old_tile_y, old_tile_x);
 		draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
 		
+		draw_blinky(game.blinky_y, game.blinky_x);
+		
 		draw_game_score(&game);
 		draw_game_lives(&game);
 		

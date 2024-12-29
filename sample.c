@@ -57,7 +57,9 @@ int main (void) {
 	srand(game.standard_pills_count);
 	
 	draw_map(game.map);
+	
 	draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
+	draw_blinky(game.blinky_y, game.blinky_x);
 	
 	draw_labels();
 	draw_game_time(&game);
