@@ -35,17 +35,24 @@ void TIMER1_IRQHandler (void){
 	uint8_t irq_source = LPC_TIM1->IR;
 	
 	if(irq_source & IR_MR0) { // mr0
-		int old_tile_x = game.pacman_x;
-		int old_tile_y = game.pacman_y;
+		uint8_t previous_pacman_x = game.pacman_x;
+		uint8_t previous_pacman_y = game.pacman_y;
+		
+		uint8_t previous_blinky_x = game.blinky_x;
+		uint8_t previous_blinky_y = game.blinky_y;
 		
 		move_pacman_direction(&game);
-		
-		draw_tile(game.map, old_tile_y, old_tile_x);
-		draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
-		
-		draw_tile(game.map, game.blinky_y, game.blinky_x);
 		move_blinky_direction(&game, game.pacman_direction);
-		draw_blinky(game.blinky_y, game.blinky_x);
+		
+		if(game.pacman_x != previous_pacman_x || game.pacman_y != previous_pacman_y){
+			draw_tile(game.map, previous_pacman_y, previous_pacman_x);
+			draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
+		}
+		
+		if(game.blinky_x != previous_blinky_x || game.blinky_y != previous_blinky_y){
+			draw_tile(game.map, previous_blinky_y, previous_blinky_x);
+			draw_blinky(game.blinky_y, game.blinky_x);
+		}
 		
 		draw_game_score(&game);
 		draw_game_lives(&game);
