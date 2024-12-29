@@ -66,7 +66,7 @@ void TIMER1_IRQHandler (void){
 					return;
 				}
 				draw_game_lives(&game);
-				draw_tile(game.map, game.pacman_x, game.pacman_y);
+				//draw_tile(game.map, game.pacman_x, game.pacman_y);
 				
 				game.pacman_x = PACMAN_INITIAL_POSITION_X;
 				game.pacman_y = PACMAN_INITIAL_POSITION_Y;
@@ -74,7 +74,7 @@ void TIMER1_IRQHandler (void){
 				draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
 			}
 			else if (game.blinky_mode == FRIGHTENED){
-				draw_tile(game.map, game.blinky_y, game.blinky_x);
+				//draw_tile(game.map, game.blinky_y, game.blinky_x);
 				spawn_blinky(&game);
 				draw_blinky(game.blinky_y, game.blinky_x, game.blinky_mode);
 				update_score(&game, 100);
