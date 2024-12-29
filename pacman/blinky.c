@@ -37,3 +37,38 @@ void move_blinky(Game* game, int dx, int dy) {
 	
 	//TODO Pacman eating mechanism
 }
+
+void move_blinky_up(Game* game){
+	move_blinky(game, 0, -1);
+}
+
+void move_blinky_down(Game* game){
+	move_blinky(game, 0, 1);
+}
+
+void move_blinky_left(Game* game){
+	move_blinky(game, -1, 0);
+}
+
+void move_blinky_right(Game* game){
+	move_blinky(game, 1, 0);
+}
+
+void move_blinky_direction(Game* game, enum Direction direction){
+	switch(direction){
+		case UP:
+			move_blinky_up(game);
+			break;
+		case DOWN:
+			move_blinky_down(game);
+			break;
+		case LEFT:
+			move_blinky_left(game);
+			break;
+		case RIGHT:
+			move_blinky_right(game);
+			break;
+		default:
+			break;
+	}
+}
