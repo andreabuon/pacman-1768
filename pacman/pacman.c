@@ -145,22 +145,18 @@ void add_life(Game* game){
 	game->lives++;
 }
 
-void update_score(Game* game, Tile* new_tile){
-	// If the old tile was a pill update the game score
-  if (is_a_pill(new_tile)) {
-		game->score += get_tile_score(new_tile);
+void update_score(Game* game, uint16_t amount){
+	// If the old tile was a pill update the game score	
+		game->score += amount;
 		
 		//Add life every 1000 points
 		if (game->score >= game->threshold_new_life){
 			add_life(game);
 			game->threshold_new_life += THRESHOLD_NEW_LIFE;
+			draw_game_lives(game);
 		}
 		
-		if (new_tile->type == STANDARD_PILL) game->standard_pills_count--;
-		else if (new_tile->type == POWER_PILL) game->power_pills_count--;
-		}else{
-		return;
-		}
+		draw_game_score(game);
 }
 
 struct Coordinates place_random_power_pill(Game* game){
@@ -213,7 +209,17 @@ void move_pacman(Game* game, int dx, int dy) {
   game->pacman_x = new_x;
   game->pacman_y = new_y;
 	
-	update_score(game, &(game->map[new_y][new_x]) );
+	Tile* new_tile = &(game->map[new_y][new_x]);
+	if (is_a_pill(new_tile)) {
+		update_score(game, get_tile_score(new_tile));
+		if (new_tile->type == STANDARD_PILL) game->standard_pills_count--;
+		else if (new_tile->type == POWER_PILL) game->power_pills_count--;
+		
+		if(game->standard_pills_count == 0 && game->power_pills_count == 0){
+			win_game(game);
+			return;
+		}
+	}
 }
 
 void move_pacman_up(Game* game){

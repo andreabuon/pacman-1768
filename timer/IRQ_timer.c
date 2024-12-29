@@ -56,15 +56,16 @@ void TIMER1_IRQHandler (void){
 			draw_blinky(game.blinky_y, game.blinky_x, game.blinky_mode);
 		}
 		
+		//Pacman and Blinky meet
 		if(game.pacman_x == game.blinky_x && game.pacman_y == game.blinky_y){
 			if(game.blinky_mode == CHASE){
 				game.lives--;
-				if(game.lives == 0){
-					lose_game(&game);
-					
+				if(game.lives <= 0){
+					lose_game(&game);		
 					LPC_TIM1->IR = irq_source;
 					return;
 				}
+				draw_game_lives(&game);
 				draw_tile(game.map, game.pacman_x, game.pacman_y);
 				
 				game.pacman_x = PACMAN_INITIAL_POSITION_X;
@@ -76,17 +77,10 @@ void TIMER1_IRQHandler (void){
 				draw_tile(game.map, game.blinky_y, game.blinky_x);
 				spawn_blinky(&game);
 				draw_blinky(game.blinky_y, game.blinky_x, game.blinky_mode);
-				game.score += 100;
-				//TODO add a life if score >=1000*N
+				update_score(&game, 100);
 			}
 		}
 		
-		draw_game_score(&game);
-		draw_game_lives(&game);
-		
-		if(game.standard_pills_count == 0 && game.power_pills_count == 0){
-			win_game(&game);
-		}
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2
