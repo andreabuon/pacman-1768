@@ -66,8 +66,10 @@ void TIMER1_IRQHandler (void){
 					return;
 				}
 				draw_tile(game.map, game.pacman_x, game.pacman_y);
+				
 				game.pacman_x = PACMAN_INITIAL_POSITION_X;
 				game.pacman_y = PACMAN_INITIAL_POSITION_Y;
+				game.pacman_direction = RIGHT;
 				draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
 			}
 			else if (game.blinky_mode == FRIGHTENED){
