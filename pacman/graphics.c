@@ -147,3 +147,9 @@ void draw_pacman(uint8_t row, uint8_t col, enum Direction direction){
 			return;
 	}
 }
+
+void draw_blinky(uint8_t row, uint8_t col){
+	uint16_t initial_y = MARGIN_TOP + ( TILE_SIZE_PIXELS * row ) ;
+	uint16_t initial_x = MARGIN_LEFT + ( TILE_SIZE_PIXELS * col );
+	draw_block(initial_x, initial_y, Red);
+}
