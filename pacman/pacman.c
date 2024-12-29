@@ -146,7 +146,7 @@ void update_score(Game* game, Tile* new_tile){
 		game->score += get_tile_score(new_tile);
 		
 		//Add life every 1000 points
-		if (game->score > game->threshold_new_life){
+		if (game->score >= game->threshold_new_life){
 			add_life(game);
 			game->threshold_new_life += THRESHOLD_NEW_LIFE;
 		}
