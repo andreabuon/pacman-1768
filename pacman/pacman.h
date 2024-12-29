@@ -45,6 +45,11 @@ enum Direction{
 	RIGHT
 };
 
+enum BlinkyMode{
+	CHASE,
+	FRIGHTENED
+};
+
 typedef struct Game {
 	enum GameState state;
 	
@@ -64,8 +69,10 @@ typedef struct Game {
 	uint8_t pacman_y;
 	enum Direction pacman_direction;
 	
+	enum BlinkyMode blinky_mode;
 	uint8_t blinky_x;
 	uint8_t blinky_y;
+	
 	
 	uint16_t threshold_new_life;
 	

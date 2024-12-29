@@ -6,6 +6,7 @@
 void spawn_blinky(Game* game){
 	game->blinky_y = BLINKY_INITIAL_Y;
 	game->blinky_x = BLINKY_INITIAL_X;
+	game->blinky_mode = CHASE;
 }
 
 void move_blinky(Game* game, int dx, int dy) {
