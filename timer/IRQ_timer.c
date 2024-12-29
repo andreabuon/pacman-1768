@@ -53,7 +53,7 @@ void TIMER1_IRQHandler (void){
 		// if Blinky moved, render the previous tile it was in and render its sprite on the next one
 		if(game.blinky_x != previous_blinky_x || game.blinky_y != previous_blinky_y){
 			draw_tile(game.map, previous_blinky_y, previous_blinky_x);
-			draw_blinky(game.blinky_y, game.blinky_x);
+			draw_blinky(game.blinky_y, game.blinky_x, game.blinky_mode);
 		}
 		
 		if(game.pacman_x == game.blinky_x && game.pacman_y == game.blinky_y){
@@ -73,7 +73,7 @@ void TIMER1_IRQHandler (void){
 			else if (game.blinky_mode == FRIGHTENED){
 				draw_tile(game.map, game.blinky_y, game.blinky_x);
 				spawn_blinky(&game);
-				draw_blinky(game.blinky_y, game.blinky_x);
+				draw_blinky(game.blinky_y, game.blinky_x, game.blinky_mode);
 				game.score += 100;
 				//TODO add a life if score >=1000*N
 			}

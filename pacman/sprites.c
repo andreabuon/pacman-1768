@@ -49,7 +49,7 @@ uint16_t pacman_sprite_up[8][8] = {
     { Black, Black, Black, Yellow, Yellow, Black, Black, Black }
 };
 
-uint16_t blinky_sprite[8][8] = {
+uint16_t blinky_chase_sprite[8][8] = {
 		{Black, Black, Red,   Red,   Red,   Red,   Black, Black},
     {Black, Red,   Red,   Red,   Red,   Red,   Red,   Black},
     {Red,   White, Blue, Red,   Red,   White, Blue, Red},
@@ -58,6 +58,17 @@ uint16_t blinky_sprite[8][8] = {
     {Red,   Red, Red,   Red,   Red,   Red,   Red, Red},
     {Red,   Black, Red,   Red, Red, Red,   Black, Red},
     {Red, Black, Red, Red,   Red,   Red, Black, Red}
+};
+
+uint16_t blinky_frightened_sprite[8][8] = {
+		{Black, Black, Blue2,   Blue2,   Blue2,   Blue2,   Black, Black},
+    {Black, Blue2,   Blue2,   Blue2,   Blue2,   Blue2,   Blue2,   Black},
+    {Blue2,   White, Red, Blue2,   Blue2,   White, Red, Blue2},
+    {Blue2,   White, White, Blue2,   Blue2,   White, White, Blue2},
+    {Blue2,   Blue2,   Blue2,   Blue2,   Blue2,   Blue2,   Blue2,   Blue2},
+    {Blue2,   Blue2, Blue2,   Blue2,   Blue2,   Blue2,   Blue2, Blue2},
+    {Blue2,   Black, Blue2,   Blue2, Blue2, Blue2,   Black, Blue2},
+    {Blue2, Black, Blue2, Blue2,   Blue2,   Blue2, Black, Blue2}
 };
 
 uint16_t power_pill_sprite[8][8] = {
