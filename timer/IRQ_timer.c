@@ -44,14 +44,39 @@ void TIMER1_IRQHandler (void){
 		move_pacman_direction(&game);
 		move_blinky_direction(&game, game.pacman_direction);
 		
+		// if pacman moved, render the previous tile it was in and render its sprite on the next one
 		if(game.pacman_x != previous_pacman_x || game.pacman_y != previous_pacman_y){
 			draw_tile(game.map, previous_pacman_y, previous_pacman_x);
 			draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
 		}
 		
+		// if Blinky moved, render the previous tile it was in and render its sprite on the next one
 		if(game.blinky_x != previous_blinky_x || game.blinky_y != previous_blinky_y){
 			draw_tile(game.map, previous_blinky_y, previous_blinky_x);
 			draw_blinky(game.blinky_y, game.blinky_x);
+		}
+		
+		if(game.pacman_x == game.blinky_x && game.pacman_y == game.blinky_y){
+			if(game.blinky_mode == CHASE){
+				game.lives--;
+				if(game.lives == 0){
+					lose_game(&game);
+					
+					LPC_TIM1->IR = irq_source;
+					return;
+				}
+				draw_tile(game.map, game.pacman_x, game.pacman_y);
+				game.pacman_x = PACMAN_INITIAL_POSITION_X;
+				game.pacman_y = PACMAN_INITIAL_POSITION_Y;
+				draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
+			}
+			else if (game.blinky_mode == FRIGHTENED){
+				draw_tile(game.map, game.blinky_y, game.blinky_x);
+				spawn_blinky(&game);
+				draw_blinky(game.blinky_y, game.blinky_x);
+				game.score += 100;
+				//TODO add a life if score >=1000*N
+			}
 		}
 		
 		draw_game_score(&game);
