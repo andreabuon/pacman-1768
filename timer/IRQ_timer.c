@@ -34,20 +34,17 @@ void TIMER1_IRQHandler (void){
 	uint8_t irq_source = LPC_TIM1->IR;
 	
 	if(irq_source & IR_MR0) { // mr0
-		int old_tile_x = game.pacman_x;
-		int old_tile_y = game.pacman_y;
+		int previous_pacman_x = game.pacman_x;
+		int previous_pacman_y = game.pacman_y;
 		
 		move_pacman_direction(&game);
-		
-		draw_tile(game.map, old_tile_y, old_tile_x);
-		draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
-		
-		draw_game_score(&game);
-		draw_game_lives(&game);
-		
-		if(game.standard_pills_count == 0 && game.power_pills_count == 0){
-			win_game(&game);
+
+		// if pacman moved, render the previous tile it was in and render its sprite on the next one
+		if(game.pacman_x != previous_pacman_x || game.pacman_y != previous_pacman_y){
+			draw_tile(game.map, previous_pacman_y, previous_pacman_x);
+			draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
 		}
+		
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2

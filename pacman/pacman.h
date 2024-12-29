@@ -87,7 +87,7 @@ void lose_game(Game* game);
 void set_game_state(Game* game, enum GameState state);
 
 void add_life(Game* game);
-void update_score(Game* game, Tile* new_tile);
+void update_score(Game* game, uint16_t amount);
 
 struct Coordinates place_random_power_pill(Game* game);
 
