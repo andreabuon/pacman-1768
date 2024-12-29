@@ -3,6 +3,7 @@
 
 #include "../pacman/pacman.h"
 #include "../pacman/graphics.h"
+#include "../pacman/blinky.h"
 
 /*
 	in IR si deve settare il bit associato al MR di cui si vuole cancellare l'interruzione.
@@ -42,6 +43,8 @@ void TIMER1_IRQHandler (void){
 		draw_tile(game.map, old_tile_y, old_tile_x);
 		draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
 		
+		draw_tile(game.map, game.blinky_y, game.blinky_x);
+		move_blinky_direction(&game, game.pacman_direction);
 		draw_blinky(game.blinky_y, game.blinky_x);
 		
 		draw_game_score(&game);
