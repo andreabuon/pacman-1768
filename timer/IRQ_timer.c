@@ -119,7 +119,7 @@ void TIMER3_IRQHandler (void){
 	uint8_t irq_source = LPC_TIM3->IR;
 	
 	if(irq_source & IR_MR0) { // mr0
-		
+		disable_pacman_eating_mode(&game);
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2

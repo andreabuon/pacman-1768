@@ -17,6 +17,8 @@
 #define PACMAN_INITIAL_POSITION_X 3
 #define PACMAN_INITIAL_POSITION_Y 14
 
+#define PACMAN_POWER_MODE_DURATION 10000 //ms
+
 #define THRESHOLD_NEW_LIFE 1000
 
 //Game timers priorities
@@ -24,6 +26,7 @@
 #define TIMER0_PRIORITY	PRIO_2
 #define TIMER1_PRIORITY PRIO_3
 #define TIMER2_PRIORITY PRIO_2
+#define TIMER3_PRIORITY PRIO_3
 #define BUTTON0_PRIORITY PRIO_0
 
 uint8_t is_a_pill(Tile* tile);
