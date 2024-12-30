@@ -159,6 +159,17 @@ void update_score(Game* game, uint16_t amount){
 		draw_game_score(game);
 }
 
+void enable_pacman_eating_mode(Game* game){
+	game->blinky_mode = FRIGHTENED;
+	draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
+	//FIXME //TODO start a 10s timer, then go back to the normal mode
+}
+
+void disable_pacman_eating_mode(Game* game){
+	game->blinky_mode = CHASE;
+	draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
+};
+
 struct Coordinates place_random_power_pill(Game* game){
 	srand(game->standard_pills_count);
 	
@@ -213,7 +224,10 @@ void move_pacman(Game* game, int dx, int dy) {
 	if (is_a_pill(new_tile)) {
 		update_score(game, get_tile_score(new_tile));
 		if (new_tile->type == STANDARD_PILL) game->standard_pills_count--;
-		else if (new_tile->type == POWER_PILL) game->power_pills_count--;
+		else if (new_tile->type == POWER_PILL){
+			game->power_pills_count--;
+			enable_pacman_eating_mode(game);
+		}
 		
 		if(game->standard_pills_count == 0 && game->power_pills_count == 0){
 			win_game(game);

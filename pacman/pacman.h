@@ -99,6 +99,9 @@ void set_game_state(Game* game, enum GameState state);
 void add_life(Game* game);
 void update_score(Game* game, uint16_t amount);
 
+void enable_pacman_eating_mode(Game* game);
+void disable_pacman_eating_mode(Game* game);
+
 struct Coordinates place_random_power_pill(Game* game);
 
 void move_pacman(Game* game, int dx, int dy);
