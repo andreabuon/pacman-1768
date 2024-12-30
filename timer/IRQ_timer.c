@@ -19,6 +19,14 @@ void TIMER0_IRQHandler (void){
 		}else{
 			draw_game_time(&game);
 		}
+		
+		if(game.blinky_mode == RESPAWNING){
+			game.blinky_respawn_timeout--;
+			if(game.blinky_respawn_timeout <= 0){
+				spawn_blinky(&game);
+				draw_blinky(game.blinky_y, game.blinky_x, game.blinky_mode);
+			}
+		}
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2
@@ -66,19 +74,21 @@ void TIMER1_IRQHandler (void){
 					return;
 				}
 				draw_game_lives(&game);
-				//draw_tile(game.map, game.pacman_x, game.pacman_y);
+				//draw_tile(game.map, game.pacman_x, game.pacman_y); //Commented becasue in that tile there is Blinky
 				
 				game.pacman_x = PACMAN_INITIAL_POSITION_X;
 				game.pacman_y = PACMAN_INITIAL_POSITION_Y;
 				game.pacman_direction = RIGHT;
+				
+				draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
 			}
 			else if (game.blinky_mode == FRIGHTENED){
-				//draw_tile(game.map, game.blinky_y, game.blinky_x);
-				spawn_blinky(&game);
+				//draw_tile(game.map, game.blinky_y, game.blinky_x); //Commented becasue in that tile Pacman is already there
+				kill_blinky(&game);
 				update_score(&game, 100);
+				
+				draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
 			}
-			draw_blinky(game.blinky_y, game.blinky_x, game.blinky_mode);
-			draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
 		}
 		
 	} else if(irq_source & IR_MR1) { // mr1
