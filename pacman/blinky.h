@@ -15,6 +15,6 @@ void move_blinky_left(Game* game);
 void move_blinky_right(Game* game);
 void move_blinky_direction(Game* game, enum Direction direction);
 
-void compute_blinky_path(Game* game);
+enum Direction get_next_blinky_direction(Game* game);
 
 #endif // BLINKY_H

@@ -1,4 +1,5 @@
 #include "blinky.h"
+#include "pathfinding.h"
 
 #define BLINKY_INITIAL_X 13
 #define BLINKY_INITIAL_Y 15
@@ -82,4 +83,6 @@ void move_blinky_direction(Game* game, enum Direction direction){
 	}
 }
 
-void compute_blinky_path(Game* game){}
+enum Direction get_next_blinky_direction(Game* game){
+	
+}
