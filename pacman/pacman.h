@@ -38,7 +38,6 @@ enum GameState {
 };
 
 enum Direction{
-	NONE,
 	UP,
 	DOWN,
 	LEFT,
