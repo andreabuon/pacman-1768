@@ -81,3 +81,5 @@ void move_blinky_direction(Game* game, enum Direction direction){
 			break;
 	}
 }
+
+void compute_blinky_path(Game* game){}
