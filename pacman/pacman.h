@@ -50,7 +50,8 @@ enum Direction{
 
 enum BlinkyMode{
 	CHASE,
-	FRIGHTENED
+	FRIGHTENED,
+	RESPAWNING
 };
 
 typedef struct Game {
@@ -75,6 +76,7 @@ typedef struct Game {
 	enum BlinkyMode blinky_mode;
 	uint8_t blinky_x;
 	uint8_t blinky_y;
+	uint8_t blinky_respawn_timeout;
 	
 	
 	uint16_t threshold_new_life;

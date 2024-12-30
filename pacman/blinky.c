@@ -7,6 +7,14 @@ void spawn_blinky(Game* game){
 	game->blinky_y = BLINKY_INITIAL_Y;
 	game->blinky_x = BLINKY_INITIAL_X;
 	game->blinky_mode = CHASE;
+	game->blinky_respawn_timeout = BLINKY_RESPAWN_TIMEOUT;
+}
+
+void kill_blinky(Game* game){
+	game->blinky_y = 0; //FIXME
+	game->blinky_x = 0; //FIXME
+	game->blinky_mode = RESPAWNING;
+	game->blinky_respawn_timeout = BLINKY_RESPAWN_TIMEOUT;
 }
 
 void move_blinky(Game* game, int dx, int dy) {

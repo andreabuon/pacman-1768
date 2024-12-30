@@ -3,7 +3,10 @@
 
 #include "pacman.h"
 
+#define BLINKY_RESPAWN_TIMEOUT 3 //s
+
 void spawn_blinky(Game* game);
+void kill_blinky(Game* game);
 
 void move_blinky(Game* game, int dx, int dy);
 void move_blinky_up(Game* game);
