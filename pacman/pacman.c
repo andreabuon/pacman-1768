@@ -160,15 +160,19 @@ void update_score(Game* game, uint16_t amount){
 }
 
 void enable_pacman_eating_mode(Game* game){
-	game->blinky_mode = FRIGHTENED;
-	draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
+	if(game->blinky_mode == CHASE){
+		game->blinky_mode = FRIGHTENED;
+		draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
+	}
 	init_timer_simplified(TIMER_3, 0, TIM_MS_TO_TICKS_SIMPLE(PACMAN_POWER_MODE_DURATION), 0, TIMER_INTERRUPT_MR, 0);
 	enable_timer(TIMER_3, TIMER3_PRIORITY);
 }
 
 void disable_pacman_eating_mode(Game* game){
-	game->blinky_mode = CHASE;
-	draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
+	if(game->blinky_mode == FRIGHTENED){
+		game->blinky_mode = CHASE;
+		draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
+	}
 };
 
 struct Coordinates place_random_power_pill(Game* game){
