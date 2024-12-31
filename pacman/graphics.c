@@ -154,6 +154,8 @@ void draw_blinky(uint8_t row, uint8_t col, enum BlinkyMode mode){
 	
 	if(mode == FRIGHTENED) 
 		draw_sprite(initial_x, initial_y, blinky_frightened_sprite);
-	else
+	else if(mode == CHASE)
 		draw_sprite(initial_x, initial_y, blinky_chase_sprite);
+	else //TODO Draw while FRIGHTENED?
+		return;
 }
