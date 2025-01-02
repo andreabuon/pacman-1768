@@ -233,11 +233,6 @@ void move_pacman(Game* game, int dx, int dy) {
 			game->power_pills_count--;
 			enable_pacman_eating_mode(game);
 		}
-		
-		if(game->standard_pills_count == 0 && game->power_pills_count == 0){
-			win_game(game);
-			return;
-		}
 	}
 }
 

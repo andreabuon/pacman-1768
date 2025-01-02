@@ -56,6 +56,10 @@ void TIMER1_IRQHandler (void){
 		if(game.pacman_x != previous_pacman_x || game.pacman_y != previous_pacman_y){
 			draw_tile(game.map, previous_pacman_y, previous_pacman_x);
 			draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
+			
+			if(game.standard_pills_count == 0 && game.power_pills_count == 0){
+				win_game(&game);
+			}
 		}
 		
 		// if Blinky moved, render the previous tile it was in and render its sprite on the next one
