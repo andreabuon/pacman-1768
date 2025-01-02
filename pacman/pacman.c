@@ -209,11 +209,6 @@ void move_pacman(Game* game, int dx, int dy) {
 		update_score(game, get_tile_score(new_tile));
 		if (new_tile->type == STANDARD_PILL) game->standard_pills_count--;
 		else if (new_tile->type == POWER_PILL) game->power_pills_count--;
-		
-		if(game->standard_pills_count == 0 && game->power_pills_count == 0){
-			win_game(game);
-			return;
-		}
 	}
 }
 
