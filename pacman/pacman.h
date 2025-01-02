@@ -41,7 +41,6 @@ enum GameState {
 };
 
 enum Direction{
-	NONE,
 	UP,
 	DOWN,
 	LEFT,
@@ -107,6 +106,7 @@ void update_score(Game* game, uint16_t amount);
 void enable_pacman_eating_mode(Game* game);
 void disable_pacman_eating_mode(Game* game);
 
+void disable_power_pills_generation();
 struct Coordinates place_random_power_pill(Game* game);
 
 void move_pacman(Game* game, int dx, int dy);

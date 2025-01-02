@@ -24,6 +24,8 @@ int main (void) {
 	
 	// RIT WORKS WITH CLOCK = 100MHZ
 	init_RIT(RIT_MS_TO_TICKS(RIT_PERIOD_MS));
+	// RIT used for joystick polling, button debouncing and as a seed for the random number generator
+	enable_RIT(); 
 	
 	/* TIMER INSTRUCTIONS
 	//	init_timer_simplified:
@@ -48,13 +50,14 @@ int main (void) {
 	LCD_Clear(Black);
 	GUI_Text(8, 280, (uint8_t *) "LOADING", White, Black);
 
+	// Seed the random number generator
+	//srand(game.standard_pills_count);
+	srand(LPC_RIT->RICOUNTER);
+
 	init_game(&game);
 	
 	// Random power pills generation
 	init_timer_simplified(TIMER_2, 0, TIM_MS_TO_TICKS_SIMPLE(game.power_pills_spawn_times[0]), 0, TIMER_INTERRUPT_MR, 0);
-	
-	// Seed the random number generator
-	srand(game.standard_pills_count);
 	
 	draw_map(game.map);
 	
@@ -71,8 +74,6 @@ int main (void) {
 	NVIC_SetPriority(TIMER0_IRQn, TIMER0_PRIORITY );
 	NVIC_SetPriority(TIMER1_IRQn, TIMER1_PRIORITY );
 	NVIC_SetPriority(TIMER2_IRQn, TIMER2_PRIORITY );
-
-	enable_RIT(); // RIT used for joystick polling and button debouncing
 	
 	//Enable button only after game has loaded
 	BUTTON_init(BUTTON_0, BUTTON0_PRIORITY);

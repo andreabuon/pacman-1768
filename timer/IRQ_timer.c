@@ -109,9 +109,15 @@ void TIMER2_IRQHandler(void){
 	
 	if(irq_source & IR_MR0) { // mr0
 		if(game.power_pills_placed_count < POWER_PILLS_TO_PLACE){
+			disable_timer(TIMER_2);
+			
 			struct Coordinates power_pill_position = place_random_power_pill(&game);
 			draw_tile(game.map, power_pill_position.row, power_pill_position.col);
+			
 			LPC_TIM2->MR0 = TIM_MS_TO_TICKS_SIMPLE(game.power_pills_spawn_times[game.power_pills_placed_count]);
+			enable_timer(TIMER_2, TIMER2_PRIORITY);
+		}else{
+			disable_power_pills_generation();
 		}
 	} else if(irq_source & IR_MR1) { // mr1
 		
