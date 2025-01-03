@@ -13,7 +13,7 @@
 #define PACMAN_MOVEMENT_MS 75U
 #endif
 
-Game game; //FIXME Global
+Game game;
 
 int main (void) {
 	SystemInit();

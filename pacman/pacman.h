@@ -72,7 +72,7 @@ struct Coordinates {
 	uint8_t col;
 };
 
-extern Game game; //FIXME Global variable defined in the main
+extern Game game;
 
 void init_game(Game* game);
 
