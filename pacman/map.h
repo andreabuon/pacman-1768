@@ -10,11 +10,6 @@ enum TileType {
   STANDARD_PILL,
   POWER_PILL,
 	TELEPORT
-	/*
-	ENEMY,
-	ENEMY_PILL,
-	ENEMY_SPECIAL_PILL
-	*/
 };
 
 typedef struct {
