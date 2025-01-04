@@ -6,8 +6,8 @@
 #include "pacman/graphics.h"
 
 #ifdef SIMULATOR
-#define RIT_PERIOD_MS 100U
-#define PACMAN_MOVEMENT_MS 120U
+#define RIT_PERIOD_MS 125U
+#define PACMAN_MOVEMENT_MS 160U
 #else
 #define RIT_PERIOD_MS 50U
 #define PACMAN_MOVEMENT_MS 75U
