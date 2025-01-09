@@ -1,4 +1,8 @@
 #include "blinky.h"
+#include "pathfinding.h"
+
+#include <stdio.h>
+#include <stdlib.h>
 
 #define BLINKY_INITIAL_X 13
 #define BLINKY_INITIAL_Y 15
@@ -80,4 +84,9 @@ void move_blinky_direction(Game* game, enum Direction direction){
 		default:
 			break;
 	}
+}
+
+enum Direction get_next_blinky_direction(Game* game){
+	enum Direction direction = (rand() % 4);
+	return direction;
 }

@@ -50,7 +50,8 @@ void TIMER1_IRQHandler (void){
 		uint8_t previous_blinky_y = game.blinky_y;
 		
 		move_pacman_direction(&game);
-		move_blinky_direction(&game, game.pacman_direction);
+		enum Direction blinky_direction = get_next_blinky_direction(&game);
+		move_blinky_direction(&game, blinky_direction);
 		
 		// if pacman moved, render the previous tile it was in and render its sprite on the next one
 		if(game.pacman_x != previous_pacman_x || game.pacman_y != previous_pacman_y){
