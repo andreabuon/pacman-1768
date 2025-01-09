@@ -290,3 +290,20 @@ void move_pacman_direction(Game* game){
 			break;
 	}
 }
+
+void game_clock_tick(Game* game){
+	game->time--;
+		if(game->time == 0){
+			lose_game(game);
+		}else{
+			draw_game_time(game);
+		}
+		
+		if(game->blinky_mode == RESPAWNING){
+			game->blinky_respawn_timeout--;
+			if(game->blinky_respawn_timeout <= 0){
+				spawn_blinky(game);
+				draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
+			}
+		}
+}

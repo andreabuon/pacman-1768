@@ -13,20 +13,7 @@ void TIMER0_IRQHandler (void){
 	uint8_t irq_source = LPC_TIM0->IR;
 	
 	if(irq_source & IR_MR0) { // mr0
-		game.time--;
-		if(game.time == 0){
-			lose_game(&game);
-		}else{
-			draw_game_time(&game);
-		}
-		
-		if(game.blinky_mode == RESPAWNING){
-			game.blinky_respawn_timeout--;
-			if(game.blinky_respawn_timeout <= 0){
-				spawn_blinky(&game);
-				draw_blinky(game.blinky_y, game.blinky_x, game.blinky_mode);
-			}
-		}
+		game_clock_tick(&game);
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2
