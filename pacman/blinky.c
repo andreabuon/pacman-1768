@@ -87,6 +87,12 @@ void move_blinky_direction(Game* game, enum Direction direction){
 }
 
 enum Direction get_next_blinky_direction(Game* game){
-	enum Direction direction = (rand() % 4);
-	return direction;
+	switch(game->blinky_mode){
+		case CHASE:
+			return get_closest_next_direction(game);
+		case FRIGHTENED:
+			return get_furthest_next_direction(game);
+		default:
+			return DEFAULT_BLINKY_DIRECTION;
+	}
 }
