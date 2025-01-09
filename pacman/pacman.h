@@ -47,6 +47,11 @@ enum Direction{
 	RIGHT
 };
 
+enum PacmanMode{
+	RUN,
+	POWER
+};
+
 enum BlinkyMode{
 	CHASE,
 	FRIGHTENED,
@@ -71,6 +76,7 @@ typedef struct Game {
 	uint8_t pacman_x;
 	uint8_t pacman_y;
 	enum Direction pacman_direction;
+	enum PacmanMode pacman_mode;
 	
 	enum BlinkyMode blinky_mode;
 	uint8_t blinky_x;
@@ -103,8 +109,8 @@ void set_game_state(Game* game, enum GameState state);
 void add_life(Game* game);
 void update_score(Game* game, uint16_t amount);
 
-void enable_pacman_eating_mode(Game* game);
-void disable_pacman_eating_mode(Game* game);
+void enable_pacman_power_mode(Game* game);
+void disable_pacman_power_mode(Game* game);
 
 void disable_power_pills_generation();
 struct Coordinates place_random_power_pill(Game* game);

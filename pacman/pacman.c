@@ -34,6 +34,13 @@ void disable_power_pills_generation(){
 	disable_timer(TIMER_2);
 }
 //
+void resume_pacman_power_mode_timer(){
+	enable_timer(TIMER_3, TIMER3_PRIORITY);
+}
+
+void disable_pacman_power_mode_timer(){
+	disable_timer(TIMER_3);
+}
 
 int compare_uint32_ascending(const void* a, const void* b) {
 	uint32_t x = *(uint32_t*) a;
@@ -71,8 +78,7 @@ void init_game(Game* game){
 	game->pacman_x = PACMAN_INITIAL_POSITION_X;
 	game->pacman_y = PACMAN_INITIAL_POSITION_Y;
 	game->pacman_direction = RIGHT;
-	
-	
+	game->pacman_mode = RUN;
 	
 	game->threshold_new_life = THRESHOLD_NEW_LIFE;
 }
@@ -100,6 +106,11 @@ void start_game(Game* game){
 		enable_power_pills_generation();
 	}
 	
+	//resume pacman power mode timer when game un-paused
+	if(game->pacman_mode == POWER){
+		resume_pacman_power_mode_timer();
+	}
+	
 	enable_RIT(); //Joystick polling
 	
 	draw_game_state(game);
@@ -112,6 +123,10 @@ void pause_game(Game* game){
 	disable_pacman_movement();
 	disable_power_pills_generation();
 	
+	if(game->pacman_mode == POWER){
+		disable_pacman_power_mode_timer();
+	}
+	
 	draw_game_state(game);
 }
 
@@ -121,6 +136,7 @@ void win_game(Game* game){
 	disable_game_countdown();
 	disable_pacman_movement();
 	disable_power_pills_generation();
+	resume_pacman_power_mode_timer();
 	
 	disable_RIT(); // Disable RIT polling of the joystick and the buttons
 	
@@ -134,6 +150,7 @@ void lose_game(Game* game){
 	disable_game_countdown();
 	disable_pacman_movement();
 	disable_power_pills_generation();
+	resume_pacman_power_mode_timer();
 	
 	disable_RIT(); // Disable RIT polling of the joystick and the buttons
 	
@@ -159,7 +176,9 @@ void update_score(Game* game, uint16_t amount){
 		draw_game_score(game);
 }
 
-void enable_pacman_eating_mode(Game* game){
+void enable_pacman_power_mode(Game* game){
+	game->pacman_mode = POWER;
+	
 	if(game->blinky_mode == CHASE){
 		game->blinky_mode = FRIGHTENED;
 		draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
@@ -168,7 +187,8 @@ void enable_pacman_eating_mode(Game* game){
 	enable_timer(TIMER_3, TIMER3_PRIORITY);
 }
 
-void disable_pacman_eating_mode(Game* game){
+void disable_pacman_power_mode(Game* game){
+	game->pacman_mode = RUN;
 	if(game->blinky_mode == FRIGHTENED){
 		game->blinky_mode = CHASE;
 		draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
@@ -231,7 +251,7 @@ void move_pacman(Game* game, int dx, int dy) {
 		if (new_tile->type == STANDARD_PILL) game->standard_pills_count--;
 		else if (new_tile->type == POWER_PILL){
 			game->power_pills_count--;
-			enable_pacman_eating_mode(game);
+			enable_pacman_power_mode(game);
 		}
 	}
 }
