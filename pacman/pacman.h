@@ -120,5 +120,6 @@ void move_pacman_right(Game* game);
 void move_pacman_direction(Game* game);
 
 void game_clock_tick(Game* game);
+void pacman_blinky_movement_tick(Game* game);
 
 #endif // PACMAN_H *

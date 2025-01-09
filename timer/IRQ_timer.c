@@ -30,60 +30,7 @@ void TIMER1_IRQHandler (void){
 	uint8_t irq_source = LPC_TIM1->IR;
 	
 	if(irq_source & IR_MR0) { // mr0
-		uint8_t previous_pacman_x = game.pacman_x;
-		uint8_t previous_pacman_y = game.pacman_y;
-		
-		uint8_t previous_blinky_x = game.blinky_x;
-		uint8_t previous_blinky_y = game.blinky_y;
-		
-		move_pacman_direction(&game);
-		enum Direction blinky_direction = get_next_blinky_direction(&game);
-		move_blinky_direction(&game, blinky_direction);
-		
-		// if pacman moved, render the previous tile it was in and render its sprite on the next one
-		if(game.pacman_x != previous_pacman_x || game.pacman_y != previous_pacman_y){
-			draw_tile(game.map, previous_pacman_y, previous_pacman_x);
-			draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
-			
-			if(game.standard_pills_count == 0 && game.power_pills_count == 0){
-				win_game(&game);
-			}
-		}
-		
-		// if Blinky moved, render the previous tile it was in and render its sprite on the next one
-		if(game.blinky_x != previous_blinky_x || game.blinky_y != previous_blinky_y){
-			draw_tile(game.map, previous_blinky_y, previous_blinky_x);
-			draw_blinky(game.blinky_y, game.blinky_x, game.blinky_mode);
-		}
-		
-		//Pacman and Blinky meet
-		if(game.pacman_x == game.blinky_x && game.pacman_y == game.blinky_y){
-			if(game.blinky_mode == CHASE){
-				game.lives--;
-				if(game.lives <= 0){
-					lose_game(&game);		
-					LPC_TIM1->IR = irq_source;
-					return;
-				}
-				draw_game_lives(&game);
-				//draw_tile(game.map, game.pacman_x, game.pacman_y); //Commented becasue in that tile there is Blinky
-				
-				game.pacman_x = PACMAN_INITIAL_POSITION_X;
-				game.pacman_y = PACMAN_INITIAL_POSITION_Y;
-				game.pacman_direction = RIGHT;
-				game.pacman_mode = RUN;
-				
-				draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
-			}
-			else if (game.blinky_mode == FRIGHTENED){
-				//draw_tile(game.map, game.blinky_y, game.blinky_x); //Commented becasue in that tile Pacman is already there
-				kill_blinky(&game);
-				update_score(&game, 100);
-				
-				draw_pacman(game.pacman_y, game.pacman_x, game.pacman_direction);
-			}
-		}
-		
+		pacman_blinky_movement_tick(&game);
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2
