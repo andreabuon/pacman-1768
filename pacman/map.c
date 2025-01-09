@@ -1,6 +1,5 @@
 #include "map.h"
 #include "pacman.h"
-#include <stdint.h>
 #include <stdlib.h>
 
 enum TileType board[MAP_HEIGHT][MAP_LENGTH];

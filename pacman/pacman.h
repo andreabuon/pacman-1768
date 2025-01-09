@@ -29,9 +29,6 @@
 #define TIMER3_PRIORITY PRIO_3
 #define BUTTON0_PRIORITY PRIO_0
 
-uint8_t is_a_pill(Tile* tile);
-uint8_t get_tile_score(Tile* tile);
-
 enum GameState {
 	READY,
 	PLAYING,
