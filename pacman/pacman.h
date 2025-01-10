@@ -19,6 +19,8 @@
 
 #define PACMAN_POWER_MODE_DURATION 10000 //ms
 
+#define INITIAL_BLINKY_SPEED_FACTOR 4
+
 #define THRESHOLD_NEW_LIFE 1000
 
 //Game timers priorities
@@ -79,6 +81,7 @@ typedef struct Game {
 	uint8_t blinky_x;
 	uint8_t blinky_y;
 	uint8_t blinky_respawn_timeout;
+	uint8_t blinky_speed_factor;
 	
 	
 	uint16_t threshold_new_life;

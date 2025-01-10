@@ -71,6 +71,7 @@ void init_game(Game* game){
 	game->standard_pills_count = INITIAL_STANDARD_PILLS_COUNT;
 	game->power_pills_count = INITIAL_POWER_PILLS_COUNT;
 	
+	game->blinky_speed_factor = INITIAL_BLINKY_SPEED_FACTOR;
 	spawn_blinky(game);
 	
 	generate_random_power_pills_spawn_times(game->power_pills_spawn_times);
@@ -293,19 +294,31 @@ void move_pacman_direction(Game* game){
 
 void game_clock_tick(Game* game){
 	game->time--;
-		if(game->time == 0){
-			lose_game(game);
-		}else{
-			draw_game_time(game);
+
+	//Increase Binky Speed as game progresses
+	if(game->time >= 40 && game->time <= 50){
+		game->blinky_speed_factor = 3;
+	}else if (game->time >= 20){
+		game->blinky_speed_factor = 2;
+	}else if (game->time < 20){
+		game->blinky_speed_factor = 1;
+	}
+	
+	//Check game over condition
+	if(game->time == 0){
+		lose_game(game);
+	}else{
+		draw_game_time(game);
+	}
+	
+	//Blinky respawn timeout, placed here because I have already used all the available timers
+	if(game->blinky_mode == RESPAWNING){
+		game->blinky_respawn_timeout--;
+		if(game->blinky_respawn_timeout <= 0){
+			spawn_blinky(game);
+			draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
 		}
-		
-		if(game->blinky_mode == RESPAWNING){
-			game->blinky_respawn_timeout--;
-			if(game->blinky_respawn_timeout <= 0){
-				spawn_blinky(game);
-				draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
-			}
-		}
+	}
 }
 
 void pacman_blinky_movement_tick(Game* game){
@@ -320,17 +333,8 @@ void pacman_blinky_movement_tick(Game* game){
 		// Blinky moves faster as the game progresses	
 		static int blinky_tick_count = 0;
     blinky_tick_count++;
-		
-		static int speed_factor = 3;
-		if(game->time >= 45){
-			speed_factor = 3;
-		}else if (game->time >= 25){
-			speed_factor = 2;
-		}else {
-			speed_factor = 1;
-		}
 	
-    if (blinky_tick_count >= speed_factor) {
+    if (blinky_tick_count >= game->blinky_speed_factor) {
         blinky_tick_count = 0; // Reset counter
         enum Direction blinky_direction = get_next_blinky_direction(game);
         move_blinky_direction(game, blinky_direction);
