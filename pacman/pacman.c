@@ -309,15 +309,32 @@ void game_clock_tick(Game* game){
 }
 
 void pacman_blinky_movement_tick(Game* game){
-	uint8_t previous_pacman_x = game->pacman_x;
+		uint8_t previous_pacman_x = game->pacman_x;
 		uint8_t previous_pacman_y = game->pacman_y;
 		
 		uint8_t previous_blinky_x = game->blinky_x;
 		uint8_t previous_blinky_y = game->blinky_y;
 		
 		move_pacman_direction(game);
-		enum Direction blinky_direction = get_next_blinky_direction(game);
-		move_blinky_direction(game, blinky_direction);
+
+		// Blinky moves faster as the game progresses	
+		static int blinky_tick_count = 0;
+    blinky_tick_count++;
+		
+		static int speed_factor = 3;
+		if(game->time >= 45){
+			speed_factor = 3;
+		}else if (game->time >= 25){
+			speed_factor = 2;
+		}else {
+			speed_factor = 1;
+		}
+	
+    if (blinky_tick_count >= speed_factor) {
+        blinky_tick_count = 0; // Reset counter
+        enum Direction blinky_direction = get_next_blinky_direction(game);
+        move_blinky_direction(game, blinky_direction);
+    }
 		
 		// if pacman moved, render the previous tile it was in and render its sprite on the next one
 		if(game->pacman_x != previous_pacman_x || game->pacman_y != previous_pacman_y){
