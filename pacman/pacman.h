@@ -17,7 +17,7 @@
 #define PACMAN_INITIAL_POSITION_X 3
 #define PACMAN_INITIAL_POSITION_Y 14
 
-#define PACMAN_POWER_MODE_DURATION 10000 //ms
+#define PACMAN_POWER_MODE_DURATION 10 //s
 
 #define INITIAL_BLINKY_SPEED_FACTOR 4
 
@@ -76,6 +76,7 @@ typedef struct Game {
 	uint8_t pacman_y;
 	enum Direction pacman_direction;
 	enum PacmanMode pacman_mode;
+	uint8_t pacman_power_mode_timeout;
 	
 	enum BlinkyMode blinky_mode;
 	uint8_t blinky_x;

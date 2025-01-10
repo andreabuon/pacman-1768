@@ -33,14 +33,6 @@ void enable_power_pills_generation(){
 void disable_power_pills_generation(){
 	disable_timer(TIMER_2);
 }
-//
-void resume_pacman_power_mode_timer(){
-	enable_timer(TIMER_3, TIMER3_PRIORITY);
-}
-
-void disable_pacman_power_mode_timer(){
-	disable_timer(TIMER_3);
-}
 
 int compare_uint32_ascending(const void* a, const void* b) {
 	uint32_t x = *(uint32_t*) a;
@@ -80,6 +72,7 @@ void init_game(Game* game){
 	game->pacman_y = PACMAN_INITIAL_POSITION_Y;
 	game->pacman_direction = RIGHT;
 	game->pacman_mode = RUN;
+	game->pacman_power_mode_timeout = PACMAN_POWER_MODE_DURATION;
 	
 	game->threshold_new_life = THRESHOLD_NEW_LIFE;
 }
@@ -107,11 +100,6 @@ void start_game(Game* game){
 		enable_power_pills_generation();
 	}
 	
-	//resume pacman power mode timer when game un-paused
-	if(game->pacman_mode == POWER){
-		resume_pacman_power_mode_timer();
-	}
-	
 	enable_RIT(); //Joystick polling
 	
 	draw_game_state(game);
@@ -124,10 +112,6 @@ void pause_game(Game* game){
 	disable_pacman_movement();
 	disable_power_pills_generation();
 	
-	if(game->pacman_mode == POWER){
-		disable_pacman_power_mode_timer();
-	}
-	
 	draw_game_state(game);
 }
 
@@ -137,7 +121,6 @@ void win_game(Game* game){
 	disable_game_countdown();
 	disable_pacman_movement();
 	disable_power_pills_generation();
-	disable_pacman_power_mode_timer();
 	
 	disable_RIT(); // Disable RIT polling of the joystick and the buttons
 	
@@ -151,7 +134,6 @@ void lose_game(Game* game){
 	disable_game_countdown();
 	disable_pacman_movement();
 	disable_power_pills_generation();
-	disable_pacman_power_mode_timer();
 	
 	disable_RIT(); // Disable RIT polling of the joystick and the buttons
 	
@@ -179,13 +161,12 @@ void update_score(Game* game, uint16_t amount){
 
 void enable_pacman_power_mode(Game* game){
 	game->pacman_mode = POWER;
+	game->pacman_power_mode_timeout = PACMAN_POWER_MODE_DURATION;
 	
 	if(game->blinky_mode == CHASE){
 		game->blinky_mode = FRIGHTENED;
 		draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
 	}
-	init_timer_simplified(TIMER_3, 0, TIM_MS_TO_TICKS_SIMPLE(PACMAN_POWER_MODE_DURATION), 0, TIMER_INTERRUPT_MR, 0);
-	enable_timer(TIMER_3, TIMER3_PRIORITY);
 }
 
 void disable_pacman_power_mode(Game* game){
@@ -319,6 +300,15 @@ void game_clock_tick(Game* game){
 			draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
 		}
 	}
+	
+	//
+	if(game->pacman_mode == POWER){
+		game->pacman_power_mode_timeout--;
+		if(game->pacman_power_mode_timeout == 0){
+			disable_pacman_power_mode(game);
+		}
+	}
+	
 }
 
 void handle_pacman_blinky_collision(Game* game){
