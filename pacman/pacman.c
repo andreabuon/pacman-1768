@@ -3,6 +3,7 @@
 
 #include "pacman.h"
 #include "../pacman/graphics.h"
+#include "blinky.h"
 //
 #include "../timer/timer.h"
 #include "../common.h"
@@ -33,6 +34,13 @@ void disable_power_pills_generation(){
 	disable_timer(TIMER_2);
 }
 //
+void resume_pacman_power_mode_timer(){
+	enable_timer(TIMER_3, TIMER3_PRIORITY);
+}
+
+void disable_pacman_power_mode_timer(){
+	disable_timer(TIMER_3);
+}
 
 int compare_uint32_ascending(const void* a, const void* b) {
 	uint32_t x = *(uint32_t*) a;
@@ -63,11 +71,15 @@ void init_game(Game* game){
 	game->standard_pills_count = INITIAL_STANDARD_PILLS_COUNT;
 	game->power_pills_count = INITIAL_POWER_PILLS_COUNT;
 	
+	game->blinky_speed_factor = INITIAL_BLINKY_SPEED_FACTOR;
+	spawn_blinky(game);
+	
 	generate_random_power_pills_spawn_times(game->power_pills_spawn_times);
 	
 	game->pacman_x = PACMAN_INITIAL_POSITION_X;
 	game->pacman_y = PACMAN_INITIAL_POSITION_Y;
 	game->pacman_direction = RIGHT;
+	game->pacman_mode = RUN;
 	
 	game->threshold_new_life = THRESHOLD_NEW_LIFE;
 }
@@ -95,6 +107,11 @@ void start_game(Game* game){
 		enable_power_pills_generation();
 	}
 	
+	//resume pacman power mode timer when game un-paused
+	if(game->pacman_mode == POWER){
+		resume_pacman_power_mode_timer();
+	}
+	
 	enable_RIT(); //Joystick polling
 	
 	draw_game_state(game);
@@ -107,6 +124,10 @@ void pause_game(Game* game){
 	disable_pacman_movement();
 	disable_power_pills_generation();
 	
+	if(game->pacman_mode == POWER){
+		disable_pacman_power_mode_timer();
+	}
+	
 	draw_game_state(game);
 }
 
@@ -116,6 +137,7 @@ void win_game(Game* game){
 	disable_game_countdown();
 	disable_pacman_movement();
 	disable_power_pills_generation();
+	resume_pacman_power_mode_timer();
 	
 	disable_RIT(); // Disable RIT polling of the joystick and the buttons
 	
@@ -129,6 +151,7 @@ void lose_game(Game* game){
 	disable_game_countdown();
 	disable_pacman_movement();
 	disable_power_pills_generation();
+	resume_pacman_power_mode_timer();
 	
 	disable_RIT(); // Disable RIT polling of the joystick and the buttons
 	
@@ -153,6 +176,25 @@ void update_score(Game* game, uint16_t amount){
 		
 		draw_game_score(game);
 }
+
+void enable_pacman_power_mode(Game* game){
+	game->pacman_mode = POWER;
+	
+	if(game->blinky_mode == CHASE){
+		game->blinky_mode = FRIGHTENED;
+		draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
+	}
+	init_timer_simplified(TIMER_3, 0, TIM_MS_TO_TICKS_SIMPLE(PACMAN_POWER_MODE_DURATION), 0, TIMER_INTERRUPT_MR, 0);
+	enable_timer(TIMER_3, TIMER3_PRIORITY);
+}
+
+void disable_pacman_power_mode(Game* game){
+	game->pacman_mode = RUN;
+	if(game->blinky_mode == FRIGHTENED){
+		game->blinky_mode = CHASE;
+		draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
+	}
+};
 
 struct Coordinates place_random_power_pill(Game* game){
 	srand(game->standard_pills_count);
@@ -208,7 +250,10 @@ void move_pacman(Game* game, int dx, int dy) {
 	if (is_a_pill(new_tile)) {
 		update_score(game, get_tile_score(new_tile));
 		if (new_tile->type == STANDARD_PILL) game->standard_pills_count--;
-		else if (new_tile->type == POWER_PILL) game->power_pills_count--;
+		else if (new_tile->type == POWER_PILL){
+			game->power_pills_count--;
+			enable_pacman_power_mode(game);
+		}
 	}
 }
 
@@ -245,4 +290,110 @@ void move_pacman_direction(Game* game){
 		default:
 			break;
 	}
+}
+
+void game_clock_tick(Game* game){
+	game->time--;
+
+	//Increase Binky Speed as game progresses
+	if(game->time >= 40 && game->time <= 50){
+		game->blinky_speed_factor = 3;
+	}else if (game->time >= 20){
+		game->blinky_speed_factor = 2;
+	}else if (game->time < 20){
+		game->blinky_speed_factor = 1;
+	}
+	
+	//Check game over condition
+	if(game->time == 0){
+		lose_game(game);
+	}else{
+		draw_game_time(game);
+	}
+	
+	//Blinky respawn timeout, placed here because I have already used all the available timers
+	if(game->blinky_mode == RESPAWNING){
+		game->blinky_respawn_timeout--;
+		if(game->blinky_respawn_timeout <= 0){
+			spawn_blinky(game);
+			draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
+		}
+	}
+}
+
+void pacman_blinky_movement_tick(Game* game){
+		uint8_t previous_pacman_x = game->pacman_x;
+		uint8_t previous_pacman_y = game->pacman_y;
+		
+		uint8_t previous_blinky_x = game->blinky_x;
+		uint8_t previous_blinky_y = game->blinky_y;
+		
+		move_pacman_direction(game);
+
+		// Blinky moves faster as the game progresses	
+		static int blinky_tick_count = 0;
+    blinky_tick_count++;
+	
+    if (blinky_tick_count >= game->blinky_speed_factor) {
+        blinky_tick_count = 0; // Reset counter
+        enum Direction blinky_direction = get_next_blinky_direction(game);
+        move_blinky_direction(game, blinky_direction);
+    }
+		
+		// if pacman moved, render the previous tile it was in and render its sprite on the next one
+		if(game->pacman_x != previous_pacman_x || game->pacman_y != previous_pacman_y){
+			draw_tile(game->map, previous_pacman_y, previous_pacman_x);
+			draw_pacman(game->pacman_y, game->pacman_x, game->pacman_direction);
+			
+			if(game->standard_pills_count == 0 && game->power_pills_count == 0){
+				win_game(game);
+			}
+		}
+		
+		// if Blinky moved, render the previous tile it was in and render its sprite on the next one
+		if(game->blinky_x != previous_blinky_x || game->blinky_y != previous_blinky_y){
+			draw_tile(game->map, previous_blinky_y, previous_blinky_x);
+			draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
+		}
+		
+		//Pacman and Blinky meet
+		if(game->pacman_x == game->blinky_x && game->pacman_y == game->blinky_y){
+			if(game->blinky_mode == CHASE){
+				game->lives--;
+				if(game->lives <= 0){
+					lose_game(game);
+					return;
+				}
+				draw_game_lives(game);
+				//draw_tile(game->map, game->pacman_x, game->pacman_y); //Commented becasue in that tile there is Blinky
+				
+				game->pacman_x = PACMAN_INITIAL_POSITION_X;
+				game->pacman_y = PACMAN_INITIAL_POSITION_Y;
+				game->pacman_direction = RIGHT;
+				game->pacman_mode = RUN;
+				
+				draw_pacman(game->pacman_y, game->pacman_x, game->pacman_direction);
+			}
+			else if (game->blinky_mode == FRIGHTENED){
+				//draw_tile(game->map, game->blinky_y, game->blinky_x); //Commented becasue in that tile Pacman is already there
+				kill_blinky(game);
+				update_score(game, 100);
+				
+				draw_pacman(game->pacman_y, game->pacman_x, game->pacman_direction);
+			}
+		}
+}
+
+void powerpills_timer_tick(Game* game){
+	if(game->power_pills_placed_count < POWER_PILLS_TO_PLACE){
+			disable_timer(TIMER_2);
+			
+			struct Coordinates power_pill_position = place_random_power_pill(game);
+			draw_tile(game->map, power_pill_position.row, power_pill_position.col);
+			
+			LPC_TIM2->MR0 = TIM_MS_TO_TICKS_SIMPLE(game->power_pills_spawn_times[game->power_pills_placed_count]);
+			enable_timer(TIMER_2, TIMER2_PRIORITY);
+		}else{
+			disable_power_pills_generation();
+		}
 }

@@ -590,6 +590,26 @@
               <FileType>5</FileType>
               <FilePath>.\pacman\sprites.h</FilePath>
             </File>
+            <File>
+              <FileName>blinky.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\pacman\blinky.c</FilePath>
+            </File>
+            <File>
+              <FileName>blinky.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pacman\blinky.h</FilePath>
+            </File>
+            <File>
+              <FileName>pathfinding.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\pacman\pathfinding.c</FilePath>
+            </File>
+            <File>
+              <FileName>pathfinding.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pacman\pathfinding.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1180,6 +1200,26 @@
               <FileName>sprites.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\pacman\sprites.h</FilePath>
+            </File>
+            <File>
+              <FileName>blinky.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\pacman\blinky.c</FilePath>
+            </File>
+            <File>
+              <FileName>blinky.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pacman\blinky.h</FilePath>
+            </File>
+            <File>
+              <FileName>pathfinding.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\pacman\pathfinding.c</FilePath>
+            </File>
+            <File>
+              <FileName>pathfinding.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pacman\pathfinding.h</FilePath>
             </File>
           </Files>
         </Group>

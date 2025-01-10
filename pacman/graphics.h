@@ -20,4 +20,6 @@ void draw_map(Tile map[MAP_HEIGHT][MAP_LENGTH]);
 
 void draw_pacman(uint8_t row, uint8_t col, enum Direction direction);
 
+void draw_blinky(uint8_t row, uint8_t col, enum BlinkyMode mode);
+
 #endif // GRAPHICS_H *
