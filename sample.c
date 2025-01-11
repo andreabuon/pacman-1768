@@ -24,6 +24,11 @@ int main (void) {
 	
 	// RIT WORKS WITH CLOCK = 100MHZ
 	init_RIT(RIT_MS_TO_TICKS(RIT_PERIOD_MS));
+	
+	LPC_PINCON->PINSEL1 |= (1<<21);
+	LPC_PINCON->PINSEL1 &= ~(1<<20);
+	LPC_GPIO0->FIODIR |= (1<<26);
+	
 	// RIT used for joystick polling, button debouncing and as a seed for the random number generator
 	enable_RIT(); 
 	
