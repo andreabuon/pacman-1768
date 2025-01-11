@@ -27,11 +27,11 @@ void disable_pacman_movement(){
 }
 // Power Pills Generation
 void enable_power_pills_generation(){
-	enable_timer(TIMER_2, TIMER2_PRIORITY);
+	//enable_timer(TIMER_2, TIMER2_PRIORITY);
 }
 
 void disable_power_pills_generation(){
-	disable_timer(TIMER_2);
+	//disable_timer(TIMER_2);
 }
 
 int compare_uint32_ascending(const void* a, const void* b) {
