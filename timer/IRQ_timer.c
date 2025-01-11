@@ -62,9 +62,11 @@ void TIMER2_IRQHandler(void){
 		/* DAC management */	
 		static int currentValue; 
 		currentValue = SinTable[sineticks];
+		/*
 		currentValue -= 410;
 		currentValue /= 1;
 		currentValue += 410;
+		*/
 		LPC_DAC->DACR = currentValue <<6;
 		sineticks++;
 		if(sineticks==45) sineticks=0;
