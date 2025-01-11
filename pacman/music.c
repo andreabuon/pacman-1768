@@ -8,11 +8,11 @@ void playNote(NOTE note)
 	if(note.freq != REST)
 	{
 		reset_timer(TIMER_2);
-		init_timer_simplified(TIMER_2, 1, note.freq*AMPLIFIER*VOLUME, 0, 0, 0);
+		init_timer_simplified(TIMER_2, 1, note.freq*AMPLIFIER*VOLUME, 0, TIMER_INTERRUPT_MR, 0);
 		enable_timer(TIMER_2, 0);
 	}
 	reset_timer(TIMER_3);
-	init_timer_simplified(TIMER_3, 1, note.duration, 0, 0, 0);
+	init_timer_simplified(TIMER_3, 1, note.duration, 0, TIMER_INTERRUPT_MR, 0);
 	enable_timer(TIMER_3, 0);
 }
 
