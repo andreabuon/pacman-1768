@@ -171,7 +171,7 @@ void RIT_IRQHandler(void){
 	
 	if(currentNote == (sizeof(song) / sizeof(song[0])))
 	{
-		disable_RIT();
+		currentNote = 0;
 	}
 	
 	LPC_RIT->RICTRL |= 0x1;
