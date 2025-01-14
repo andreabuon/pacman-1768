@@ -137,7 +137,7 @@ void win_game(Game* game){
 	disable_game_countdown();
 	disable_pacman_movement();
 	disable_power_pills_generation();
-	resume_pacman_power_mode_timer();
+	disable_pacman_power_mode_timer();
 	
 	disable_RIT(); // Disable RIT polling of the joystick and the buttons
 	
@@ -151,7 +151,7 @@ void lose_game(Game* game){
 	disable_game_countdown();
 	disable_pacman_movement();
 	disable_power_pills_generation();
-	resume_pacman_power_mode_timer();
+	disable_pacman_power_mode_timer();
 	
 	disable_RIT(); // Disable RIT polling of the joystick and the buttons
 	
