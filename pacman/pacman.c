@@ -299,9 +299,9 @@ void game_clock_tick(Game* game){
 	if(game->time >= 40 && game->time <= 50){
 		game->blinky_speed_factor = 3;
 	}else if (game->time >= 20){
-		game->blinky_speed_factor = 2;
+		game->blinky_speed_factor = 3;
 	}else if (game->time < 20){
-		game->blinky_speed_factor = 1;
+		game->blinky_speed_factor = 2;
 	}
 	
 	//Check game over condition
