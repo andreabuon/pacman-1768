@@ -10,7 +10,7 @@
 #define PACMAN_MOVEMENT_MS 160U
 #else
 #define RIT_PERIOD_MS 50U
-#define PACMAN_MOVEMENT_MS 75U
+#define PACMAN_MOVEMENT_MS 160U
 #endif
 
 Game game;
