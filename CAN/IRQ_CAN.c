@@ -75,9 +75,11 @@ void CAN_IRQHandler (void)  {
 		uint8_t lifes = (uint8_t) CAN_RxMsg.data[1] ;
 		uint16_t score = (uint16_t) ( (uint8_t) CAN_RxMsg.data[2] << 8 ) | (uint8_t) CAN_RxMsg.data[3] ;
 		
-		draw_game_time(time);
-		draw_game_lifes(lifes);
-		draw_game_score(score);
+		if(game.state == PLAYING){
+			draw_game_time(time);
+			draw_game_lifes(lifes);
+			draw_game_score(score);
+		}
 	}
 	if (icr & (1 << 1)) {                         /* CAN Controller #2 meassage is transmitted */
 		// do nothing in this example
