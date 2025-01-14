@@ -321,6 +321,32 @@ void game_clock_tick(Game* game){
 	}
 }
 
+void handle_pacman_blinky_collision(Game* game){
+			if(game->blinky_mode == CHASE){
+			game->lives--;
+			if(game->lives <= 0){
+				lose_game(game);
+				return;
+			}
+			draw_game_lives(game);
+			//draw_tile(game->map, game->pacman_x, game->pacman_y); //Commented becasue in that tile there is Blinky
+			
+			game->pacman_x = PACMAN_INITIAL_POSITION_X;
+			game->pacman_y = PACMAN_INITIAL_POSITION_Y;
+			game->pacman_direction = RIGHT;
+			game->pacman_mode = RUN;
+			
+			draw_pacman(game->pacman_y, game->pacman_x, game->pacman_direction);
+		}
+		else if (game->blinky_mode == FRIGHTENED){
+			//draw_tile(game->map, game->blinky_y, game->blinky_x); //Commented becasue in that tile Pacman is already there
+			kill_blinky(game);
+			update_score(game, 100);
+			
+			draw_pacman(game->pacman_y, game->pacman_x, game->pacman_direction);
+		}
+}
+
 void pacman_blinky_movement_tick(Game* game){
 		uint8_t previous_pacman_x = game->pacman_x;
 		uint8_t previous_pacman_y = game->pacman_y;
@@ -329,17 +355,7 @@ void pacman_blinky_movement_tick(Game* game){
 		uint8_t previous_blinky_y = game->blinky_y;
 		
 		move_pacman_direction(game);
-
-		// Blinky moves faster as the game progresses	
-		static int blinky_tick_count = 0;
-    blinky_tick_count++;
 	
-    if (blinky_tick_count >= game->blinky_speed_factor) {
-        blinky_tick_count = 0; // Reset counter
-        enum Direction blinky_direction = get_next_blinky_direction(game);
-        move_blinky_direction(game, blinky_direction);
-    }
-		
 		// if pacman moved, render the previous tile it was in and render its sprite on the next one
 		if(game->pacman_x != previous_pacman_x || game->pacman_y != previous_pacman_y){
 			draw_tile(game->map, previous_pacman_y, previous_pacman_x);
@@ -350,38 +366,32 @@ void pacman_blinky_movement_tick(Game* game){
 			}
 		}
 		
-		// if Blinky moved, render the previous tile it was in and render its sprite on the next one
-		if(game->blinky_x != previous_blinky_x || game->blinky_y != previous_blinky_y){
-			draw_tile(game->map, previous_blinky_y, previous_blinky_x);
-			draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
-		}
-		
 		//Pacman and Blinky meet
 		if(game->pacman_x == game->blinky_x && game->pacman_y == game->blinky_y){
-			if(game->blinky_mode == CHASE){
-				game->lives--;
-				if(game->lives <= 0){
-					lose_game(game);
-					return;
-				}
-				draw_game_lives(game);
-				//draw_tile(game->map, game->pacman_x, game->pacman_y); //Commented becasue in that tile there is Blinky
-				
-				game->pacman_x = PACMAN_INITIAL_POSITION_X;
-				game->pacman_y = PACMAN_INITIAL_POSITION_Y;
-				game->pacman_direction = RIGHT;
-				game->pacman_mode = RUN;
-				
-				draw_pacman(game->pacman_y, game->pacman_x, game->pacman_direction);
-			}
-			else if (game->blinky_mode == FRIGHTENED){
-				//draw_tile(game->map, game->blinky_y, game->blinky_x); //Commented becasue in that tile Pacman is already there
-				kill_blinky(game);
-				update_score(game, 100);
-				
-				draw_pacman(game->pacman_y, game->pacman_x, game->pacman_direction);
-			}
+			handle_pacman_blinky_collision(game);
 		}
+
+		// Blinky moves faster as the game progresses	
+		static int blinky_tick_count = 0;
+    blinky_tick_count++;
+	
+    if (blinky_tick_count >= game->blinky_speed_factor) {
+        blinky_tick_count = 0; // Reset counter
+        enum Direction blinky_direction = get_next_blinky_direction(game);
+        move_blinky_direction(game, blinky_direction);
+			
+				// if Blinky moved, render the previous tile it was in and render its sprite on the next one
+				if(game->blinky_x != previous_blinky_x || game->blinky_y != previous_blinky_y){
+					draw_tile(game->map, previous_blinky_y, previous_blinky_x);
+					draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
+				}
+				
+				//Check again if Pacman and Blinky have met
+				if(game->pacman_x == game->blinky_x && game->pacman_y == game->blinky_y){
+					handle_pacman_blinky_collision(game);
+				}
+    }
+		
 }
 
 void powerpills_timer_tick(Game* game){
