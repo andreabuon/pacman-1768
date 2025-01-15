@@ -26,11 +26,11 @@ void disable_pacman_movement(){
 	disable_timer(TIMER_1);
 }
 
-int compare_uint32_ascending(const void* a, const void* b) {
+int compare_uint32_descending(const void* a, const void* b) {
 	uint32_t x = *(uint32_t*) a;
 	uint32_t y = *(uint32_t*) b;
-	if (x < y) return -1;
-	if (x > y) return 1;
+	if (x < y) return 1;
+	if (x > y) return -1;
 	return 0;
 }
 
@@ -40,7 +40,7 @@ void generate_random_power_pills_spawn_times(uint32_t power_pills_spawn_times[PO
 		int time_seconds = rand() % INITIAL_GAME_TIME;
 		power_pills_spawn_times[i] = time_seconds;
 	}
-	qsort(power_pills_spawn_times, POWER_PILLS_TO_PLACE, sizeof(power_pills_spawn_times[0]), compare_uint32_ascending );
+	qsort(power_pills_spawn_times, POWER_PILLS_TO_PLACE, sizeof(power_pills_spawn_times[0]), compare_uint32_descending );
 }
 
 void init_game(Game* game){
