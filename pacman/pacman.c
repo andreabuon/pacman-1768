@@ -323,6 +323,7 @@ void handle_pacman_blinky_collision(Game* game){
 			game->pacman_mode = RUN;
 			
 			draw_pacman(game->pacman_y, game->pacman_x, game->pacman_direction);
+			draw_blinky(game->blinky_y, game->blinky_x, game->blinky_mode);
 		}
 		else if (game->blinky_mode == FRIGHTENED){
 			//draw_tile(game->map, game->blinky_y, game->blinky_x); //Commented becasue in that tile Pacman is already there
