@@ -356,6 +356,8 @@ void pacman_blinky_movement_tick(Game* game){
 		//Pacman and Blinky meet
 		if(game->pacman_x == game->blinky_x && game->pacman_y == game->blinky_y){
 			handle_pacman_blinky_collision(game);
+			
+			if(game->blinky_mode == RESPAWNING) return; //Skip moving and redrawing blinky if it's waiting to respawn
 		}
 
 		// Blinky moves faster as the game progresses	
