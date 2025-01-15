@@ -75,7 +75,7 @@ void draw_game_time(uint8_t time){
 	GUI_Text(45, 304, (uint8_t *) buf , White, Black);
 }
 	
-void draw_game_lifes(uint8_t lifes){
+void draw_game_lives(uint8_t lifes){
 	char buf[5];
 	sprintf(buf, "%02u", lifes);
 	GUI_Text(125, 304, (uint8_t *) buf , White, Black);

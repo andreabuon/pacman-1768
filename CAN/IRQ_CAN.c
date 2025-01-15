@@ -77,7 +77,7 @@ void CAN_IRQHandler (void)  {
 		
 		if(game.state == PLAYING){
 			draw_game_time(time);
-			draw_game_lifes(lifes);
+			draw_game_lives(lifes);
 			draw_game_score(score);
 		}
 	}

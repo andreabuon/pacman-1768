@@ -8,7 +8,7 @@
 
 void draw_labels();
 void draw_game_time(uint8_t time);
-void draw_game_lifes(uint8_t lifes);
+void draw_game_lives(uint8_t lifes);
 void draw_game_score(uint16_t score);
 void draw_game_state(enum GameState state);
 
