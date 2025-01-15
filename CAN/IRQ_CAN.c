@@ -28,20 +28,13 @@ extern CAN_msg       CAN_RxMsg;    /* CAN message for receiving */
 extern Game game;
 
 void send_values_CAN(){
-	uint8_t buffer[4];
-
-	buffer[0] = (uint8_t) game.time;
-	buffer[1] = (uint8_t) game.lives;
-	buffer[2] = (uint8_t) ( ( game.score & 0xFF00 ) >> 8);
-	buffer[3] = (uint8_t) ( game.score & 0xFF);
-
-	int i;
-	for(i = 0; i<4; i++){
-		CAN_TxMsg.data[i] = buffer[i];
-	}
+	CAN_TxMsg.data[0] = (uint8_t) game.time;
+	CAN_TxMsg.data[1] = (uint8_t) game.lives;
+	CAN_TxMsg.data[2] = (uint8_t) ( ( game.score & 0xFF00 ) >> 8);
+	CAN_TxMsg.data[3] = (uint8_t) ( game.score & 0xFF);
 
 	CAN_TxMsg.id = 2;
-	CAN_TxMsg.len = 4; //FIXME
+	CAN_TxMsg.len = 4;
 	CAN_TxMsg.format = STANDARD_FORMAT;
 	CAN_TxMsg.type = DATA_FRAME;
 	CAN_wrMsg (1, &CAN_TxMsg);               /* transmit message */
