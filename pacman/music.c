@@ -10,11 +10,11 @@ void playNote(NOTE note)
 	{
 		reset_timer(TIMER_2);
 		init_timer_simplified(TIMER_2, 0, note.freq*AMPLIFIER*VOLUME, 0, TIMER_INTERRUPT_MR | TIMER_RESET_MR, 0);
-		enable_timer(TIMER_2, 0);
+		enable_timer(TIMER_2, TIMER2_PRIORITY);
 	}
 	reset_timer(TIMER_3);
 	init_timer_simplified(TIMER_3, 0, note.duration, 0, TIMER_RESET_MR | TIMER_STOP_MR | TIMER_INTERRUPT_MR, 0);
-	enable_timer(TIMER_3, 0);
+	enable_timer(TIMER_3, TIMER3_PRIORITY);
 }
 
 BOOL isNotePlaying(void)
