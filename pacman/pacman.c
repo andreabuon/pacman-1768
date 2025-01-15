@@ -34,10 +34,23 @@ int compare_uint8_descending(const void* a, const void* b) {
 	return 0;
 }
 
+bool is_unique(uint8_t value, uint8_t* array, int size) {
+    for (int i = 0; i < size; i++) {
+        if (array[i] == value) {
+            return false;
+        }
+    }
+    return true;
+}
+
 //Fills the array with the values to set the timer MR0 to generate the random power pills
 void generate_random_power_pills_spawn_times(uint8_t power_pills_spawn_times[POWER_PILLS_TO_PLACE]){
 	for(int i = 0; i < POWER_PILLS_TO_PLACE; i++){
-		int time_seconds = rand() % INITIAL_GAME_TIME;
+		uint8_t time_seconds;
+    do {
+			time_seconds = (uint8_t)(rand() % INITIAL_GAME_TIME);
+    } while (!is_unique(time_seconds, power_pills_spawn_times, POWER_PILLS_TO_PLACE));
+		
 		power_pills_spawn_times[i] = (uint8_t) time_seconds;
 	}
 	qsort(power_pills_spawn_times, POWER_PILLS_TO_PLACE, sizeof(power_pills_spawn_times[0]), compare_uint8_descending );
