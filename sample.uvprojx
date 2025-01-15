@@ -620,6 +620,11 @@
               <FileType>5</FileType>
               <FilePath>.\pacman\music.h</FilePath>
             </File>
+            <File>
+              <FileName>songs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pacman\songs.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1240,6 +1245,11 @@
               <FileName>music.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\pacman\music.h</FilePath>
+            </File>
+            <File>
+              <FileName>songs.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pacman\songs.h</FilePath>
             </File>
           </Files>
         </Group>
