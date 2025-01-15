@@ -2,6 +2,7 @@
 
 #include "../timer/timer.h"
 #include "pacman.h"
+#include <stdbool.h>
 
 void playNote(NOTE note)
 {
@@ -19,4 +20,20 @@ void playNote(NOTE note)
 BOOL isNotePlaying(void)
 {
 	return ((LPC_TIM2->TCR != 0) || (LPC_TIM3->TCR != 0));
+}
+
+void playSongOnce(const NOTE* song, size_t songLength) {
+	static unsigned int currentNote = 0;
+	static bool playSong = true;
+    if (playSong) {
+        if (!isNotePlaying()) {
+            if (currentNote < songLength) {
+                playNote(song[currentNote++]);
+            } else {
+                // Stop the song after all notes are played
+                playSong = false;
+                currentNote = 0;
+            }
+        }
+    }
 }

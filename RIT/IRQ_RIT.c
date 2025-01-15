@@ -98,21 +98,7 @@ void RIT_IRQHandler(void){
 		}
 	}
 	
-	static int currentNote = 0;
-	static bool PLAY_SONG = 1;
-	if (PLAY_SONG)
-	{
-		if (!isNotePlaying())
-		{
-			playNote(pacman_theme[currentNote++]);
-		}
-
-		if (currentNote == (sizeof(pacman_theme) / sizeof(pacman_theme[0])))
-		{
-			currentNote = 0;
-			PLAY_SONG = 0;
-		}
-	}
+	playSongOnce(pacman_theme, sizeof(pacman_theme) / sizeof(pacman_theme[0]));
 	
 	LPC_RIT->RICTRL |= 0x1;
 }

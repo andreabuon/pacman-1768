@@ -1,6 +1,8 @@
 #ifndef MUSIC_H
 #define MUSIC_H
 
+#include <stdio.h>
+
 #define TIMER_FREQUENCY 25000000  // 25 MHz (timer frequency)
 #define NOTE_DIVISOR 45  					// Divisor for note frequency calculation
 
@@ -161,6 +163,8 @@ void playNote(NOTE note);
 
 // Function to check if a note is currently being played
 BOOL isNotePlaying(void);
+
+void playSongOnce(const NOTE* song, size_t songLength);
 
 #endif
 /* EOF */
