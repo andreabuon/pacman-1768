@@ -285,7 +285,6 @@ void game_clock_tick(Game* game){
 		if( game->time == game->power_pills_spawn_times[game->power_pills_placed_count] ){
 			struct Coordinates power_pill_position = place_random_power_pill(game);
 			draw_tile(game->map, power_pill_position.row, power_pill_position.col);
-			game->power_pills_placed_count++;
 		}
 	}
 	
