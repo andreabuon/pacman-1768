@@ -47,8 +47,6 @@ void move_blinky(Game* game, int dx, int dy) {
 	
   game->blinky_x = new_x;
   game->blinky_y = new_y;
-	
-	//TODO Pacman eating mechanism
 }
 
 void move_blinky_up(Game* game){
