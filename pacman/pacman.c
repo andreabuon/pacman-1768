@@ -113,7 +113,7 @@ void pause_game(Game* game){
 	disable_power_pills_generation();
 	
 	if(game->pacman_mode == POWER){
-		disable_pacman_power_mode_timer();
+		disable_pacman_power_mode(game);
 	}
 	
 	draw_game_state(game->state);
