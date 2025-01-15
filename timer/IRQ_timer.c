@@ -3,7 +3,7 @@
 
 #include "../pacman/pacman.h"
 #include "../pacman/graphics.h"
-#include "../pacman/blinky.h"
+#include "../CAN/CAN.h"
 
 /*
 	in IR si deve settare il bit associato al MR di cui si vuole cancellare l'interruzione.
@@ -14,6 +14,7 @@ void TIMER0_IRQHandler (void){
 	
 	if(irq_source & IR_MR0) { // mr0
 		game_clock_tick(&game);
+		send_values_CAN();
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2
@@ -31,6 +32,7 @@ void TIMER1_IRQHandler (void){
 	
 	if(irq_source & IR_MR0) { // mr0
 		pacman_blinky_movement_tick(&game);
+		send_values_CAN();
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2

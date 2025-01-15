@@ -102,7 +102,7 @@ void start_game(Game* game){
 	
 	enable_RIT(); //Joystick polling
 	
-	draw_game_state(game);
+	draw_game_state(game->state);
 }
 
 void pause_game(Game* game){
@@ -112,7 +112,11 @@ void pause_game(Game* game){
 	disable_pacman_movement();
 	disable_power_pills_generation();
 	
-	draw_game_state(game);
+	if(game->pacman_mode == POWER){
+		disable_pacman_power_mode_timer();
+	}
+	
+	draw_game_state(game->state);
 }
 
 void win_game(Game* game){
@@ -153,10 +157,10 @@ void update_score(Game* game, uint16_t amount){
 		if (game->score >= game->threshold_new_life){
 			add_life(game);
 			game->threshold_new_life += THRESHOLD_NEW_LIFE;
-			draw_game_lives(game);
+			//draw_game_lives(game); Done by the CAN IRQ Handler
 		}
 		
-		draw_game_score(game);
+		//draw_game_score(game); Done by the CAN IRQ Handler
 }
 
 void enable_pacman_power_mode(Game* game){
@@ -289,7 +293,7 @@ void game_clock_tick(Game* game){
 	if(game->time == 0){
 		lose_game(game);
 	}else{
-		draw_game_time(game);
+		//draw_game_time(game); Done by the CAN IRQ Handler
 	}
 	
 	//Blinky respawn timeout, placed here because I have already used all the available timers

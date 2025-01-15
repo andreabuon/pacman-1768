@@ -4,6 +4,7 @@
 
 #include "pacman/pacman.h"
 #include "pacman/graphics.h"
+#include "CAN/CAN.h" //FIXME move
 
 #ifdef SIMULATOR
 #define RIT_PERIOD_MS 125U
@@ -21,6 +22,7 @@ int main (void) {
 	LED_init();
 	joystick_init();
 	LCD_Initialization();
+	CAN_Init();
 	
 	// RIT WORKS WITH CLOCK = 100MHZ
 	init_RIT(RIT_MS_TO_TICKS(RIT_PERIOD_MS));
@@ -71,10 +73,13 @@ int main (void) {
 	draw_blinky(game.blinky_y, game.blinky_x, game.blinky_mode);
 	
 	draw_labels();
-	draw_game_time(&game);
-	draw_game_lives(&game);
-	draw_game_score(&game);
-	draw_game_state(&game);
+	draw_game_state(game.state);
+	
+	/* Values should be printed from within the CAN IRQ instead
+	draw_game_time(game.time);
+	draw_game_lifes(game.lives);
+	draw_game_score(game.score);
+	*/
 	
 	NVIC_SetPriority(RIT_IRQn, RIT_PRIORITY );
 	NVIC_SetPriority(TIMER0_IRQn, TIMER0_PRIORITY );
