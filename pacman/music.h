@@ -164,7 +164,8 @@ void playNote(NOTE note);
 // Function to check if a note is currently being played
 BOOL isNotePlaying(void);
 
-void playSongOnce(const NOTE* song, size_t songLength);
+void playSong(const NOTE* song, size_t songLength);
+void playEffect(const NOTE* song, size_t songLength);
 
 #endif
 /* EOF */

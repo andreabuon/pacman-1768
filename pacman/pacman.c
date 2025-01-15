@@ -65,6 +65,9 @@ void init_game(Game* game){
 	game->pacman_power_mode_timeout = PACMAN_POWER_MODE_DURATION;
 	
 	game->threshold_new_life = THRESHOLD_NEW_LIFE;
+	
+	game->play_song_flag = 1;
+	game->play_effect_flag = 0;
 }
 
 void toggle_game_state(Game* game){
@@ -222,6 +225,7 @@ void move_pacman(Game* game, int dx, int dy) {
 		else if (new_tile->type == POWER_PILL){
 			game->power_pills_count--;
 			enable_pacman_power_mode(game);
+			game->play_effect_flag = 1;
 		}
 	}
 }

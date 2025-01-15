@@ -98,7 +98,13 @@ void RIT_IRQHandler(void){
 		}
 	}
 	
-	playSongOnce(pacman_theme, sizeof(pacman_theme) / sizeof(pacman_theme[0]));
+	if(game.play_song_flag){
+		playSong(pacman_theme, sizeof(pacman_theme) / sizeof(pacman_theme[0]));
+	}
+	
+	if(game.play_effect_flag){
+		playEffect(power_pill_sound, sizeof(power_pill_sound) / sizeof(power_pill_sound[0]));
+	}
 	
 	LPC_RIT->RICTRL |= 0x1;
 }

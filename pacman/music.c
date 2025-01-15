@@ -22,16 +22,30 @@ BOOL isNotePlaying(void)
 	return ((LPC_TIM2->TCR != 0) || (LPC_TIM3->TCR != 0));
 }
 
-void playSongOnce(const NOTE* song, size_t songLength) {
+void playSong(const NOTE* song, size_t songLength) {
 	static unsigned int currentNote = 0;
-	static bool playSong = true;
-    if (playSong) {
+    if (game.play_song_flag) {
         if (!isNotePlaying()) {
             if (currentNote < songLength) {
                 playNote(song[currentNote++]);
             } else {
                 // Stop the song after all notes are played
-                playSong = false;
+                game.play_song_flag = false;
+                currentNote = 0;
+            }
+        }
+    }
+}
+
+void playEffect(const NOTE* song, size_t songLength) {
+	static unsigned int currentNote = 0;
+    if (game.play_effect_flag) {
+        if (!isNotePlaying()) {
+            if (currentNote < songLength) {
+                playNote(song[currentNote++]);
+            } else {
+                // Stop after all notes are played
+                game.play_effect_flag = false;
                 currentNote = 0;
             }
         }

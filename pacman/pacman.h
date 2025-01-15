@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include "map.h"
 
+#include <stdbool.h>
+
 #define INITIAL_GAME_TIME 60
 
 #define INITIAL_STANDARD_PILLS_COUNT 240
@@ -84,8 +86,10 @@ typedef struct Game {
 	uint8_t blinky_respawn_timeout;
 	uint8_t blinky_speed_factor;
 	
-	
 	uint16_t threshold_new_life;
+	
+	bool play_song_flag;
+	bool play_effect_flag;
 	
 } Game;
 
