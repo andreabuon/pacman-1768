@@ -4,7 +4,6 @@
 
 #include "pacman/pacman.h"
 #include "pacman/graphics.h"
-#include "CAN/CAN.h" //FIXME move
 
 #ifdef SIMULATOR
 #define RIT_PERIOD_MS 125U
