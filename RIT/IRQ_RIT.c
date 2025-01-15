@@ -9,6 +9,8 @@
 #include "../pacman/music.h"
 #include "../pacman/songs.h"
 
+#include <stdbool.h>
+
 volatile uint32_t pressed_button_0 = 0;
 
 uint32_t pressed_joystick_up     = 0;
@@ -97,14 +99,19 @@ void RIT_IRQHandler(void){
 	}
 	
 	static int currentNote = 0;
-	if(!isNotePlaying())
+	static bool PLAY_SONG = 1;
+	if (PLAY_SONG)
 	{
-		playNote(pacman_theme[currentNote++]);
-	}
-	
-	if(currentNote == (sizeof(pacman_theme) / sizeof(pacman_theme[0])))
-	{
-		currentNote = 0;
+		if (!isNotePlaying())
+		{
+			playNote(pacman_theme[currentNote++]);
+		}
+
+		if (currentNote == (sizeof(pacman_theme) / sizeof(pacman_theme[0])))
+		{
+			currentNote = 0;
+			PLAY_SONG = 0;
+		}
 	}
 	
 	LPC_RIT->RICTRL |= 0x1;
