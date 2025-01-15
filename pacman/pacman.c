@@ -322,7 +322,7 @@ void handle_pacman_blinky_collision(Game* game){
 				lose_game(game);
 				return;
 			}
-			draw_game_lives(game->lives);
+			//draw_game_lives(game->lives); Done by the CAN IRQ Handler
 			//draw_tile(game->map, game->pacman_x, game->pacman_y); //Commented becasue in that tile there is Blinky
 			
 			game->pacman_x = PACMAN_INITIAL_POSITION_X;
