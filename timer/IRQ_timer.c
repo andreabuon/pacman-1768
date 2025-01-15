@@ -57,22 +57,14 @@ uint16_t SinTable[45] =
 void TIMER2_IRQHandler(void){
 	uint8_t irq_source = LPC_TIM2->IR;
 	
-	if(irq_source & IR_MR0) { // mr0
-		//powerpills_timer_tick(&game);
-		
+	if(irq_source & IR_MR0) { // mr0	
 		static int sineticks=0;
 		/* DAC management */	
 		static int currentValue; 
 		currentValue = SinTable[sineticks];
-		/*
-		currentValue -= 410;
-		currentValue /= 1;
-		currentValue += 410;
-		*/
 		LPC_DAC->DACR = currentValue <<6;
 		sineticks++;
 		if(sineticks==45) sineticks=0;
-		
 	} else if(irq_source & IR_MR1) { // mr1
 		
 	} else if(irq_source & IR_MR2) { // mr2

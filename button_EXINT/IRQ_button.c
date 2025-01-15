@@ -6,7 +6,6 @@
 extern int pressed_button_0;
 
 void EINT0_IRQHandler(void){
-	
 	// Variable set to 1	
     pressed_button_0 = 1;
 	// Disable interrupt
