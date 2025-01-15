@@ -22,3 +22,9 @@ NOTE pacman_theme[] =
     {NOTE_GS5, time_32nd}, {NOTE_A5, time_16th}, 
     {NOTE_B5, time_8th}
 };
+
+
+NOTE power_pill_sound[] = {
+    {NOTE_B4, time_16th},    {NOTE_E4, time_16th},
+    {NOTE_B4, time_16th}
+};
