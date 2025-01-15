@@ -25,14 +25,6 @@ void enable_pacman_movement(){
 void disable_pacman_movement(){
 	disable_timer(TIMER_1);
 }
-// Power Pills Generation
-void enable_power_pills_generation(){
-	//enable_timer(TIMER_2, TIMER2_PRIORITY);
-}
-
-void disable_power_pills_generation(){
-	//disable_timer(TIMER_2);
-}
 
 int compare_uint32_ascending(const void* a, const void* b) {
 	uint32_t x = *(uint32_t*) a;
@@ -96,9 +88,6 @@ void start_game(Game* game){
 	
 	enable_game_countdown();
 	enable_pacman_movement();
-	if(game->power_pills_placed_count < POWER_PILLS_TO_PLACE){
-		enable_power_pills_generation();
-	}
 	
 	enable_RIT(); //Joystick polling
 	
@@ -110,7 +99,6 @@ void pause_game(Game* game){
 	
 	disable_game_countdown();
 	disable_pacman_movement();
-	disable_power_pills_generation();
 	
 	if(game->pacman_mode == POWER){
 		disable_pacman_power_mode(game);
@@ -124,7 +112,6 @@ void win_game(Game* game){
 	
 	disable_game_countdown();
 	disable_pacman_movement();
-	disable_power_pills_generation();
 	
 	disable_RIT(); // Disable RIT polling of the joystick and the buttons
 	
@@ -137,7 +124,6 @@ void lose_game(Game* game){
 	
 	disable_game_countdown();
 	disable_pacman_movement();
-	disable_power_pills_generation();
 	
 	disable_RIT(); // Disable RIT polling of the joystick and the buttons
 	
@@ -296,6 +282,15 @@ void game_clock_tick(Game* game){
 		//draw_game_time(game); Done by the CAN IRQ Handler
 	}
 	
+	//Powerpills generation, placed here becuase I have used all the available timers
+	if(game->power_pills_placed_count < POWER_PILLS_TO_PLACE){
+		if( game->time == game->power_pills_spawn_times[game->power_pills_placed_count] ){
+			struct Coordinates power_pill_position = place_random_power_pill(game);
+			draw_tile(game->map, power_pill_position.row, power_pill_position.col);
+			game->power_pills_placed_count++;
+		}
+	}
+	
 	//Blinky respawn timeout, placed here because I have already used all the available timers
 	if(game->blinky_mode == RESPAWNING){
 		game->blinky_respawn_timeout--;
@@ -386,18 +381,4 @@ void pacman_blinky_movement_tick(Game* game){
 				}
     }
 		
-}
-
-void powerpills_timer_tick(Game* game){
-	if(game->power_pills_placed_count < POWER_PILLS_TO_PLACE){
-			disable_timer(TIMER_2);
-			
-			struct Coordinates power_pill_position = place_random_power_pill(game);
-			draw_tile(game->map, power_pill_position.row, power_pill_position.col);
-			
-			LPC_TIM2->MR0 = TIM_MS_TO_TICKS_SIMPLE(game->power_pills_spawn_times[game->power_pills_placed_count]);
-			enable_timer(TIMER_2, TIMER2_PRIORITY);
-		}else{
-			disable_power_pills_generation();
-		}
 }
